@@ -1,0 +1,5 @@
+workspace.code-workspace
+__pycache__
+dist/
+env/
+src/landauer.egg-info
