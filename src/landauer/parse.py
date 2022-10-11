@@ -34,11 +34,25 @@ from antlr4_verilog.verilog import VerilogParserListener, VerilogParser, Verilog
 
 class DefaultVerilogListener(VerilogParserListener):
     def __init__(self):
-        self.aig = nx.DiGraph()
+        self._aig = nx.DiGraph()
         self._inputs = set()
-        self._wires = dict()
         self._outputs = set()
+        self._identifiers = set()
         self._labels = itertools.count(start=1)
+
+    @property
+    def aig(self):
+        # Resolve identifiers
+        for identifier in self._identifiers - self._inputs - self._outputs:
+            assignments = list(self._aig.in_edges(identifier, data = 'inverter'))
+            assert len(assignments) == 1, f'Expected exactly one assignment to \'{identifier}\', but got {len(assignments)}'
+            assignment_in, _, inverted_in = assignments[0]
+            for _, assignment_out, inverted_out in self._aig.out_edges(identifier, data = 'inverter'):
+                assert not self._aig.has_edge(assignment_in, assignment_out), 'Unexpected gate with duplicated input'
+                self._aig.add_edge(assignment_in, assignment_out, inverter = inverted_in ^ inverted_out)
+            self._aig.remove_node(identifier)
+
+        return self._aig
 
     # Input/Output declaration
     def _get_port_names(self, ctx):
@@ -54,10 +68,10 @@ class DefaultVerilogListener(VerilogParserListener):
     def _binary_expression(self, operator, left, right):
         assert operator in ('&','|','^')
         if operator == '&':
-            assert left[0] != right[0], f'Expected node \'{node}\' without duplicated inputs'
+            assert left[0] != right[0], f'Unexpected gate with duplicated input'
             node = next(self._labels)
-            self.aig.add_edge(left[0], node, inverter = left[1])
-            self.aig.add_edge(right[0], node, inverter = right[1])
+            self._aig.add_edge(left[0], node, inverter = left[1])
+            self._aig.add_edge(right[0], node, inverter = right[1])
             return (node, False)
 
         if operator == '|':
@@ -86,11 +100,9 @@ class DefaultVerilogListener(VerilogParserListener):
             # Identifier
             if (isinstance(ctx.getChild(0), VerilogParser.IdentifierContext)):
                 identifier = ctx.getText()
-                assert identifier in self._inputs or identifier in self._wires, f"Identifier '{identifier}' not recognized"
-                if identifier in self._inputs:
-                    return (identifier, False)
-                if identifier in self._wires:
-                    return self._wires[identifier]
+                assert identifier not in self._outputs, f'Unexpected reference to output \'{identifier}\''
+                self._identifiers.add(identifier)
+                return (identifier, False)
 
             return self._expression_traversal(ctx.getChild(0))
         
@@ -113,11 +125,10 @@ class DefaultVerilogListener(VerilogParserListener):
             return self._binary_expression(operator, left, right)
 
     def _assignment(self, identifier, expression):
-        assert identifier not in self._inputs
+        assert identifier not in self._inputs, f'Unexpected assignment to input \'{identifier}\''
+        self._identifiers.add(identifier)
         expression = self._expression_traversal(expression)
-        self._wires[identifier] = expression
-        if identifier in self._outputs:
-            self.aig.add_edge(expression[0], identifier, inverter = expression[1])
+        self._aig.add_edge(expression[0], identifier, inverter = expression[1])
 
     def exitNet_decl_assignment(self, ctx:VerilogParser.Net_decl_assignmentContext):
         self._assignment(ctx.net_identifier().getText(), ctx.expression())
@@ -129,13 +140,17 @@ class MajoritySupportVerilogListener(DefaultVerilogListener):
     def _parse_identifier(self, ctx):
         if ctx.getChildCount() == 2 and ctx.getChild(0).getText() == '~':
             identifier, is_inverted = self._parse_identifier(ctx.getChild(1))
+            assert identifier not in self._outputs, f'Unexpected reference to output \'{identifier}\''
+            self._identifiers.add(identifier)
             return identifier, not is_inverted
 
         if ctx.getChildCount() == 1:
             if not isinstance(ctx.getChild(0), VerilogParser.IdentifierContext):
                 return self._parse_identifier(ctx.getChild(0))
             identifier = ctx.getText()
-            return (identifier, False) if identifier in self._inputs else self._wires.get(identifier)
+            assert identifier not in self._outputs, f'Unexpected reference to output \'{identifier}\''
+            self._identifiers.add(identifier)
+            return (identifier, False)
 
         return None
 
@@ -170,11 +185,11 @@ class MajoritySupportVerilogListener(DefaultVerilogListener):
         b2, c2 = self._parse_AND(ctx.getChild(2))  # (b & c)
 
         if a1 and a2 and b1 and b2 and c1 and c2 and a1 == a2 and b1 == b2 and c1 == c2:
+            assert a1[0] != b1[0] and a1[0] != c1[0] and b1[0] != c1[0], f'Unexpected gate with duplicated input'
             node = next(self._labels)
-            assert a1[0] != b1[0] and a1[0] != c1[0] and b1[0] != c1[0], f'Expected node \'{node}\' without duplicated inputs'
-            self.aig.add_edge(a1[0], node, inverter = a1[1])
-            self.aig.add_edge(b1[0], node, inverter = b1[1])
-            self.aig.add_edge(c1[0], node, inverter = c1[1])
+            self._aig.add_edge(a1[0], node, inverter = a1[1])
+            self._aig.add_edge(b1[0], node, inverter = b1[1])
+            self._aig.add_edge(c1[0], node, inverter = c1[1])
             return (node, False)
 
         return None

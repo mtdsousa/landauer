@@ -47,5 +47,77 @@ class Test(unittest.TestCase):
         entropy_energy_oriented = evaluate.evaluate(energy_oriented, simulation)
         self.assertEqual(1.688721875540867, entropy_energy_oriented['total'])
 
+    def test_majority_support(self):
+        module = '''
+            module my_module (a, b, c, maj1, maj2);
+                input a, b, c;
+                output maj1, maj2;
+                assign maj1 = (a & b) | (a & ~c) | (b & ~c);
+                assign maj2 = (~a & ~b) | (~a & c) | (~b & c);
+            endmodule
+        '''
+        aig = parse.parse(module, majority_support = True)
+        # inputs (3) + outputs (2) + majority gates (2) = 7
+        self.assertEqual(7, aig.number_of_nodes())
+
+    def test_forward_reference(self):
+        module = '''
+            module my_module (a, b, c);
+                input a, b;
+                output c;
+
+                assign c = d;
+                assign d = e & f;
+                assign e = g;
+                assign g = a;
+                assign f = b;
+            
+            endmodule
+        '''
+        aig = parse.parse(module)
+        # the netlist is the same as c = a & b
+        # inputs (2) + and gate (1) + output (1) = 4
+        self.assertEqual(4, aig.number_of_nodes())
+
+    def test_reference_to_output(self):
+        module = '''
+            module my_module(a, b, c);
+                input a;
+                output b, c;
+
+                assign b = a;
+                assign c = b;
+            endmodule
+        '''
+        
+        with self.assertRaises(AssertionError) as e:
+            aig = parse.parse(module)    
+        self.assertEqual('Unexpected reference to output \'b\'', str(e.exception))
+
+    def test_duplicated_input(self):
+        module1 = '''
+            module my_module(a, b);
+                input a;
+                output b;
+
+                assign b = a & a;
+            endmodule
+        '''
+        module2 = '''
+            module my_module(a, b);
+                input a;
+                output b;
+
+                assign c = a;
+                assign b = a & c;
+            endmodule
+        '''
+        with self.assertRaises(AssertionError) as e:
+            aig = parse.parse(module1)    
+        self.assertEqual('Unexpected gate with duplicated input', str(e.exception))
+        with self.assertRaises(AssertionError) as e:
+            aig = parse.parse(module2)    
+        self.assertEqual('Unexpected gate with duplicated input', str(e.exception))
+
 if __name__ == '__main__':
     unittest.main()
