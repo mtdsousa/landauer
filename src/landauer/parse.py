@@ -54,9 +54,13 @@ class DefaultVerilogListener(VerilogParserListener):
 
         return self._aig
 
+    # Handle escaped names
+    def _handle_escaped_name(self, identifier):
+        return identifier.lstrip('\\').rstrip()
+
     # Input/Output declaration
     def _get_port_names(self, ctx):
-        return [child.identifier().getText() for child in ctx.list_of_port_identifiers().getChildren() if isinstance(child, VerilogParser.Port_identifierContext)]
+        return [self._handle_escaped_name(child.identifier().getText()) for child in ctx.list_of_port_identifiers().getChildren() if isinstance(child, VerilogParser.Port_identifierContext)]
 
     def exitInput_declaration(self, ctx):
         self._inputs.update(set(self._get_port_names(ctx)))
@@ -99,7 +103,7 @@ class DefaultVerilogListener(VerilogParserListener):
 
             # Identifier
             if (isinstance(ctx.getChild(0), VerilogParser.IdentifierContext)):
-                identifier = ctx.getText()
+                identifier = self._handle_escaped_name(ctx.getText())
                 assert identifier not in self._outputs, f'Unexpected reference to output \'{identifier}\''
                 self._identifiers.add(identifier)
                 return (identifier, False)
@@ -131,10 +135,10 @@ class DefaultVerilogListener(VerilogParserListener):
         self._aig.add_edge(expression[0], identifier, inverter = expression[1])
 
     def exitNet_decl_assignment(self, ctx:VerilogParser.Net_decl_assignmentContext):
-        self._assignment(ctx.net_identifier().getText(), ctx.expression())
+        self._assignment(self._handle_escaped_name(ctx.net_identifier().getText()), ctx.expression())
 
     def exitNet_assignment(self, ctx:VerilogParser.Net_assignmentContext):
-        self._assignment(ctx.net_lvalue().getText(), ctx.expression())
+        self._assignment(self._handle_escaped_name(ctx.net_lvalue().getText()), ctx.expression())
 
 class MajoritySupportVerilogListener(DefaultVerilogListener):
     def _parse_identifier(self, ctx):
