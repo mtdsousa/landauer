@@ -43,15 +43,20 @@ class DefaultVerilogListener(VerilogParserListener):
     @property
     def aig(self):
         # Resolve identifiers
-        for identifier in self._identifiers - self._inputs - self._outputs:
+        for identifier in self._identifiers - self._inputs:
             assignments = list(self._aig.in_edges(identifier, data = 'inverter'))
             assert len(assignments) == 1, f'Expected exactly one assignment to \'{identifier}\', but got {len(assignments)}'
             assignment_in, _, inverted_in = assignments[0]
-            for _, assignment_out, inverted_out in self._aig.out_edges(identifier, data = 'inverter'):
+            for _, assignment_out, inverted_out in list(self._aig.out_edges(identifier, data = 'inverter')):
                 assert not self._aig.has_edge(assignment_in, assignment_out), 'Unexpected gate with duplicated input'
                 self._aig.add_edge(assignment_in, assignment_out, inverter = inverted_in ^ inverted_out)
-            self._aig.remove_node(identifier)
+                self._aig.remove_edge(identifier, assignment_out)
 
+            if identifier not in self._outputs:
+                self._aig.remove_node(identifier)
+            
+
+    
         return self._aig
 
     # Handle escaped names
@@ -104,7 +109,6 @@ class DefaultVerilogListener(VerilogParserListener):
             # Identifier
             if (isinstance(ctx.getChild(0), VerilogParser.IdentifierContext)):
                 identifier = self._handle_escaped_name(ctx.getText())
-                assert identifier not in self._outputs, f'Unexpected reference to output \'{identifier}\''
                 self._identifiers.add(identifier)
                 return (identifier, False)
 
@@ -144,15 +148,13 @@ class MajoritySupportVerilogListener(DefaultVerilogListener):
     def _parse_identifier(self, ctx):
         if ctx.getChildCount() == 2 and ctx.getChild(0).getText() == '~':
             identifier, is_inverted = self._parse_identifier(ctx.getChild(1))
-            assert identifier not in self._outputs, f'Unexpected reference to output \'{identifier}\''
             self._identifiers.add(identifier)
             return identifier, not is_inverted
 
         if ctx.getChildCount() == 1:
             if not isinstance(ctx.getChild(0), VerilogParser.IdentifierContext):
                 return self._parse_identifier(ctx.getChild(0))
-            identifier = ctx.getText()
-            assert identifier not in self._outputs, f'Unexpected reference to output \'{identifier}\''
+            identifier = self._handle_escaped_name(ctx.getText())
             self._identifiers.add(identifier)
             return (identifier, False)
 

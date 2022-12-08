@@ -31,7 +31,7 @@ print(aig)
 ```
 > You can enable majority-gates support using the switch `--majority_support`. In this case the output is an AIG superset where a node with three inputs (e.g. a, b, and c) is equivalent to `(a & b) | (a & c) | (b & c)`.
 
-> Verilog subset supported: Single module description. Restricted to `input`, `output`, and `wire` declarations (registers nor arrays are supported). Usage of identifiers before their proper declaration is currently not supported.
+> Verilog subset supported: Single module description. Restricted to `input`, `output`, and `wire` declarations (registers nor arrays are supported).
 
 You can also use this module via the command line. The output is a JSON-serialized NetworkX DiGraph in an adjacency format:
 

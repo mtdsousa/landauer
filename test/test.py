@@ -57,10 +57,11 @@ class Test(unittest.TestCase):
             endmodule
         '''
         aig = parse.parse(module, majority_support = True)
-        # inputs (3) + outputs (2) + majority gates (2) = 7
-        self.assertEqual(7, aig.number_of_nodes())
+        self.assertEqual(set([('a', 1, False), ('b', 1, False), ('c', 1, True), (1, 'maj1', False), \
+                              ('a', 2, True),  ('b', 2, True),  ('c', 2, False), (2, 'maj2', False)]), set(aig.edges(data='inverter')))
 
     def test_forward_reference(self):
+        # Issue #2: Support forward references
         module = '''
             module my_module (a, b, c);
                 input a, b;
@@ -76,10 +77,10 @@ class Test(unittest.TestCase):
         '''
         aig = parse.parse(module)
         # the netlist is the same as c = a & b
-        # inputs (2) + and gate (1) + output (1) = 4
-        self.assertEqual(4, aig.number_of_nodes())
+        self.assertEqual(set([('a', 1), ('b', 1), (1, 'c')]), set(aig.edges()))
 
     def test_reference_to_output(self):
+        # Issue #4: Support reference to output signals
         module = '''
             module my_module(a, b, c);
                 input a;
@@ -89,10 +90,8 @@ class Test(unittest.TestCase):
                 assign c = b;
             endmodule
         '''
-        
-        with self.assertRaises(AssertionError) as e:
-            aig = parse.parse(module)    
-        self.assertEqual('Unexpected reference to output \'b\'', str(e.exception))
+        aig = parse.parse(module)
+        self.assertEqual(set([('a', 'b'), ('a', 'c')]), set(aig.edges()))
 
     def test_duplicated_input(self):
         module1 = '''
@@ -118,6 +117,19 @@ class Test(unittest.TestCase):
         with self.assertRaises(AssertionError) as e:
             aig = parse.parse(module2)    
         self.assertEqual('Unexpected gate with duplicated input', str(e.exception))
+
+    def test_escaped_names(self):
+        # Issue #3: Issue with reference to escaped identifiers
+        module = '''
+            module my_module(\\a? ,\\b! ,\\$c ,\\d ,\\e );
+                input \\a? ,\\b! ,\\$c ;
+                output \\d ,\\e ;
+                assign \\d  = \\a?  ;
+                assign \\e  = (\\a?  & \\b! ) | (\\a?  & \\$c ) | (\\b!  & \\$c );
+            endmodule
+        '''
+        aig = parse.parse(module, majority_support = True)
+        self.assertEqual(set([('a?', 'd'), ('a?', 1), ('b!', 1), ('$c', 1), (1, 'e')]), set(aig.edges()))
 
 if __name__ == '__main__':
     unittest.main()
