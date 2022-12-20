@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 import landauer.evaluate as evaluate
 import landauer.parse as parse
 import landauer.graph as graph
-import landauer.naive as naive
+import landauer.algorithms.naive as naive
 import landauer.simulate as simulate
 
 class Test(unittest.TestCase):
