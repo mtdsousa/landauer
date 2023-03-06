@@ -51,7 +51,10 @@ def _set_hierarchical_level(dag):
 
 def _get_simple_edge(aig, u, v):
     edges = [key for key in aig.succ[u][v].keys() if not aig.edges[u, v, key].get('forward', False)]
-    assert len(edges) == 1, 'Expected a single edge between nodes \'{u}\' and \'{v}\''
+    if len(edges) != 1:
+        import landauer.graph as graph
+        graph.show(graph.default(aig))
+    assert len(edges) == 1, f'Expected a single edge between nodes \'{u}\' and \'{v}\''
     return edges[0]
 
 
@@ -66,8 +69,8 @@ def naive(aig, strategy = Strategy.DELAY_ORIENTED, palette = 'colorblind'):
     CHAVES, J. et all. Designing Partially Reversible Field-Coupled 
     Nanocomputing Circuits. IEEE Transactions on Nanotechnology, Volume 18, 2019
     '''
-    pallete = deque(sns.color_palette(palette).as_hex())
-    return _build_chain(aig, strategy, pallete)
+    palette = deque(sns.color_palette(palette).as_hex())
+    return _build_chain(aig, strategy, palette)
 
 def _ranked_children(aig, node):
     _set_hierarchical_level(aig)
@@ -98,7 +101,7 @@ def _choose(aig, strategy, children):
 
     return set(choices[:])
 
-def _make_chain(aig, pallete, node, choices, outputs):
+def _make_chain(aig, palette, node, choices, outputs):
     '''
     "It selects a non-recyclable node, e.g., an output, to be at the bottom of 
     the chain. After selection of the children, the algorithm links their inputs 
@@ -110,17 +113,17 @@ def _make_chain(aig, pallete, node, choices, outputs):
     key = _get_simple_edge(aig, node, last)
     last_is_inverted = aig.edges[node, last, key]['inverter']
 
-    color = pallete[0]
-    pallete.rotate(1)
+    color = palette[0]
+    palette.rotate(1)
     aig.edges[node, last, key].setdefault('attributes', {}).update({'color':color})
 
     for choice in choices:
         key = _get_simple_edge(aig, node, choice)
-        current_is_inverted = aig.edges[node, choice, key]['inverter']
+        choice_is_inverted = aig.edges[node, choice, key]['inverter']
         aig.remove_edge(node, choice, key)
-        aig.add_edge(last, choice, node, forward = True, inverter = (current_is_inverted != last_is_inverted), attributes = {'color': color})
+        aig.add_edge(last, choice, node, forward = True, inverter = (choice_is_inverted != last_is_inverted), attributes = {'color': color})
         last = choice
-        last_is_inverted = current_is_inverted
+        last_is_inverted = choice_is_inverted
 
     for output in outputs:
         key = _get_simple_edge(aig, node, output)
@@ -128,7 +131,7 @@ def _make_chain(aig, pallete, node, choices, outputs):
         aig.remove_edge(node, output, key)
         aig.add_edge(last, output, node, forward = True, inverter = output_is_inverted != last_is_inverted, attributes = {'color': color})
 
-def _build_chain(aig, strategy, pallete):
+def _build_chain(aig, strategy, palette):
     '''
     Algorithm 1: Building Chains of n-bits Recycling Gates
     data : netlist <- circuit's netlist
@@ -144,7 +147,7 @@ def _build_chain(aig, strategy, pallete):
     '''
     aig = nx.MultiDiGraph(aig)
     for node in list(nx.topological_sort(aig)):
-        outputs = set([successor for successor in aig.successors(node) if len(list(aig.successors(successor))) == 0])
+        outputs = set(v for u, v, forward in aig.out_edges(node, data='forward') if not forward and aig.successors(v) == 0)
         while (True):
             choices = set()
             ranks = _ranked_children(aig, node)
@@ -160,7 +163,7 @@ def _build_chain(aig, strategy, pallete):
 
             # "Finally, when the chain is complete, i.e., 
             # there are no sets left:"
-            _make_chain(aig, pallete, node, choices, outputs)
+            _make_chain(aig, palette, node, choices, outputs)
 
     return aig
 
