@@ -131,5 +131,19 @@ class Test(unittest.TestCase):
         aig = parse.parse(module, majority_support = True)
         self.assertEqual(set([('a?', 'd'), ('a?', 1), ('b!', 1), ('$c', 1), (1, 'e')]), set(aig.edges()))
 
+    def test_parse_serialization(self):
+        module = '''
+            module my_module(a, b);
+                input a;
+                output b;
+                assign b = a;
+            endmodule
+        '''
+        content = parse.serialize(parse.parse(module))
+        self.assertEqual('{"directed": true, "multigraph": false, "graph": [], "nodes": [{"id": "a"}, {"id": "b"}], "adjacency": [[{"inverter": false, "id": "b"}], []]}', content)
+        aig = parse.deserialize(content)
+        self.assertEqual({('a', 'b')}, set(aig.edges()))
+
+
 if __name__ == '__main__':
     unittest.main()
