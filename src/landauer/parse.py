@@ -54,9 +54,9 @@ class DefaultVerilogListener(VerilogParserListener):
 
             if identifier not in self._outputs:
                 self._aig.remove_node(identifier)
-            
 
-    
+            self._identifiers.remove(identifier)
+        assert len(self._identifiers - self._inputs) == 0, f'There are identifiers without proper assignment: {", ".join(self._identifiers)}' 
         return self._aig
 
     # Handle escaped names
