@@ -98,7 +98,7 @@ def _entropy(counter, states):
         assert sanity_check == states
     return result
 
-def simulate(aig, progressbar = False):
+def entropy(aig, progressbar = False):
     inputs = set(node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0) - {0}
     states = 2 ** len(inputs)
     mask = 0xFFFFFFFFFFFFFFFF >> max(64 - states, 0)
@@ -113,8 +113,8 @@ def simulate(aig, progressbar = False):
             for product, count in products.items():
                 counter[variables][product] = counter[variables].get(product, 0) + count
 
-    entropy = _entropy(counter, states)
-    return entropy
+    entropy_ = _entropy(counter, states)
+    return entropy_
 
 def serialize(simulation):
     return json.dumps([{'variables':list(variables),'entropy':entropy} for variables, entropy in simulation.items()])
@@ -135,7 +135,7 @@ def main():
     import landauer.parse as parse
     content = args.file.read() if args.file else sys.stdin.read()
     aig = parse.deserialize(content)
-    print(serialize(simulate(aig, progressbar = args.progressbar)))
+    print(serialize(entropy(aig, progressbar = args.progressbar)))
 
 if __name__ == "__main__":
     main()

@@ -64,7 +64,7 @@ def deserialize(content):
 
 def main():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('simulation', help='simulation database', type=argparse.FileType('r'))
+    argparser.add_argument('entropy', help='entropy database', type=argparse.FileType('r'))
 
     group = argparser.add_mutually_exclusive_group(required=True)
     group.add_argument('--file', help='and-inverter graph file', type=argparse.FileType('r'))
@@ -76,10 +76,10 @@ def main():
     content = args.file.read() if args.file else sys.stdin.read()
     aig = parse.deserialize(content)
     
-    import landauer.simulate as simulate
-    simulation = simulate.deserialize(args.simulation.read())
+    import landauer.entropy as entropy
+    entropy_ = entropy.deserialize(args.entropy.read())
 
-    evaluation = evaluate(aig, simulation)
+    evaluation = evaluate(aig, entropy_)
     print(serialize(evaluation))
 
 if __name__ == "__main__":
