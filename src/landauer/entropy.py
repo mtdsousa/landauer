@@ -29,6 +29,7 @@ import math
 import networkx as nx
 import sys
 
+from timeit import default_timer as timer
 from tqdm import tqdm
 
 def _input_generator():
@@ -98,13 +99,15 @@ def _entropy(counter, states):
         assert sanity_check == states
     return result
 
-def entropy(aig, progressbar = False):
+def entropy(aig, timeout = 0.0):
     inputs = set(node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0) - {0}
     states = 2 ** len(inputs)
     mask = 0xFFFFFFFFFFFFFFFF >> max(64 - states, 0)
     input_generator = list(zip(sorted(inputs), _input_generator()))
     counter = {}
-    for _ in tqdm(range(max(1, states // 64)), disable = not progressbar):
+    start = timer()
+
+    for _ in range(max(1, states // 64)):
         constants = {0: 0}
         constants.update({name: next(values) for name, values in input_generator})
         result = _simulate(aig, constants, mask)
@@ -112,6 +115,8 @@ def entropy(aig, progressbar = False):
             counter.setdefault(variables, {})
             for product, count in products.items():
                 counter[variables][product] = counter[variables].get(product, 0) + count
+        if timeout != 0 and timer() - start > timeout:
+            raise Exception(f'timed out')
 
     entropy_ = _entropy(counter, states)
     return entropy_
@@ -124,7 +129,7 @@ def deserialize(content):
 
 def main():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--progressbar', help='enable progressbar', action='store_true')
+    argparser.add_argument('--timeout', help='timeout (s)', type=float, default = 0.0)
     
     group = argparser.add_mutually_exclusive_group(required=True)
     group.add_argument('--file', help='and-inverter graph file', type=argparse.FileType('r'))
@@ -135,7 +140,7 @@ def main():
     import landauer.parse as parse
     content = args.file.read() if args.file else sys.stdin.read()
     aig = parse.deserialize(content)
-    print(serialize(entropy(aig, progressbar = args.progressbar)))
+    print(serialize(entropy(aig, timeout = args.timeout, progressbar = args.progressbar)))
 
 if __name__ == "__main__":
     main()
