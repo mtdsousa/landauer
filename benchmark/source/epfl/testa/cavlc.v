@@ -1,6 +1,4 @@
-// written by CirKit Wed Nov  2 14:26:17 2016
-
-module cavlc_best_speed.blif_ (
+module cavlc_best_speed (
         pi0, pi1, pi2, pi3, pi4, pi5, pi6, pi7, pi8, pi9, 
         po00, po01, po02, po03, po04, po05, po06, po07, po08, po09, po10);
 input pi0, pi1, pi2, pi3, pi4, pi5, pi6, pi7, pi8, pi9;

@@ -1138,24 +1138,6 @@
                 }
             },
             {
-                "name": "div",
-                "majority_support": true,
-                "files": {
-                    "design": "source/epfl/testa/div.v",
-                    "tree": "tree/epfl/testa/div.json",
-                    "entropy": "entropy/epfl/testa/div.json"
-                }
-            },
-            {
-                "name": "hyp",
-                "majority_support": true,
-                "files": {
-                    "design": "source/epfl/testa/hyp.v",
-                    "tree": "tree/epfl/testa/hyp.json",
-                    "entropy": "entropy/epfl/testa/hyp.json"
-                }
-            },
-            {
                 "name": "i2c",
                 "majority_support": true,
                 "files": {

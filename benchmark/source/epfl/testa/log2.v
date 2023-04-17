@@ -1,4 +1,3 @@
-//Written by the Majority Logic Package Thu Jul  2 16:37:56 2015
 module top (
             a_0, a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11, a_12, a_13, a_14, a_15, a_16, a_17, a_18, a_19, a_20, a_21, a_22, a_23, a_24, a_25, a_26, a_27, a_28, a_29, a_30, a_31, 
             result_0, result_1, result_2, result_3, result_4, result_5, result_6, result_7, result_8, result_9, result_10, result_11, result_12, result_13, result_14, result_15, result_16, result_17, result_18, result_19, result_20, result_21, result_22, result_23, result_24, result_25, result_26, result_27, result_28, result_29, result_30, result_31);

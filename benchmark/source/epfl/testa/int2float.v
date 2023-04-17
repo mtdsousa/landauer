@@ -1,6 +1,4 @@
-// written by CirKit Wed Nov  2 14:26:16 2016
-
-module int2float_best_speed.blif_ (
+module int2float_best_speed (
         pi00, pi01, pi02, pi03, pi04, pi05, pi06, pi07, pi08, pi09, pi10, 
         po0, po1, po2, po3, po4, po5, po6);
 input pi00, pi01, pi02, pi03, pi04, pi05, pi06, pi07, pi08, pi09, pi10;

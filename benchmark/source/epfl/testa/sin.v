@@ -1,4 +1,3 @@
-//Written by the Majority Logic Package Thu Jul  2 16:49:51 2015
 module top (
             a_0, a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9, a_10, a_11, a_12, a_13, a_14, a_15, a_16, a_17, a_18, a_19, a_20, a_21, a_22, a_23, 
             sin_0, sin_1, sin_2, sin_3, sin_4, sin_5, sin_6, sin_7, sin_8, sin_9, sin_10, sin_11, sin_12, sin_13, sin_14, sin_15, sin_16, sin_17, sin_18, sin_19, sin_20, sin_21, sin_22, sin_23, sin_24);

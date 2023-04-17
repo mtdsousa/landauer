@@ -1,6 +1,4 @@
-// written by CirKit Wed Nov  2 14:26:15 2016
-
-module ctrl_best_speed.blif_ (
+module ctrl_best_speed (
         pi0, pi1, pi2, pi3, pi4, pi5, pi6, 
         po00, po01, po02, po03, po04, po05, po06, po07, po08, po09, po10, po11, po12, po13, po14, po15, po16, po17, po18, po19, po20, po21, po22, po23, po24, po25);
 input pi0, pi1, pi2, pi3, pi4, pi5, pi6;
