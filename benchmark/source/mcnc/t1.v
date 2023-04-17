@@ -1,0 +1,377 @@
+// Benchmark "source.pla" written by ABC on Sun Apr 22 21:43:14 2018
+
+module \source.pla  ( 
+    pi00, pi01, pi02, pi03, pi04, pi05, pi06, pi07, pi08, pi09, pi10, pi11,
+    pi12, pi13, pi14, pi15, pi16, pi17, pi18, pi19, pi20,
+    po00, po01, po02, po03, po04, po05, po06, po07, po08, po09, po10, po11,
+    po12, po13, po14, po15, po16, po17, po18, po19, po20, po21, po22  );
+  input  pi00, pi01, pi02, pi03, pi04, pi05, pi06, pi07, pi08, pi09,
+    pi10, pi11, pi12, pi13, pi14, pi15, pi16, pi17, pi18, pi19, pi20;
+  output po00, po01, po02, po03, po04, po05, po06, po07, po08, po09, po10,
+    po11, po12, po13, po14, po15, po16, po17, po18, po19, po20, po21, po22;
+  wire n45, n46, n47, n48, n49, n50, n51, n52, n53, n54, n55, n56, n57, n58,
+    n59, n60, n61, n62, n63, n64, n65, n66, n67, n68, n69, n70, n71, n72,
+    n73, n74, n75, n76, n77, n78, n79, n80, n82, n83, n84, n85, n86, n87,
+    n88, n89, n90, n91, n92, n93, n94, n95, n96, n97, n98, n99, n100, n101,
+    n102, n103, n104, n105, n106, n107, n108, n109, n110, n112, n113, n114,
+    n115, n116, n117, n118, n119, n120, n121, n122, n123, n124, n125, n126,
+    n127, n128, n129, n130, n131, n133, n134, n135, n136, n137, n138, n139,
+    n140, n142, n143, n144, n145, n146, n147, n149, n150, n151, n152, n153,
+    n154, n155, n156, n157, n158, n159, n160, n161, n162, n163, n164, n165,
+    n167, n168, n169, n170, n171, n172, n173, n174, n175, n176, n177, n178,
+    n179, n180, n181, n182, n183, n184, n185, n186, n187, n188, n189, n190,
+    n191, n192, n193, n194, n195, n196, n197, n198, n200, n201, n202, n203,
+    n204, n205, n206, n207, n208, n209, n210, n211, n212, n213, n214, n215,
+    n216, n217, n218, n219, n220, n221, n223, n224, n225, n226, n227, n228,
+    n229, n230, n231, n232, n233, n234, n235, n236, n237, n238, n240, n241,
+    n242, n243, n244, n245, n246, n247, n248, n249, n250, n251, n252, n253,
+    n255, n256, n257, n258, n259, n260, n261, n262, n263, n264, n265, n266,
+    n267, n268, n270, n271, n272, n273, n274, n275, n276, n277, n278, n280,
+    n281, n282, n283, n284, n285, n286, n287, n288, n289, n290, n291, n292,
+    n294, n295, n296, n297, n298, n299, n300, n301, n302, n303, n304, n306,
+    n307, n308, n309, n310, n311, n312, n313, n314, n315, n317, n318, n319,
+    n320, n321, n322, n323, n324, n325, n326, n328, n329, n330, n331, n332,
+    n333, n334, n335, n337, n338, n339, n340, n341, n342, n343, n345, n346,
+    n347, n348, n349, n350, n351, n352, n353, n354, n355, n357, n358, n359,
+    n361, n362, n363, n364, n366, n367, n368, n369, n370, n371, n372, n373,
+    n375, n376, n377, n378, n379, n380;
+  assign n45 = pi06 & ~pi15;
+  assign n46 = pi03 & n45;
+  assign n47 = ~pi15 & ~n46;
+  assign n48 = pi20 & ~n47;
+  assign n49 = pi15 & ~pi20;
+  assign n50 = ~n48 & ~n49;
+  assign n51 = pi19 & ~n50;
+  assign n52 = pi15 & ~pi19;
+  assign n53 = ~n51 & ~n52;
+  assign n54 = ~pi17 & ~n53;
+  assign n55 = pi15 & pi17;
+  assign n56 = ~n54 & ~n55;
+  assign n57 = ~pi04 & ~n56;
+  assign n58 = pi04 & pi15;
+  assign n59 = ~n57 & ~n58;
+  assign n60 = pi18 & ~n59;
+  assign n61 = ~pi17 & pi19;
+  assign n62 = ~pi17 & ~n61;
+  assign n63 = ~pi17 & ~pi19;
+  assign n64 = n62 & ~n63;
+  assign n65 = ~pi18 & ~n64;
+  assign n66 = pi15 & n65;
+  assign n67 = ~n60 & ~n66;
+  assign n68 = ~pi16 & ~n67;
+  assign n69 = ~pi04 & ~pi18;
+  assign n70 = ~pi04 & ~n69;
+  assign n71 = pi18 & ~pi19;
+  assign n72 = ~pi04 & n71;
+  assign n73 = n70 & ~n72;
+  assign n74 = ~pi04 & pi18;
+  assign n75 = pi19 & ~pi20;
+  assign n76 = n74 & n75;
+  assign n77 = n73 & ~n76;
+  assign n78 = pi16 & ~n77;
+  assign n79 = pi15 & n78;
+  assign n80 = ~n68 & ~n79;
+  assign po00 = ~pi00 & ~n80;
+  assign n82 = pi06 & ~pi07;
+  assign n83 = pi06 & ~n82;
+  assign n84 = pi20 & ~n83;
+  assign n85 = ~pi16 & n84;
+  assign n86 = pi03 & n85;
+  assign n87 = pi16 & ~pi20;
+  assign n88 = ~n86 & ~n87;
+  assign n89 = pi19 & ~n88;
+  assign n90 = pi16 & ~pi19;
+  assign n91 = ~n89 & ~n90;
+  assign n92 = pi18 & ~n91;
+  assign n93 = pi16 & ~pi18;
+  assign n94 = ~n92 & ~n93;
+  assign n95 = ~pi15 & ~n94;
+  assign n96 = ~pi16 & pi20;
+  assign n97 = ~n87 & ~n96;
+  assign n98 = pi19 & ~n97;
+  assign n99 = ~n90 & ~n98;
+  assign n100 = pi18 & ~n99;
+  assign n101 = ~n93 & ~n100;
+  assign n102 = pi15 & ~n101;
+  assign n103 = ~n95 & ~n102;
+  assign n104 = ~pi04 & ~n103;
+  assign n105 = pi04 & pi16;
+  assign n106 = ~n104 & ~n105;
+  assign n107 = ~pi17 & ~n106;
+  assign n108 = pi17 & ~n77;
+  assign n109 = pi16 & n108;
+  assign n110 = ~n107 & ~n109;
+  assign po01 = ~pi00 & ~n110;
+  assign n112 = pi03 & pi06;
+  assign n113 = pi03 & ~n112;
+  assign n114 = pi20 & ~n113;
+  assign n115 = ~pi17 & n114;
+  assign n116 = pi17 & ~pi20;
+  assign n117 = ~n115 & ~n116;
+  assign n118 = pi19 & ~n117;
+  assign n119 = pi17 & ~pi19;
+  assign n120 = ~n118 & ~n119;
+  assign n121 = pi18 & ~n120;
+  assign n122 = pi17 & ~pi18;
+  assign n123 = ~n121 & ~n122;
+  assign n124 = ~pi04 & ~n123;
+  assign n125 = pi04 & pi17;
+  assign n126 = ~n124 & ~n125;
+  assign n127 = ~pi16 & ~n126;
+  assign n128 = ~n109 & ~n127;
+  assign n129 = ~pi15 & ~n128;
+  assign n130 = pi15 & n108;
+  assign n131 = ~n129 & ~n130;
+  assign po02 = ~pi00 & ~n131;
+  assign n133 = ~pi04 & ~pi19;
+  assign n134 = ~pi04 & ~n133;
+  assign n135 = ~pi04 & n75;
+  assign n136 = n134 & ~n135;
+  assign n137 = pi18 & ~n136;
+  assign n138 = pi19 & pi20;
+  assign n139 = n69 & n138;
+  assign n140 = ~n137 & ~n139;
+  assign po03 = ~pi00 & ~n140;
+  assign n142 = ~pi04 & ~pi20;
+  assign n143 = ~pi04 & ~n142;
+  assign n144 = pi19 & ~n143;
+  assign n145 = ~pi19 & pi20;
+  assign n146 = ~pi04 & n145;
+  assign n147 = ~n144 & ~n146;
+  assign po04 = ~pi00 & ~n147;
+  assign n149 = pi04 & pi20;
+  assign n150 = ~pi04 & n87;
+  assign n151 = ~n149 & ~n150;
+  assign n152 = ~pi04 & ~pi16;
+  assign n153 = n116 & n152;
+  assign n154 = n151 & ~n153;
+  assign n155 = pi18 & ~pi20;
+  assign n156 = ~pi17 & n155;
+  assign n157 = n152 & n156;
+  assign n158 = n154 & ~n157;
+  assign n159 = ~pi04 & pi19;
+  assign n160 = pi19 & ~n159;
+  assign n161 = ~pi20 & ~n160;
+  assign n162 = ~pi18 & n161;
+  assign n163 = ~pi17 & n162;
+  assign n164 = ~pi16 & n163;
+  assign n165 = n158 & ~n164;
+  assign po05 = ~pi00 & ~n165;
+  assign n167 = pi02 & ~pi15;
+  assign n168 = ~pi01 & n167;
+  assign n169 = ~pi03 & ~n168;
+  assign n170 = ~pi16 & ~n169;
+  assign n171 = ~pi01 & pi02;
+  assign n172 = ~pi03 & ~n171;
+  assign n173 = pi17 & ~n172;
+  assign n174 = pi16 & n173;
+  assign n175 = ~pi15 & n174;
+  assign n176 = ~n170 & ~n175;
+  assign n177 = ~pi15 & ~pi17;
+  assign n178 = ~pi15 & ~n177;
+  assign n179 = ~pi18 & ~n178;
+  assign n180 = pi16 & n179;
+  assign n181 = pi03 & n180;
+  assign n182 = n176 & ~n181;
+  assign n183 = ~pi19 & ~n178;
+  assign n184 = pi18 & n183;
+  assign n185 = pi16 & n184;
+  assign n186 = pi03 & n185;
+  assign n187 = n182 & ~n186;
+  assign n188 = pi16 & ~n178;
+  assign n189 = pi03 & n188;
+  assign n190 = pi01 & pi02;
+  assign n191 = ~pi16 & ~pi17;
+  assign n192 = ~pi15 & n191;
+  assign n193 = n190 & n192;
+  assign n194 = ~n189 & ~n193;
+  assign n195 = ~pi20 & ~n194;
+  assign n196 = pi19 & n195;
+  assign n197 = pi18 & n196;
+  assign n198 = n187 & ~n197;
+  assign po06 = ~pi00 & ~n198;
+  assign n200 = ~pi09 & pi16;
+  assign n201 = ~pi08 & n200;
+  assign n202 = pi16 & ~n201;
+  assign n203 = ~pi09 & pi13;
+  assign n204 = pi15 & pi16;
+  assign n205 = n203 & n204;
+  assign n206 = n202 & ~n205;
+  assign n207 = ~pi18 & ~n206;
+  assign n208 = ~pi20 & ~n206;
+  assign n209 = ~pi19 & n208;
+  assign n210 = pi18 & n209;
+  assign n211 = ~n207 & ~n210;
+  assign n212 = ~pi17 & ~n211;
+  assign n213 = pi13 & pi16;
+  assign n214 = pi08 & ~n213;
+  assign n215 = ~pi19 & ~pi20;
+  assign n216 = pi18 & n215;
+  assign n217 = pi18 & ~n216;
+  assign n218 = ~n214 & ~n217;
+  assign n219 = pi17 & n218;
+  assign n220 = pi15 & n219;
+  assign n221 = ~pi09 & n220;
+  assign po07 = n212 | n221;
+  assign n223 = pi09 & pi16;
+  assign n224 = ~pi08 & n223;
+  assign n225 = pi16 & ~n224;
+  assign n226 = ~n205 & n225;
+  assign n227 = ~pi18 & ~n226;
+  assign n228 = ~pi20 & ~n226;
+  assign n229 = ~pi19 & n228;
+  assign n230 = pi18 & n229;
+  assign n231 = ~n227 & ~n230;
+  assign n232 = ~pi17 & ~n231;
+  assign n233 = ~pi08 & pi09;
+  assign n234 = ~pi09 & n213;
+  assign n235 = ~n233 & ~n234;
+  assign n236 = ~n217 & ~n235;
+  assign n237 = pi17 & n236;
+  assign n238 = pi15 & n237;
+  assign po08 = n232 | n238;
+  assign n240 = pi08 & n200;
+  assign n241 = pi16 & ~n240;
+  assign n242 = ~n205 & n241;
+  assign n243 = ~pi18 & ~n242;
+  assign n244 = ~pi20 & ~n242;
+  assign n245 = ~pi19 & n244;
+  assign n246 = pi18 & n245;
+  assign n247 = ~n243 & ~n246;
+  assign n248 = ~pi17 & ~n247;
+  assign n249 = ~pi08 & ~n213;
+  assign n250 = ~n217 & ~n249;
+  assign n251 = pi17 & n250;
+  assign n252 = pi15 & n251;
+  assign n253 = ~pi09 & n252;
+  assign po09 = n248 | n253;
+  assign n255 = pi08 & n223;
+  assign n256 = pi16 & ~n255;
+  assign n257 = ~n205 & n256;
+  assign n258 = ~pi18 & ~n257;
+  assign n259 = ~pi20 & ~n257;
+  assign n260 = ~pi19 & n259;
+  assign n261 = pi18 & n260;
+  assign n262 = ~n258 & ~n261;
+  assign n263 = ~pi17 & ~n262;
+  assign n264 = pi08 & pi09;
+  assign n265 = ~n234 & ~n264;
+  assign n266 = ~n217 & ~n265;
+  assign n267 = pi17 & n266;
+  assign n268 = pi15 & n267;
+  assign po10 = n263 | n268;
+  assign n270 = ~pi16 & pi17;
+  assign n271 = ~pi16 & ~n270;
+  assign n272 = ~pi17 & ~pi18;
+  assign n273 = ~pi16 & n272;
+  assign n274 = n271 & ~n273;
+  assign n275 = pi18 & pi19;
+  assign n276 = n191 & n275;
+  assign n277 = n274 & ~n276;
+  assign n278 = n191 & n216;
+  assign po11 = ~n277 | n278;
+  assign n280 = ~pi18 & pi19;
+  assign n281 = ~pi18 & ~n280;
+  assign n282 = ~pi11 & pi16;
+  assign n283 = ~pi10 & n282;
+  assign n284 = pi16 & ~n283;
+  assign n285 = ~n205 & n284;
+  assign n286 = ~n281 & ~n285;
+  assign n287 = ~pi17 & n286;
+  assign n288 = ~pi10 & ~pi11;
+  assign n289 = ~n234 & ~n288;
+  assign n290 = ~n281 & ~n289;
+  assign n291 = pi17 & n290;
+  assign n292 = pi15 & n291;
+  assign po12 = n287 | n292;
+  assign n294 = pi11 & pi16;
+  assign n295 = ~pi10 & n294;
+  assign n296 = pi16 & ~n295;
+  assign n297 = ~n205 & n296;
+  assign n298 = ~n281 & ~n297;
+  assign n299 = ~pi17 & n298;
+  assign n300 = ~pi10 & pi11;
+  assign n301 = ~n234 & ~n300;
+  assign n302 = ~n281 & ~n301;
+  assign n303 = pi17 & n302;
+  assign n304 = pi15 & n303;
+  assign po13 = n299 | n304;
+  assign n306 = pi10 & n282;
+  assign n307 = pi16 & ~n306;
+  assign n308 = ~n205 & n307;
+  assign n309 = ~n281 & ~n308;
+  assign n310 = ~pi17 & n309;
+  assign n311 = pi10 & ~pi11;
+  assign n312 = ~n234 & ~n311;
+  assign n313 = ~n281 & ~n312;
+  assign n314 = pi17 & n313;
+  assign n315 = pi15 & n314;
+  assign po14 = n310 | n315;
+  assign n317 = pi10 & n294;
+  assign n318 = pi16 & ~n317;
+  assign n319 = ~n205 & n318;
+  assign n320 = ~n281 & ~n319;
+  assign n321 = ~pi17 & n320;
+  assign n322 = pi10 & pi11;
+  assign n323 = ~n234 & ~n322;
+  assign n324 = ~n281 & ~n323;
+  assign n325 = pi17 & n324;
+  assign n326 = pi15 & n325;
+  assign po15 = n321 | n326;
+  assign n328 = ~pi05 & ~pi17;
+  assign n329 = ~pi12 & n55;
+  assign n330 = ~n328 & ~n329;
+  assign n331 = ~pi16 & ~n330;
+  assign n332 = pi16 & ~pi17;
+  assign n333 = ~pi12 & ~pi15;
+  assign n334 = n332 & n333;
+  assign n335 = ~n331 & ~n334;
+  assign po16 = ~n281 & ~n335;
+  assign n337 = pi05 & ~pi17;
+  assign n338 = pi12 & n55;
+  assign n339 = ~n337 & ~n338;
+  assign n340 = ~pi16 & ~n339;
+  assign n341 = pi12 & ~pi15;
+  assign n342 = n332 & n341;
+  assign n343 = ~n340 & ~n342;
+  assign po17 = ~n281 & ~n343;
+  assign n345 = ~n61 & ~n119;
+  assign n346 = ~pi16 & pi18;
+  assign n347 = ~n93 & ~n346;
+  assign n348 = ~n345 & ~n347;
+  assign n349 = ~n71 & ~n280;
+  assign n350 = pi16 & ~n349;
+  assign n351 = ~pi16 & ~pi18;
+  assign n352 = ~n350 & ~n351;
+  assign n353 = pi17 & ~n352;
+  assign n354 = pi16 & n63;
+  assign n355 = ~n353 & ~n354;
+  assign po18 = n348 | ~n355;
+  assign n357 = pi15 & n270;
+  assign n358 = ~pi15 & n332;
+  assign n359 = ~n357 & ~n358;
+  assign po19 = ~n349 & ~n359;
+  assign n361 = pi18 & ~n71;
+  assign n362 = pi18 & n75;
+  assign n363 = n361 & ~n362;
+  assign n364 = pi16 & ~n363;
+  assign po20 = pi15 & n364;
+  assign n366 = ~pi12 & ~pi14;
+  assign n367 = ~pi14 & ~n366;
+  assign n368 = ~n349 & ~n367;
+  assign n369 = ~pi18 & n145;
+  assign n370 = ~n362 & ~n369;
+  assign n371 = ~n367 & ~n370;
+  assign n372 = ~n368 & ~n371;
+  assign n373 = pi16 & ~n372;
+  assign po21 = pi15 & n373;
+  assign n375 = pi12 & ~pi14;
+  assign n376 = ~pi14 & ~n375;
+  assign n377 = ~n349 & ~n376;
+  assign n378 = ~n370 & ~n376;
+  assign n379 = ~n377 & ~n378;
+  assign n380 = pi16 & ~n379;
+  assign po22 = pi15 & n380;
+endmodule
+
+

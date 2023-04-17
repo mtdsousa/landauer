@@ -1,0 +1,3431 @@
+[
+    {
+        "name": "bencgen",
+        "description": "Fabrício Vivas Andrade, Leandro Maia Silva, and Antônio Otávio Fernandes. 2008. BenCGen: a digital circuit generation tool for benchmarks. In Proceedings of the 21st annual symposium on Integrated circuits and system design (SBCCI '08). Association for Computing Machinery, New York, NY, USA, 164–169. https://doi.org/10.1145/1404371.1404418",
+        "items": [
+            {
+                "name": "ripple-carry adder (3-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_3.v",
+                    "tree": "tree/bencgen/c11_3.json",
+                    "entropy": "entropy/bencgen/c11_3.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (4-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_4.v",
+                    "tree": "tree/bencgen/c11_4.json",
+                    "entropy": "entropy/bencgen/c11_4.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (5-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_5.v",
+                    "tree": "tree/bencgen/c11_5.json",
+                    "entropy": "entropy/bencgen/c11_5.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (6-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_6.v",
+                    "tree": "tree/bencgen/c11_6.json",
+                    "entropy": "entropy/bencgen/c11_6.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (7-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_7.v",
+                    "tree": "tree/bencgen/c11_7.json",
+                    "entropy": "entropy/bencgen/c11_7.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (8-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_8.v",
+                    "tree": "tree/bencgen/c11_8.json",
+                    "entropy": "entropy/bencgen/c11_8.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (9-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_9.v",
+                    "tree": "tree/bencgen/c11_9.json",
+                    "entropy": "entropy/bencgen/c11_9.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (10-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_10.v",
+                    "tree": "tree/bencgen/c11_10.json",
+                    "entropy": "entropy/bencgen/c11_10.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (11-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_11.v",
+                    "tree": "tree/bencgen/c11_11.json",
+                    "entropy": "entropy/bencgen/c11_11.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (12-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_12.v",
+                    "tree": "tree/bencgen/c11_12.json",
+                    "entropy": "entropy/bencgen/c11_12.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (13-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_13.v",
+                    "tree": "tree/bencgen/c11_13.json",
+                    "entropy": "entropy/bencgen/c11_13.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (14-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_14.v",
+                    "tree": "tree/bencgen/c11_14.json",
+                    "entropy": "entropy/bencgen/c11_14.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (15-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_15.v",
+                    "tree": "tree/bencgen/c11_15.json",
+                    "entropy": "entropy/bencgen/c11_15.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (16-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c11_16.v",
+                    "tree": "tree/bencgen/c11_16.json",
+                    "entropy": "entropy/bencgen/c11_16.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (3-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_3.v",
+                    "tree": "tree/bencgen/c13_3.json",
+                    "entropy": "entropy/bencgen/c13_3.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (4-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_4.v",
+                    "tree": "tree/bencgen/c13_4.json",
+                    "entropy": "entropy/bencgen/c13_4.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (5-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_5.v",
+                    "tree": "tree/bencgen/c13_5.json",
+                    "entropy": "entropy/bencgen/c13_5.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (6-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_6.v",
+                    "tree": "tree/bencgen/c13_6.json",
+                    "entropy": "entropy/bencgen/c13_6.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (7-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_7.v",
+                    "tree": "tree/bencgen/c13_7.json",
+                    "entropy": "entropy/bencgen/c13_7.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (8-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_8.v",
+                    "tree": "tree/bencgen/c13_8.json",
+                    "entropy": "entropy/bencgen/c13_8.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (9-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_9.v",
+                    "tree": "tree/bencgen/c13_9.json",
+                    "entropy": "entropy/bencgen/c13_9.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (10-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_10.v",
+                    "tree": "tree/bencgen/c13_10.json",
+                    "entropy": "entropy/bencgen/c13_10.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (11-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_11.v",
+                    "tree": "tree/bencgen/c13_11.json",
+                    "entropy": "entropy/bencgen/c13_11.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (12-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_12.v",
+                    "tree": "tree/bencgen/c13_12.json",
+                    "entropy": "entropy/bencgen/c13_12.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (13-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_13.v",
+                    "tree": "tree/bencgen/c13_13.json",
+                    "entropy": "entropy/bencgen/c13_13.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (14-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_14.v",
+                    "tree": "tree/bencgen/c13_14.json",
+                    "entropy": "entropy/bencgen/c13_14.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (15-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_15.v",
+                    "tree": "tree/bencgen/c13_15.json",
+                    "entropy": "entropy/bencgen/c13_15.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (16-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c13_16.v",
+                    "tree": "tree/bencgen/c13_16.json",
+                    "entropy": "entropy/bencgen/c13_16.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (3-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_3.v",
+                    "tree": "tree/bencgen/c17_3.json",
+                    "entropy": "entropy/bencgen/c17_3.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (4-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_4.v",
+                    "tree": "tree/bencgen/c17_4.json",
+                    "entropy": "entropy/bencgen/c17_4.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (5-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_5.v",
+                    "tree": "tree/bencgen/c17_5.json",
+                    "entropy": "entropy/bencgen/c17_5.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (6-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_6.v",
+                    "tree": "tree/bencgen/c17_6.json",
+                    "entropy": "entropy/bencgen/c17_6.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (7-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_7.v",
+                    "tree": "tree/bencgen/c17_7.json",
+                    "entropy": "entropy/bencgen/c17_7.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (8-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_8.v",
+                    "tree": "tree/bencgen/c17_8.json",
+                    "entropy": "entropy/bencgen/c17_8.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (9-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_9.v",
+                    "tree": "tree/bencgen/c17_9.json",
+                    "entropy": "entropy/bencgen/c17_9.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (10-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_10.v",
+                    "tree": "tree/bencgen/c17_10.json",
+                    "entropy": "entropy/bencgen/c17_10.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (11-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_11.v",
+                    "tree": "tree/bencgen/c17_11.json",
+                    "entropy": "entropy/bencgen/c17_11.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (12-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_12.v",
+                    "tree": "tree/bencgen/c17_12.json",
+                    "entropy": "entropy/bencgen/c17_12.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (13-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_13.v",
+                    "tree": "tree/bencgen/c17_13.json",
+                    "entropy": "entropy/bencgen/c17_13.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (14-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_14.v",
+                    "tree": "tree/bencgen/c17_14.json",
+                    "entropy": "entropy/bencgen/c17_14.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (15-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_15.v",
+                    "tree": "tree/bencgen/c17_15.json",
+                    "entropy": "entropy/bencgen/c17_15.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (16-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/c17_16.v",
+                    "tree": "tree/bencgen/c17_16.json",
+                    "entropy": "entropy/bencgen/c17_16.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (3-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_3.v",
+                    "tree": "tree/bencgen/maj_3.json",
+                    "entropy": "entropy/bencgen/maj_3.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (4-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_4.v",
+                    "tree": "tree/bencgen/maj_4.json",
+                    "entropy": "entropy/bencgen/maj_4.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (5-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_5.v",
+                    "tree": "tree/bencgen/maj_5.json",
+                    "entropy": "entropy/bencgen/maj_5.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (6-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_6.v",
+                    "tree": "tree/bencgen/maj_6.json",
+                    "entropy": "entropy/bencgen/maj_6.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (7-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_7.v",
+                    "tree": "tree/bencgen/maj_7.json",
+                    "entropy": "entropy/bencgen/maj_7.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (8-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_8.v",
+                    "tree": "tree/bencgen/maj_8.json",
+                    "entropy": "entropy/bencgen/maj_8.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (9-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_9.v",
+                    "tree": "tree/bencgen/maj_9.json",
+                    "entropy": "entropy/bencgen/maj_9.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (10-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_10.v",
+                    "tree": "tree/bencgen/maj_10.json",
+                    "entropy": "entropy/bencgen/maj_10.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (11-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_11.v",
+                    "tree": "tree/bencgen/maj_11.json",
+                    "entropy": "entropy/bencgen/maj_11.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (12-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_12.v",
+                    "tree": "tree/bencgen/maj_12.json",
+                    "entropy": "entropy/bencgen/maj_12.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (13-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_13.v",
+                    "tree": "tree/bencgen/maj_13.json",
+                    "entropy": "entropy/bencgen/maj_13.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (14-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_14.v",
+                    "tree": "tree/bencgen/maj_14.json",
+                    "entropy": "entropy/bencgen/maj_14.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (15-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_15.v",
+                    "tree": "tree/bencgen/maj_15.json",
+                    "entropy": "entropy/bencgen/maj_15.json"
+                }
+            },
+            {
+                "name": "majority ripple-carry adder (16-bit input)",
+                "majority_support": true,
+                "files": {
+                    "design": "source/bencgen/maj_16.v",
+                    "tree": "tree/bencgen/maj_16.json",
+                    "entropy": "entropy/bencgen/maj_16.json"
+                }
+            }
+        ]
+    },
+    {
+        "name": "bencgen (balanced)",
+        "description": "",
+        "items": [
+            {
+                "name": "ripple-carry adder (3-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_3.v",
+                    "tree": "tree/bencgen/balanced/c11_3.json",
+                    "entropy": "entropy/bencgen/balanced/c11_3.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (4-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_4.v",
+                    "tree": "tree/bencgen/balanced/c11_4.json",
+                    "entropy": "entropy/bencgen/balanced/c11_4.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (5-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_5.v",
+                    "tree": "tree/bencgen/balanced/c11_5.json",
+                    "entropy": "entropy/bencgen/balanced/c11_5.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (6-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_6.v",
+                    "tree": "tree/bencgen/balanced/c11_6.json",
+                    "entropy": "entropy/bencgen/balanced/c11_6.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (7-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_7.v",
+                    "tree": "tree/bencgen/balanced/c11_7.json",
+                    "entropy": "entropy/bencgen/balanced/c11_7.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (8-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_8.v",
+                    "tree": "tree/bencgen/balanced/c11_8.json",
+                    "entropy": "entropy/bencgen/balanced/c11_8.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (9-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_9.v",
+                    "tree": "tree/bencgen/balanced/c11_9.json",
+                    "entropy": "entropy/bencgen/balanced/c11_9.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (10-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_10.v",
+                    "tree": "tree/bencgen/balanced/c11_10.json",
+                    "entropy": "entropy/bencgen/balanced/c11_10.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (11-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_11.v",
+                    "tree": "tree/bencgen/balanced/c11_11.json",
+                    "entropy": "entropy/bencgen/balanced/c11_11.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (12-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_12.v",
+                    "tree": "tree/bencgen/balanced/c11_12.json",
+                    "entropy": "entropy/bencgen/balanced/c11_12.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (13-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_13.v",
+                    "tree": "tree/bencgen/balanced/c11_13.json",
+                    "entropy": "entropy/bencgen/balanced/c11_13.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (14-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_14.v",
+                    "tree": "tree/bencgen/balanced/c11_14.json",
+                    "entropy": "entropy/bencgen/balanced/c11_14.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (15-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_15.v",
+                    "tree": "tree/bencgen/balanced/c11_15.json",
+                    "entropy": "entropy/bencgen/balanced/c11_15.json"
+                }
+            },
+            {
+                "name": "ripple-carry adder (16-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c11_16.v",
+                    "tree": "tree/bencgen/balanced/c11_16.json",
+                    "entropy": "entropy/bencgen/balanced/c11_16.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (3-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_3.v",
+                    "tree": "tree/bencgen/balanced/c13_3.json",
+                    "entropy": "entropy/bencgen/balanced/c13_3.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (4-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_4.v",
+                    "tree": "tree/bencgen/balanced/c13_4.json",
+                    "entropy": "entropy/bencgen/balanced/c13_4.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (5-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_5.v",
+                    "tree": "tree/bencgen/balanced/c13_5.json",
+                    "entropy": "entropy/bencgen/balanced/c13_5.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (6-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_6.v",
+                    "tree": "tree/bencgen/balanced/c13_6.json",
+                    "entropy": "entropy/bencgen/balanced/c13_6.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (7-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_7.v",
+                    "tree": "tree/bencgen/balanced/c13_7.json",
+                    "entropy": "entropy/bencgen/balanced/c13_7.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (8-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_8.v",
+                    "tree": "tree/bencgen/balanced/c13_8.json",
+                    "entropy": "entropy/bencgen/balanced/c13_8.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (9-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_9.v",
+                    "tree": "tree/bencgen/balanced/c13_9.json",
+                    "entropy": "entropy/bencgen/balanced/c13_9.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (10-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_10.v",
+                    "tree": "tree/bencgen/balanced/c13_10.json",
+                    "entropy": "entropy/bencgen/balanced/c13_10.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (11-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_11.v",
+                    "tree": "tree/bencgen/balanced/c13_11.json",
+                    "entropy": "entropy/bencgen/balanced/c13_11.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (12-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_12.v",
+                    "tree": "tree/bencgen/balanced/c13_12.json",
+                    "entropy": "entropy/bencgen/balanced/c13_12.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (13-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_13.v",
+                    "tree": "tree/bencgen/balanced/c13_13.json",
+                    "entropy": "entropy/bencgen/balanced/c13_13.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (14-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_14.v",
+                    "tree": "tree/bencgen/balanced/c13_14.json",
+                    "entropy": "entropy/bencgen/balanced/c13_14.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (15-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_15.v",
+                    "tree": "tree/bencgen/balanced/c13_15.json",
+                    "entropy": "entropy/bencgen/balanced/c13_15.json"
+                }
+            },
+            {
+                "name": "carry-lookahead adder (16-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c13_16.v",
+                    "tree": "tree/bencgen/balanced/c13_16.json",
+                    "entropy": "entropy/bencgen/balanced/c13_16.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (3-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_3.v",
+                    "tree": "tree/bencgen/balanced/c17_3.json",
+                    "entropy": "entropy/bencgen/balanced/c17_3.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (4-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_4.v",
+                    "tree": "tree/bencgen/balanced/c17_4.json",
+                    "entropy": "entropy/bencgen/balanced/c17_4.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (5-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_5.v",
+                    "tree": "tree/bencgen/balanced/c17_5.json",
+                    "entropy": "entropy/bencgen/balanced/c17_5.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (6-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_6.v",
+                    "tree": "tree/bencgen/balanced/c17_6.json",
+                    "entropy": "entropy/bencgen/balanced/c17_6.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (7-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_7.v",
+                    "tree": "tree/bencgen/balanced/c17_7.json",
+                    "entropy": "entropy/bencgen/balanced/c17_7.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (8-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_8.v",
+                    "tree": "tree/bencgen/balanced/c17_8.json",
+                    "entropy": "entropy/bencgen/balanced/c17_8.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (9-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_9.v",
+                    "tree": "tree/bencgen/balanced/c17_9.json",
+                    "entropy": "entropy/bencgen/balanced/c17_9.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (10-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_10.v",
+                    "tree": "tree/bencgen/balanced/c17_10.json",
+                    "entropy": "entropy/bencgen/balanced/c17_10.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (11-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_11.v",
+                    "tree": "tree/bencgen/balanced/c17_11.json",
+                    "entropy": "entropy/bencgen/balanced/c17_11.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (12-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_12.v",
+                    "tree": "tree/bencgen/balanced/c17_12.json",
+                    "entropy": "entropy/bencgen/balanced/c17_12.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (13-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_13.v",
+                    "tree": "tree/bencgen/balanced/c17_13.json",
+                    "entropy": "entropy/bencgen/balanced/c17_13.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (14-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_14.v",
+                    "tree": "tree/bencgen/balanced/c17_14.json",
+                    "entropy": "entropy/bencgen/balanced/c17_14.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (15-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_15.v",
+                    "tree": "tree/bencgen/balanced/c17_15.json",
+                    "entropy": "entropy/bencgen/balanced/c17_15.json"
+                }
+            },
+            {
+                "name": "carry-lookahead block adder (16-bit input)",
+                "majority_support": false,
+                "files": {
+                    "design": "source/bencgen/balanced/c17_16.v",
+                    "tree": "tree/bencgen/balanced/c17_16.json",
+                    "entropy": "entropy/bencgen/balanced/c17_16.json"
+                }
+            }
+        ]
+    },
+    {
+        "name": "epfl",
+        "description": "Amarù, Luca Gaetano, Pierre-Emmanuel Gaillardon and Giovanni De Micheli. \"The EPFL Combinational Benchmark Suite.\" (2015).",
+        "items": [
+            {
+                "name": "adder",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/adder.v",
+                    "tree": "tree/epfl/adder.json",
+                    "entropy": "entropy/epfl/adder.json"
+                }
+            },
+            {
+                "name": "arbiter",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/arbiter.v",
+                    "tree": "tree/epfl/arbiter.json",
+                    "entropy": "entropy/epfl/arbiter.json"
+                }
+            },
+            {
+                "name": "bar",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/bar.v",
+                    "tree": "tree/epfl/bar.json",
+                    "entropy": "entropy/epfl/bar.json"
+                }
+            },
+            {
+                "name": "cavlc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/cavlc.v",
+                    "tree": "tree/epfl/cavlc.json",
+                    "entropy": "entropy/epfl/cavlc.json"
+                }
+            },
+            {
+                "name": "ctrl",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/ctrl.v",
+                    "tree": "tree/epfl/ctrl.json",
+                    "entropy": "entropy/epfl/ctrl.json"
+                }
+            },
+            {
+                "name": "dec",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/dec.v",
+                    "tree": "tree/epfl/dec.json",
+                    "entropy": "entropy/epfl/dec.json"
+                }
+            },
+            {
+                "name": "div",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/div.v",
+                    "tree": "tree/epfl/div.json",
+                    "entropy": "entropy/epfl/div.json"
+                }
+            },
+            {
+                "name": "hyp",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/hyp.v",
+                    "tree": "tree/epfl/hyp.json",
+                    "entropy": "entropy/epfl/hyp.json"
+                }
+            },
+            {
+                "name": "i2c",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/i2c.v",
+                    "tree": "tree/epfl/i2c.json",
+                    "entropy": "entropy/epfl/i2c.json"
+                }
+            },
+            {
+                "name": "int2float",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/int2float.v",
+                    "tree": "tree/epfl/int2float.json",
+                    "entropy": "entropy/epfl/int2float.json"
+                }
+            },
+            {
+                "name": "log2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/log2.v",
+                    "tree": "tree/epfl/log2.json",
+                    "entropy": "entropy/epfl/log2.json"
+                }
+            },
+            {
+                "name": "max",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/max.v",
+                    "tree": "tree/epfl/max.json",
+                    "entropy": "entropy/epfl/max.json"
+                }
+            },
+            {
+                "name": "mem_ctrl",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/mem_ctrl.v",
+                    "tree": "tree/epfl/mem_ctrl.json",
+                    "entropy": "entropy/epfl/mem_ctrl.json"
+                }
+            },
+            {
+                "name": "multiplier",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/multiplier.v",
+                    "tree": "tree/epfl/multiplier.json",
+                    "entropy": "entropy/epfl/multiplier.json"
+                }
+            },
+            {
+                "name": "priority",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/priority.v",
+                    "tree": "tree/epfl/priority.json",
+                    "entropy": "entropy/epfl/priority.json"
+                }
+            },
+            {
+                "name": "router",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/router.v",
+                    "tree": "tree/epfl/router.json",
+                    "entropy": "entropy/epfl/router.json"
+                }
+            },
+            {
+                "name": "sin",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/sin.v",
+                    "tree": "tree/epfl/sin.json",
+                    "entropy": "entropy/epfl/sin.json"
+                }
+            },
+            {
+                "name": "sqrt",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/sqrt.v",
+                    "tree": "tree/epfl/sqrt.json",
+                    "entropy": "entropy/epfl/sqrt.json"
+                }
+            },
+            {
+                "name": "square",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/square.v",
+                    "tree": "tree/epfl/square.json",
+                    "entropy": "entropy/epfl/square.json"
+                }
+            },
+            {
+                "name": "voter",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/voter.v",
+                    "tree": "tree/epfl/voter.json",
+                    "entropy": "entropy/epfl/voter.json"
+                }
+            }
+        ]
+    },
+    {
+        "name": "epfl (testa)",
+        "description": "",
+        "items": [
+            {
+                "name": "adder",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/adder.v",
+                    "tree": "tree/epfl/testa/adder.json",
+                    "entropy": "entropy/epfl/testa/adder.json"
+                }
+            },
+            {
+                "name": "arbiter",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/arbiter.v",
+                    "tree": "tree/epfl/testa/arbiter.json",
+                    "entropy": "entropy/epfl/testa/arbiter.json"
+                }
+            },
+            {
+                "name": "bar",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/bar.v",
+                    "tree": "tree/epfl/testa/bar.json",
+                    "entropy": "entropy/epfl/testa/bar.json"
+                }
+            },
+            {
+                "name": "cavlc",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/cavlc.v",
+                    "tree": "tree/epfl/testa/cavlc.json",
+                    "entropy": "entropy/epfl/testa/cavlc.json"
+                }
+            },
+            {
+                "name": "ctrl",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/ctrl.v",
+                    "tree": "tree/epfl/testa/ctrl.json",
+                    "entropy": "entropy/epfl/testa/ctrl.json"
+                }
+            },
+            {
+                "name": "dec",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/dec.v",
+                    "tree": "tree/epfl/testa/dec.json",
+                    "entropy": "entropy/epfl/testa/dec.json"
+                }
+            },
+            {
+                "name": "div",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/div.v",
+                    "tree": "tree/epfl/testa/div.json",
+                    "entropy": "entropy/epfl/testa/div.json"
+                }
+            },
+            {
+                "name": "hyp",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/hyp.v",
+                    "tree": "tree/epfl/testa/hyp.json",
+                    "entropy": "entropy/epfl/testa/hyp.json"
+                }
+            },
+            {
+                "name": "i2c",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/i2c.v",
+                    "tree": "tree/epfl/testa/i2c.json",
+                    "entropy": "entropy/epfl/testa/i2c.json"
+                }
+            },
+            {
+                "name": "int2float",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/int2float.v",
+                    "tree": "tree/epfl/testa/int2float.json",
+                    "entropy": "entropy/epfl/testa/int2float.json"
+                }
+            },
+            {
+                "name": "log2",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/log2.v",
+                    "tree": "tree/epfl/testa/log2.json",
+                    "entropy": "entropy/epfl/testa/log2.json"
+                }
+            },
+            {
+                "name": "max",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/max.v",
+                    "tree": "tree/epfl/testa/max.json",
+                    "entropy": "entropy/epfl/testa/max.json"
+                }
+            },
+            {
+                "name": "mem_ctrl",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/mem_ctrl.v",
+                    "tree": "tree/epfl/testa/mem_ctrl.json",
+                    "entropy": "entropy/epfl/testa/mem_ctrl.json"
+                }
+            },
+            {
+                "name": "multiplier",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/multiplier.v",
+                    "tree": "tree/epfl/testa/multiplier.json",
+                    "entropy": "entropy/epfl/testa/multiplier.json"
+                }
+            },
+            {
+                "name": "priority",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/priority.v",
+                    "tree": "tree/epfl/testa/priority.json",
+                    "entropy": "entropy/epfl/testa/priority.json"
+                }
+            },
+            {
+                "name": "router",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/router.v",
+                    "tree": "tree/epfl/testa/router.json",
+                    "entropy": "entropy/epfl/testa/router.json"
+                }
+            },
+            {
+                "name": "sin",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/sin.v",
+                    "tree": "tree/epfl/testa/sin.json",
+                    "entropy": "entropy/epfl/testa/sin.json"
+                }
+            },
+            {
+                "name": "sqrt",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/sqrt.v",
+                    "tree": "tree/epfl/testa/sqrt.json",
+                    "entropy": "entropy/epfl/testa/sqrt.json"
+                }
+            },
+            {
+                "name": "square",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/square.v",
+                    "tree": "tree/epfl/testa/square.json",
+                    "entropy": "entropy/epfl/testa/square.json"
+                }
+            },
+            {
+                "name": "voter",
+                "majority_support": true,
+                "files": {
+                    "design": "source/epfl/testa/voter.v",
+                    "tree": "tree/epfl/testa/voter.json",
+                    "entropy": "entropy/epfl/testa/voter.json"
+                }
+            }
+        ]
+    },
+    {
+        "name": "epfl (testa, majority-disabled)",
+        "description": "",
+        "items": [
+            {
+                "name": "adder",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/adder.v",
+                    "tree": "tree/epfl/testa/adder.json",
+                    "entropy": "entropy/epfl/testa/disabled/adder.json"
+                }
+            },
+            {
+                "name": "arbiter",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/arbiter.v",
+                    "tree": "tree/epfl/testa/arbiter.json",
+                    "entropy": "entropy/epfl/testa/disabled/arbiter.json"
+                }
+            },
+            {
+                "name": "bar",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/bar.v",
+                    "tree": "tree/epfl/testa/bar.json",
+                    "entropy": "entropy/epfl/testa/disabled/bar.json"
+                }
+            },
+            {
+                "name": "cavlc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/cavlc.v",
+                    "tree": "tree/epfl/testa/cavlc.json",
+                    "entropy": "entropy/epfl/testa/disabled/cavlc.json"
+                }
+            },
+            {
+                "name": "ctrl",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/ctrl.v",
+                    "tree": "tree/epfl/testa/ctrl.json",
+                    "entropy": "entropy/epfl/testa/disabled/ctrl.json"
+                }
+            },
+            {
+                "name": "dec",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/dec.v",
+                    "tree": "tree/epfl/testa/dec.json",
+                    "entropy": "entropy/epfl/testa/disabled/dec.json"
+                }
+            },
+            {
+                "name": "div",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/div.v",
+                    "tree": "tree/epfl/testa/div.json",
+                    "entropy": "entropy/epfl/testa/disabled/div.json"
+                }
+            },
+            {
+                "name": "hyp",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/hyp.v",
+                    "tree": "tree/epfl/testa/hyp.json",
+                    "entropy": "entropy/epfl/testa/disabled/hyp.json"
+                }
+            },
+            {
+                "name": "i2c",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/i2c.v",
+                    "tree": "tree/epfl/testa/i2c.json",
+                    "entropy": "entropy/epfl/testa/disabled/i2c.json"
+                }
+            },
+            {
+                "name": "int2float",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/int2float.v",
+                    "tree": "tree/epfl/testa/int2float.json",
+                    "entropy": "entropy/epfl/testa/disabled/int2float.json"
+                }
+            },
+            {
+                "name": "log2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/log2.v",
+                    "tree": "tree/epfl/testa/log2.json",
+                    "entropy": "entropy/epfl/testa/disabled/log2.json"
+                }
+            },
+            {
+                "name": "max",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/max.v",
+                    "tree": "tree/epfl/testa/max.json",
+                    "entropy": "entropy/epfl/testa/disabled/max.json"
+                }
+            },
+            {
+                "name": "mem_ctrl",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/mem_ctrl.v",
+                    "tree": "tree/epfl/testa/mem_ctrl.json",
+                    "entropy": "entropy/epfl/testa/disabled/mem_ctrl.json"
+                }
+            },
+            {
+                "name": "multiplier",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/multiplier.v",
+                    "tree": "tree/epfl/testa/multiplier.json",
+                    "entropy": "entropy/epfl/testa/disabled/multiplier.json"
+                }
+            },
+            {
+                "name": "priority",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/priority.v",
+                    "tree": "tree/epfl/testa/priority.json",
+                    "entropy": "entropy/epfl/testa/disabled/priority.json"
+                }
+            },
+            {
+                "name": "router",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/router.v",
+                    "tree": "tree/epfl/testa/router.json",
+                    "entropy": "entropy/epfl/testa/disabled/router.json"
+                }
+            },
+            {
+                "name": "sin",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/sin.v",
+                    "tree": "tree/epfl/testa/sin.json",
+                    "entropy": "entropy/epfl/testa/disabled/sin.json"
+                }
+            },
+            {
+                "name": "sqrt",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/sqrt.v",
+                    "tree": "tree/epfl/testa/sqrt.json",
+                    "entropy": "entropy/epfl/testa/disabled/sqrt.json"
+                }
+            },
+            {
+                "name": "square",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/square.v",
+                    "tree": "tree/epfl/testa/square.json",
+                    "entropy": "entropy/epfl/testa/disabled/square.json"
+                }
+            },
+            {
+                "name": "voter",
+                "majority_support": false,
+                "files": {
+                    "design": "source/epfl/testa/voter.v",
+                    "tree": "tree/epfl/testa/voter.json",
+                    "entropy": "entropy/epfl/testa/disabled/voter.json"
+                }
+            }
+        ]
+    },
+    {
+        "name": "mcnc",
+        "description": "S. Yang, \"Logic Synthesis and Optimization Benchmarks,\" Technical Report, MCNC, Dec. 1988, published at 1989 MCNC International Workshop on Logic Synthesis.",
+        "items": [
+            {
+                "name": "5xp1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/5xp1.v",
+                    "tree": "tree/mcnc/5xp1.json",
+                    "entropy": "entropy/mcnc/5xp1.json"
+                }
+            },
+            {
+                "name": "9symml",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/9symml.v",
+                    "tree": "tree/mcnc/9symml.json",
+                    "entropy": "entropy/mcnc/9symml.json"
+                }
+            },
+            {
+                "name": "9sym",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/9sym.v",
+                    "tree": "tree/mcnc/9sym.json",
+                    "entropy": "entropy/mcnc/9sym.json"
+                }
+            },
+            {
+                "name": "al2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/al2.v",
+                    "tree": "tree/mcnc/al2.json",
+                    "entropy": "entropy/mcnc/al2.json"
+                }
+            },
+            {
+                "name": "alcom",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/alcom.v",
+                    "tree": "tree/mcnc/alcom.json",
+                    "entropy": "entropy/mcnc/alcom.json"
+                }
+            },
+            {
+                "name": "alu1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/alu1.v",
+                    "tree": "tree/mcnc/alu1.json",
+                    "entropy": "entropy/mcnc/alu1.json"
+                }
+            },
+            {
+                "name": "alu2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/alu2.v",
+                    "tree": "tree/mcnc/alu2.json",
+                    "entropy": "entropy/mcnc/alu2.json"
+                }
+            },
+            {
+                "name": "alu3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/alu3.v",
+                    "tree": "tree/mcnc/alu3.json",
+                    "entropy": "entropy/mcnc/alu3.json"
+                }
+            },
+            {
+                "name": "alu4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/alu4.v",
+                    "tree": "tree/mcnc/alu4.json",
+                    "entropy": "entropy/mcnc/alu4.json"
+                }
+            },
+            {
+                "name": "amd",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/amd.v",
+                    "tree": "tree/mcnc/amd.json",
+                    "entropy": "entropy/mcnc/amd.json"
+                }
+            },
+            {
+                "name": "apex1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apex1.v",
+                    "tree": "tree/mcnc/apex1.json",
+                    "entropy": "entropy/mcnc/apex1.json"
+                }
+            },
+            {
+                "name": "apex2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apex2.v",
+                    "tree": "tree/mcnc/apex2.json",
+                    "entropy": "entropy/mcnc/apex2.json"
+                }
+            },
+            {
+                "name": "apex3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apex3.v",
+                    "tree": "tree/mcnc/apex3.json",
+                    "entropy": "entropy/mcnc/apex3.json"
+                }
+            },
+            {
+                "name": "apex4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apex4.v",
+                    "tree": "tree/mcnc/apex4.json",
+                    "entropy": "entropy/mcnc/apex4.json"
+                }
+            },
+            {
+                "name": "apex5",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apex5.v",
+                    "tree": "tree/mcnc/apex5.json",
+                    "entropy": "entropy/mcnc/apex5.json"
+                }
+            },
+            {
+                "name": "apex6",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apex6.v",
+                    "tree": "tree/mcnc/apex6.json",
+                    "entropy": "entropy/mcnc/apex6.json"
+                }
+            },
+            {
+                "name": "apex7",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apex7.v",
+                    "tree": "tree/mcnc/apex7.json",
+                    "entropy": "entropy/mcnc/apex7.json"
+                }
+            },
+            {
+                "name": "apla",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/apla.v",
+                    "tree": "tree/mcnc/apla.json",
+                    "entropy": "entropy/mcnc/apla.json"
+                }
+            },
+            {
+                "name": "b10",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b10.v",
+                    "tree": "tree/mcnc/b10.json",
+                    "entropy": "entropy/mcnc/b10.json"
+                }
+            },
+            {
+                "name": "b11",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b11.v",
+                    "tree": "tree/mcnc/b11.json",
+                    "entropy": "entropy/mcnc/b11.json"
+                }
+            },
+            {
+                "name": "b12",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b12.v",
+                    "tree": "tree/mcnc/b12.json",
+                    "entropy": "entropy/mcnc/b12.json"
+                }
+            },
+            {
+                "name": "b1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b1.v",
+                    "tree": "tree/mcnc/b1.json",
+                    "entropy": "entropy/mcnc/b1.json"
+                }
+            },
+            {
+                "name": "b2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b2.v",
+                    "tree": "tree/mcnc/b2.json",
+                    "entropy": "entropy/mcnc/b2.json"
+                }
+            },
+            {
+                "name": "b3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b3.v",
+                    "tree": "tree/mcnc/b3.json",
+                    "entropy": "entropy/mcnc/b3.json"
+                }
+            },
+            {
+                "name": "b4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b4.v",
+                    "tree": "tree/mcnc/b4.json",
+                    "entropy": "entropy/mcnc/b4.json"
+                }
+            },
+            {
+                "name": "b7",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b7.v",
+                    "tree": "tree/mcnc/b7.json",
+                    "entropy": "entropy/mcnc/b7.json"
+                }
+            },
+            {
+                "name": "b9",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/b9.v",
+                    "tree": "tree/mcnc/b9.json",
+                    "entropy": "entropy/mcnc/b9.json"
+                }
+            },
+            {
+                "name": "bc0",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/bc0.v",
+                    "tree": "tree/mcnc/bc0.json",
+                    "entropy": "entropy/mcnc/bc0.json"
+                }
+            },
+            {
+                "name": "bca",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/bca.v",
+                    "tree": "tree/mcnc/bca.json",
+                    "entropy": "entropy/mcnc/bca.json"
+                }
+            },
+            {
+                "name": "bcb",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/bcb.v",
+                    "tree": "tree/mcnc/bcb.json",
+                    "entropy": "entropy/mcnc/bcb.json"
+                }
+            },
+            {
+                "name": "bcc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/bcc.v",
+                    "tree": "tree/mcnc/bcc.json",
+                    "entropy": "entropy/mcnc/bcc.json"
+                }
+            },
+            {
+                "name": "bcd",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/bcd.v",
+                    "tree": "tree/mcnc/bcd.json",
+                    "entropy": "entropy/mcnc/bcd.json"
+                }
+            },
+            {
+                "name": "br1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/br1.v",
+                    "tree": "tree/mcnc/br1.json",
+                    "entropy": "entropy/mcnc/br1.json"
+                }
+            },
+            {
+                "name": "br2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/br2.v",
+                    "tree": "tree/mcnc/br2.json",
+                    "entropy": "entropy/mcnc/br2.json"
+                }
+            },
+            {
+                "name": "bw",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/bw.v",
+                    "tree": "tree/mcnc/bw.json",
+                    "entropy": "entropy/mcnc/bw.json"
+                }
+            },
+            {
+                "name": "C1355",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C1355.v",
+                    "tree": "tree/mcnc/C1355.json",
+                    "entropy": "entropy/mcnc/C1355.json"
+                }
+            },
+            {
+                "name": "C17",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C17.v",
+                    "tree": "tree/mcnc/C17.json",
+                    "entropy": "entropy/mcnc/C17.json"
+                }
+            },
+            {
+                "name": "C1908",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C1908.v",
+                    "tree": "tree/mcnc/C1908.json",
+                    "entropy": "entropy/mcnc/C1908.json"
+                }
+            },
+            {
+                "name": "C2670",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C2670.v",
+                    "tree": "tree/mcnc/C2670.json",
+                    "entropy": "entropy/mcnc/C2670.json"
+                }
+            },
+            {
+                "name": "C3540",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C3540.v",
+                    "tree": "tree/mcnc/C3540.json",
+                    "entropy": "entropy/mcnc/C3540.json"
+                }
+            },
+            {
+                "name": "C432",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C432.v",
+                    "tree": "tree/mcnc/C432.json",
+                    "entropy": "entropy/mcnc/C432.json"
+                }
+            },
+            {
+                "name": "C499",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C499.v",
+                    "tree": "tree/mcnc/C499.json",
+                    "entropy": "entropy/mcnc/C499.json"
+                }
+            },
+            {
+                "name": "C5315",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C5315.v",
+                    "tree": "tree/mcnc/C5315.json",
+                    "entropy": "entropy/mcnc/C5315.json"
+                }
+            },
+            {
+                "name": "C6288",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C6288.v",
+                    "tree": "tree/mcnc/C6288.json",
+                    "entropy": "entropy/mcnc/C6288.json"
+                }
+            },
+            {
+                "name": "C7552",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C7552.v",
+                    "tree": "tree/mcnc/C7552.json",
+                    "entropy": "entropy/mcnc/C7552.json"
+                }
+            },
+            {
+                "name": "C880",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/C880.v",
+                    "tree": "tree/mcnc/C880.json",
+                    "entropy": "entropy/mcnc/C880.json"
+                }
+            },
+            {
+                "name": "c8",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/c8.v",
+                    "tree": "tree/mcnc/c8.json",
+                    "entropy": "entropy/mcnc/c8.json"
+                }
+            },
+            {
+                "name": "cc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cc.v",
+                    "tree": "tree/mcnc/cc.json",
+                    "entropy": "entropy/mcnc/cc.json"
+                }
+            },
+            {
+                "name": "chkn",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/chkn.v",
+                    "tree": "tree/mcnc/chkn.json",
+                    "entropy": "entropy/mcnc/chkn.json"
+                }
+            },
+            {
+                "name": "cht",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cht.v",
+                    "tree": "tree/mcnc/cht.json",
+                    "entropy": "entropy/mcnc/cht.json"
+                }
+            },
+            {
+                "name": "clip",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/clip.v",
+                    "tree": "tree/mcnc/clip.json",
+                    "entropy": "entropy/mcnc/clip.json"
+                }
+            },
+            {
+                "name": "clpl",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/clpl.v",
+                    "tree": "tree/mcnc/clpl.json",
+                    "entropy": "entropy/mcnc/clpl.json"
+                }
+            },
+            {
+                "name": "cm138a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm138a.v",
+                    "tree": "tree/mcnc/cm138a.json",
+                    "entropy": "entropy/mcnc/cm138a.json"
+                }
+            },
+            {
+                "name": "cm150a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm150a.v",
+                    "tree": "tree/mcnc/cm150a.json",
+                    "entropy": "entropy/mcnc/cm150a.json"
+                }
+            },
+            {
+                "name": "cm151a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm151a.v",
+                    "tree": "tree/mcnc/cm151a.json",
+                    "entropy": "entropy/mcnc/cm151a.json"
+                }
+            },
+            {
+                "name": "cm152a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm152a.v",
+                    "tree": "tree/mcnc/cm152a.json",
+                    "entropy": "entropy/mcnc/cm152a.json"
+                }
+            },
+            {
+                "name": "cm162a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm162a.v",
+                    "tree": "tree/mcnc/cm162a.json",
+                    "entropy": "entropy/mcnc/cm162a.json"
+                }
+            },
+            {
+                "name": "cm163a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm163a.v",
+                    "tree": "tree/mcnc/cm163a.json",
+                    "entropy": "entropy/mcnc/cm163a.json"
+                }
+            },
+            {
+                "name": "cm42a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm42a.v",
+                    "tree": "tree/mcnc/cm42a.json",
+                    "entropy": "entropy/mcnc/cm42a.json"
+                }
+            },
+            {
+                "name": "cm82a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm82a.v",
+                    "tree": "tree/mcnc/cm82a.json",
+                    "entropy": "entropy/mcnc/cm82a.json"
+                }
+            },
+            {
+                "name": "cm85a",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cm85a.v",
+                    "tree": "tree/mcnc/cm85a.json",
+                    "entropy": "entropy/mcnc/cm85a.json"
+                }
+            },
+            {
+                "name": "cmb",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cmb.v",
+                    "tree": "tree/mcnc/cmb.json",
+                    "entropy": "entropy/mcnc/cmb.json"
+                }
+            },
+            {
+                "name": "comp",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/comp.v",
+                    "tree": "tree/mcnc/comp.json",
+                    "entropy": "entropy/mcnc/comp.json"
+                }
+            },
+            {
+                "name": "con1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/con1.v",
+                    "tree": "tree/mcnc/con1.json",
+                    "entropy": "entropy/mcnc/con1.json"
+                }
+            },
+            {
+                "name": "cordic",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cordic.v",
+                    "tree": "tree/mcnc/cordic.json",
+                    "entropy": "entropy/mcnc/cordic.json"
+                }
+            },
+            {
+                "name": "count",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/count.v",
+                    "tree": "tree/mcnc/count.json",
+                    "entropy": "entropy/mcnc/count.json"
+                }
+            },
+            {
+                "name": "cps",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cps.v",
+                    "tree": "tree/mcnc/cps.json",
+                    "entropy": "entropy/mcnc/cps.json"
+                }
+            },
+            {
+                "name": "cu",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/cu.v",
+                    "tree": "tree/mcnc/cu.json",
+                    "entropy": "entropy/mcnc/cu.json"
+                }
+            },
+            {
+                "name": "dalu",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dalu.v",
+                    "tree": "tree/mcnc/dalu.json",
+                    "entropy": "entropy/mcnc/dalu.json"
+                }
+            },
+            {
+                "name": "dc1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dc1.v",
+                    "tree": "tree/mcnc/dc1.json",
+                    "entropy": "entropy/mcnc/dc1.json"
+                }
+            },
+            {
+                "name": "dc2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dc2.v",
+                    "tree": "tree/mcnc/dc2.json",
+                    "entropy": "entropy/mcnc/dc2.json"
+                }
+            },
+            {
+                "name": "decod",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/decod.v",
+                    "tree": "tree/mcnc/decod.json",
+                    "entropy": "entropy/mcnc/decod.json"
+                }
+            },
+            {
+                "name": "dekoder",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dekoder.v",
+                    "tree": "tree/mcnc/dekoder.json",
+                    "entropy": "entropy/mcnc/dekoder.json"
+                }
+            },
+            {
+                "name": "des",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/des.v",
+                    "tree": "tree/mcnc/des.json",
+                    "entropy": "entropy/mcnc/des.json"
+                }
+            },
+            {
+                "name": "dist",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dist.v",
+                    "tree": "tree/mcnc/dist.json",
+                    "entropy": "entropy/mcnc/dist.json"
+                }
+            },
+            {
+                "name": "dk17",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dk17.v",
+                    "tree": "tree/mcnc/dk17.json",
+                    "entropy": "entropy/mcnc/dk17.json"
+                }
+            },
+            {
+                "name": "dk27",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dk27.v",
+                    "tree": "tree/mcnc/dk27.json",
+                    "entropy": "entropy/mcnc/dk27.json"
+                }
+            },
+            {
+                "name": "dk48",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/dk48.v",
+                    "tree": "tree/mcnc/dk48.json",
+                    "entropy": "entropy/mcnc/dk48.json"
+                }
+            },
+            {
+                "name": "duke2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/duke2.v",
+                    "tree": "tree/mcnc/duke2.json",
+                    "entropy": "entropy/mcnc/duke2.json"
+                }
+            },
+            {
+                "name": "e64",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/e64.v",
+                    "tree": "tree/mcnc/e64.json",
+                    "entropy": "entropy/mcnc/e64.json"
+                }
+            },
+            {
+                "name": "ex1010",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ex1010.v",
+                    "tree": "tree/mcnc/ex1010.json",
+                    "entropy": "entropy/mcnc/ex1010.json"
+                }
+            },
+            {
+                "name": "ex4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ex4.v",
+                    "tree": "tree/mcnc/ex4.json",
+                    "entropy": "entropy/mcnc/ex4.json"
+                }
+            },
+            {
+                "name": "ex5",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ex5.v",
+                    "tree": "tree/mcnc/ex5.json",
+                    "entropy": "entropy/mcnc/ex5.json"
+                }
+            },
+            {
+                "name": "ex7",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ex7.v",
+                    "tree": "tree/mcnc/ex7.json",
+                    "entropy": "entropy/mcnc/ex7.json"
+                }
+            },
+            {
+                "name": "example2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/example2.v",
+                    "tree": "tree/mcnc/example2.json",
+                    "entropy": "entropy/mcnc/example2.json"
+                }
+            },
+            {
+                "name": "exep",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/exep.v",
+                    "tree": "tree/mcnc/exep.json",
+                    "entropy": "entropy/mcnc/exep.json"
+                }
+            },
+            {
+                "name": "exps",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/exps.v",
+                    "tree": "tree/mcnc/exps.json",
+                    "entropy": "entropy/mcnc/exps.json"
+                }
+            },
+            {
+                "name": "exp",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/exp.v",
+                    "tree": "tree/mcnc/exp.json",
+                    "entropy": "entropy/mcnc/exp.json"
+                }
+            },
+            {
+                "name": "f51m",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/f51m.v",
+                    "tree": "tree/mcnc/f51m.json",
+                    "entropy": "entropy/mcnc/f51m.json"
+                }
+            },
+            {
+                "name": "frg1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/frg1.v",
+                    "tree": "tree/mcnc/frg1.json",
+                    "entropy": "entropy/mcnc/frg1.json"
+                }
+            },
+            {
+                "name": "frg2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/frg2.v",
+                    "tree": "tree/mcnc/frg2.json",
+                    "entropy": "entropy/mcnc/frg2.json"
+                }
+            },
+            {
+                "name": "gary",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/gary.v",
+                    "tree": "tree/mcnc/gary.json",
+                    "entropy": "entropy/mcnc/gary.json"
+                }
+            },
+            {
+                "name": "i10",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i10.v",
+                    "tree": "tree/mcnc/i10.json",
+                    "entropy": "entropy/mcnc/i10.json"
+                }
+            },
+            {
+                "name": "i1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i1.v",
+                    "tree": "tree/mcnc/i1.json",
+                    "entropy": "entropy/mcnc/i1.json"
+                }
+            },
+            {
+                "name": "i2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i2.v",
+                    "tree": "tree/mcnc/i2.json",
+                    "entropy": "entropy/mcnc/i2.json"
+                }
+            },
+            {
+                "name": "i3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i3.v",
+                    "tree": "tree/mcnc/i3.json",
+                    "entropy": "entropy/mcnc/i3.json"
+                }
+            },
+            {
+                "name": "i4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i4.v",
+                    "tree": "tree/mcnc/i4.json",
+                    "entropy": "entropy/mcnc/i4.json"
+                }
+            },
+            {
+                "name": "i5",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i5.v",
+                    "tree": "tree/mcnc/i5.json",
+                    "entropy": "entropy/mcnc/i5.json"
+                }
+            },
+            {
+                "name": "i6",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i6.v",
+                    "tree": "tree/mcnc/i6.json",
+                    "entropy": "entropy/mcnc/i6.json"
+                }
+            },
+            {
+                "name": "i7",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i7.v",
+                    "tree": "tree/mcnc/i7.json",
+                    "entropy": "entropy/mcnc/i7.json"
+                }
+            },
+            {
+                "name": "i8",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i8.v",
+                    "tree": "tree/mcnc/i8.json",
+                    "entropy": "entropy/mcnc/i8.json"
+                }
+            },
+            {
+                "name": "i9",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/i9.v",
+                    "tree": "tree/mcnc/i9.json",
+                    "entropy": "entropy/mcnc/i9.json"
+                }
+            },
+            {
+                "name": "ibm",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ibm.v",
+                    "tree": "tree/mcnc/ibm.json",
+                    "entropy": "entropy/mcnc/ibm.json"
+                }
+            },
+            {
+                "name": "in0",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in0.v",
+                    "tree": "tree/mcnc/in0.json",
+                    "entropy": "entropy/mcnc/in0.json"
+                }
+            },
+            {
+                "name": "in1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in1.v",
+                    "tree": "tree/mcnc/in1.json",
+                    "entropy": "entropy/mcnc/in1.json"
+                }
+            },
+            {
+                "name": "in2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in2.v",
+                    "tree": "tree/mcnc/in2.json",
+                    "entropy": "entropy/mcnc/in2.json"
+                }
+            },
+            {
+                "name": "in3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in3.v",
+                    "tree": "tree/mcnc/in3.json",
+                    "entropy": "entropy/mcnc/in3.json"
+                }
+            },
+            {
+                "name": "in4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in4.v",
+                    "tree": "tree/mcnc/in4.json",
+                    "entropy": "entropy/mcnc/in4.json"
+                }
+            },
+            {
+                "name": "in5",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in5.v",
+                    "tree": "tree/mcnc/in5.json",
+                    "entropy": "entropy/mcnc/in5.json"
+                }
+            },
+            {
+                "name": "in6",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in6.v",
+                    "tree": "tree/mcnc/in6.json",
+                    "entropy": "entropy/mcnc/in6.json"
+                }
+            },
+            {
+                "name": "in7",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/in7.v",
+                    "tree": "tree/mcnc/in7.json",
+                    "entropy": "entropy/mcnc/in7.json"
+                }
+            },
+            {
+                "name": "inc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/inc.v",
+                    "tree": "tree/mcnc/inc.json",
+                    "entropy": "entropy/mcnc/inc.json"
+                }
+            },
+            {
+                "name": "intb",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/intb.v",
+                    "tree": "tree/mcnc/intb.json",
+                    "entropy": "entropy/mcnc/intb.json"
+                }
+            },
+            {
+                "name": "jbp",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/jbp.v",
+                    "tree": "tree/mcnc/jbp.json",
+                    "entropy": "entropy/mcnc/jbp.json"
+                }
+            },
+            {
+                "name": "k2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/k2.v",
+                    "tree": "tree/mcnc/k2.json",
+                    "entropy": "entropy/mcnc/k2.json"
+                }
+            },
+            {
+                "name": "lal",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/lal.v",
+                    "tree": "tree/mcnc/lal.json",
+                    "entropy": "entropy/mcnc/lal.json"
+                }
+            },
+            {
+                "name": "lin",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/lin.v",
+                    "tree": "tree/mcnc/lin.json",
+                    "entropy": "entropy/mcnc/lin.json"
+                }
+            },
+            {
+                "name": "luc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/luc.v",
+                    "tree": "tree/mcnc/luc.json",
+                    "entropy": "entropy/mcnc/luc.json"
+                }
+            },
+            {
+                "name": "m1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/m1.v",
+                    "tree": "tree/mcnc/m1.json",
+                    "entropy": "entropy/mcnc/m1.json"
+                }
+            },
+            {
+                "name": "m2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/m2.v",
+                    "tree": "tree/mcnc/m2.json",
+                    "entropy": "entropy/mcnc/m2.json"
+                }
+            },
+            {
+                "name": "m3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/m3.v",
+                    "tree": "tree/mcnc/m3.json",
+                    "entropy": "entropy/mcnc/m3.json"
+                }
+            },
+            {
+                "name": "m4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/m4.v",
+                    "tree": "tree/mcnc/m4.json",
+                    "entropy": "entropy/mcnc/m4.json"
+                }
+            },
+            {
+                "name": "mainpla",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/mainpla.v",
+                    "tree": "tree/mcnc/mainpla.json",
+                    "entropy": "entropy/mcnc/mainpla.json"
+                }
+            },
+            {
+                "name": "majority",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/majority.v",
+                    "tree": "tree/mcnc/majority.json",
+                    "entropy": "entropy/mcnc/majority.json"
+                }
+            },
+            {
+                "name": "mark1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/mark1.v",
+                    "tree": "tree/mcnc/mark1.json",
+                    "entropy": "entropy/mcnc/mark1.json"
+                }
+            },
+            {
+                "name": "max1024",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/max1024.v",
+                    "tree": "tree/mcnc/max1024.json",
+                    "entropy": "entropy/mcnc/max1024.json"
+                }
+            },
+            {
+                "name": "max128",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/max128.v",
+                    "tree": "tree/mcnc/max128.json",
+                    "entropy": "entropy/mcnc/max128.json"
+                }
+            },
+            {
+                "name": "max46",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/max46.v",
+                    "tree": "tree/mcnc/max46.json",
+                    "entropy": "entropy/mcnc/max46.json"
+                }
+            },
+            {
+                "name": "max512",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/max512.v",
+                    "tree": "tree/mcnc/max512.json",
+                    "entropy": "entropy/mcnc/max512.json"
+                }
+            },
+            {
+                "name": "misex1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/misex1.v",
+                    "tree": "tree/mcnc/misex1.json",
+                    "entropy": "entropy/mcnc/misex1.json"
+                }
+            },
+            {
+                "name": "misex2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/misex2.v",
+                    "tree": "tree/mcnc/misex2.json",
+                    "entropy": "entropy/mcnc/misex2.json"
+                }
+            },
+            {
+                "name": "misex3c",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/misex3c.v",
+                    "tree": "tree/mcnc/misex3c.json",
+                    "entropy": "entropy/mcnc/misex3c.json"
+                }
+            },
+            {
+                "name": "misex3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/misex3.v",
+                    "tree": "tree/mcnc/misex3.json",
+                    "entropy": "entropy/mcnc/misex3.json"
+                }
+            },
+            {
+                "name": "misg",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/misg.v",
+                    "tree": "tree/mcnc/misg.json",
+                    "entropy": "entropy/mcnc/misg.json"
+                }
+            },
+            {
+                "name": "mish",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/mish.v",
+                    "tree": "tree/mcnc/mish.json",
+                    "entropy": "entropy/mcnc/mish.json"
+                }
+            },
+            {
+                "name": "misj",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/misj.v",
+                    "tree": "tree/mcnc/misj.json",
+                    "entropy": "entropy/mcnc/misj.json"
+                }
+            },
+            {
+                "name": "mlp4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/mlp4.v",
+                    "tree": "tree/mcnc/mlp4.json",
+                    "entropy": "entropy/mcnc/mlp4.json"
+                }
+            },
+            {
+                "name": "mp2d",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/mp2d.v",
+                    "tree": "tree/mcnc/mp2d.json",
+                    "entropy": "entropy/mcnc/mp2d.json"
+                }
+            },
+            {
+                "name": "mux",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/mux.v",
+                    "tree": "tree/mcnc/mux.json",
+                    "entropy": "entropy/mcnc/mux.json"
+                }
+            },
+            {
+                "name": "my_adder",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/my_adder.v",
+                    "tree": "tree/mcnc/my_adder.json",
+                    "entropy": "entropy/mcnc/my_adder.json"
+                }
+            },
+            {
+                "name": "newapla1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newapla1.v",
+                    "tree": "tree/mcnc/newapla1.json",
+                    "entropy": "entropy/mcnc/newapla1.json"
+                }
+            },
+            {
+                "name": "newapla2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newapla2.v",
+                    "tree": "tree/mcnc/newapla2.json",
+                    "entropy": "entropy/mcnc/newapla2.json"
+                }
+            },
+            {
+                "name": "newapla",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newapla.v",
+                    "tree": "tree/mcnc/newapla.json",
+                    "entropy": "entropy/mcnc/newapla.json"
+                }
+            },
+            {
+                "name": "newbyte",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newbyte.v",
+                    "tree": "tree/mcnc/newbyte.json",
+                    "entropy": "entropy/mcnc/newbyte.json"
+                }
+            },
+            {
+                "name": "newcond",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newcond.v",
+                    "tree": "tree/mcnc/newcond.json",
+                    "entropy": "entropy/mcnc/newcond.json"
+                }
+            },
+            {
+                "name": "newcpla1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newcpla1.v",
+                    "tree": "tree/mcnc/newcpla1.json",
+                    "entropy": "entropy/mcnc/newcpla1.json"
+                }
+            },
+            {
+                "name": "newcpla2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newcpla2.v",
+                    "tree": "tree/mcnc/newcpla2.json",
+                    "entropy": "entropy/mcnc/newcpla2.json"
+                }
+            },
+            {
+                "name": "newcwp",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newcwp.v",
+                    "tree": "tree/mcnc/newcwp.json",
+                    "entropy": "entropy/mcnc/newcwp.json"
+                }
+            },
+            {
+                "name": "newill",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newill.v",
+                    "tree": "tree/mcnc/newill.json",
+                    "entropy": "entropy/mcnc/newill.json"
+                }
+            },
+            {
+                "name": "newtag",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newtag.v",
+                    "tree": "tree/mcnc/newtag.json",
+                    "entropy": "entropy/mcnc/newtag.json"
+                }
+            },
+            {
+                "name": "newtpla1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newtpla1.v",
+                    "tree": "tree/mcnc/newtpla1.json",
+                    "entropy": "entropy/mcnc/newtpla1.json"
+                }
+            },
+            {
+                "name": "newtpla2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newtpla2.v",
+                    "tree": "tree/mcnc/newtpla2.json",
+                    "entropy": "entropy/mcnc/newtpla2.json"
+                }
+            },
+            {
+                "name": "newtpla",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newtpla.v",
+                    "tree": "tree/mcnc/newtpla.json",
+                    "entropy": "entropy/mcnc/newtpla.json"
+                }
+            },
+            {
+                "name": "newxcpla1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/newxcpla1.v",
+                    "tree": "tree/mcnc/newxcpla1.json",
+                    "entropy": "entropy/mcnc/newxcpla1.json"
+                }
+            },
+            {
+                "name": "o64",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/o64.v",
+                    "tree": "tree/mcnc/o64.json",
+                    "entropy": "entropy/mcnc/o64.json"
+                }
+            },
+            {
+                "name": "opa",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/opa.v",
+                    "tree": "tree/mcnc/opa.json",
+                    "entropy": "entropy/mcnc/opa.json"
+                }
+            },
+            {
+                "name": "p82",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/p82.v",
+                    "tree": "tree/mcnc/p82.json",
+                    "entropy": "entropy/mcnc/p82.json"
+                }
+            },
+            {
+                "name": "pair",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/pair.v",
+                    "tree": "tree/mcnc/pair.json",
+                    "entropy": "entropy/mcnc/pair.json"
+                }
+            },
+            {
+                "name": "parity",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/parity.v",
+                    "tree": "tree/mcnc/parity.json",
+                    "entropy": "entropy/mcnc/parity.json"
+                }
+            },
+            {
+                "name": "pcler8",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/pcler8.v",
+                    "tree": "tree/mcnc/pcler8.json",
+                    "entropy": "entropy/mcnc/pcler8.json"
+                }
+            },
+            {
+                "name": "pcle",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/pcle.v",
+                    "tree": "tree/mcnc/pcle.json",
+                    "entropy": "entropy/mcnc/pcle.json"
+                }
+            },
+            {
+                "name": "pdc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/pdc.v",
+                    "tree": "tree/mcnc/pdc.json",
+                    "entropy": "entropy/mcnc/pdc.json"
+                }
+            },
+            {
+                "name": "pm1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/pm1.v",
+                    "tree": "tree/mcnc/pm1.json",
+                    "entropy": "entropy/mcnc/pm1.json"
+                }
+            },
+            {
+                "name": "pope",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/pope.v",
+                    "tree": "tree/mcnc/pope.json",
+                    "entropy": "entropy/mcnc/pope.json"
+                }
+            },
+            {
+                "name": "prom1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/prom1.v",
+                    "tree": "tree/mcnc/prom1.json",
+                    "entropy": "entropy/mcnc/prom1.json"
+                }
+            },
+            {
+                "name": "prom2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/prom2.v",
+                    "tree": "tree/mcnc/prom2.json",
+                    "entropy": "entropy/mcnc/prom2.json"
+                }
+            },
+            {
+                "name": "rd53",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/rd53.v",
+                    "tree": "tree/mcnc/rd53.json",
+                    "entropy": "entropy/mcnc/rd53.json"
+                }
+            },
+            {
+                "name": "rd73",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/rd73.v",
+                    "tree": "tree/mcnc/rd73.json",
+                    "entropy": "entropy/mcnc/rd73.json"
+                }
+            },
+            {
+                "name": "rd84",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/rd84.v",
+                    "tree": "tree/mcnc/rd84.json",
+                    "entropy": "entropy/mcnc/rd84.json"
+                }
+            },
+            {
+                "name": "risc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/risc.v",
+                    "tree": "tree/mcnc/risc.json",
+                    "entropy": "entropy/mcnc/risc.json"
+                }
+            },
+            {
+                "name": "root",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/root.v",
+                    "tree": "tree/mcnc/root.json",
+                    "entropy": "entropy/mcnc/root.json"
+                }
+            },
+            {
+                "name": "rot",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/rot.v",
+                    "tree": "tree/mcnc/rot.json",
+                    "entropy": "entropy/mcnc/rot.json"
+                }
+            },
+            {
+                "name": "ryy6",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ryy6.v",
+                    "tree": "tree/mcnc/ryy6.json",
+                    "entropy": "entropy/mcnc/ryy6.json"
+                }
+            },
+            {
+                "name": "sao2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/sao2.v",
+                    "tree": "tree/mcnc/sao2.json",
+                    "entropy": "entropy/mcnc/sao2.json"
+                }
+            },
+            {
+                "name": "sct",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/sct.v",
+                    "tree": "tree/mcnc/sct.json",
+                    "entropy": "entropy/mcnc/sct.json"
+                }
+            },
+            {
+                "name": "seq",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/seq.v",
+                    "tree": "tree/mcnc/seq.json",
+                    "entropy": "entropy/mcnc/seq.json"
+                }
+            },
+            {
+                "name": "sex",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/sex.v",
+                    "tree": "tree/mcnc/sex.json",
+                    "entropy": "entropy/mcnc/sex.json"
+                }
+            },
+            {
+                "name": "shift",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/shift.v",
+                    "tree": "tree/mcnc/shift.json",
+                    "entropy": "entropy/mcnc/shift.json"
+                }
+            },
+            {
+                "name": "signet",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/signet.v",
+                    "tree": "tree/mcnc/signet.json",
+                    "entropy": "entropy/mcnc/signet.json"
+                }
+            },
+            {
+                "name": "soar",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/soar.v",
+                    "tree": "tree/mcnc/soar.json",
+                    "entropy": "entropy/mcnc/soar.json"
+                }
+            },
+            {
+                "name": "spla",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/spla.v",
+                    "tree": "tree/mcnc/spla.json",
+                    "entropy": "entropy/mcnc/spla.json"
+                }
+            },
+            {
+                "name": "sqn",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/sqn.v",
+                    "tree": "tree/mcnc/sqn.json",
+                    "entropy": "entropy/mcnc/sqn.json"
+                }
+            },
+            {
+                "name": "sqr6",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/sqr6.v",
+                    "tree": "tree/mcnc/sqr6.json",
+                    "entropy": "entropy/mcnc/sqr6.json"
+                }
+            },
+            {
+                "name": "sqrt8",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/sqrt8.v",
+                    "tree": "tree/mcnc/sqrt8.json",
+                    "entropy": "entropy/mcnc/sqrt8.json"
+                }
+            },
+            {
+                "name": "squar5",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/squar5.v",
+                    "tree": "tree/mcnc/squar5.json",
+                    "entropy": "entropy/mcnc/squar5.json"
+                }
+            },
+            {
+                "name": "t1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/t1.v",
+                    "tree": "tree/mcnc/t1.json",
+                    "entropy": "entropy/mcnc/t1.json"
+                }
+            },
+            {
+                "name": "t2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/t2.v",
+                    "tree": "tree/mcnc/t2.json",
+                    "entropy": "entropy/mcnc/t2.json"
+                }
+            },
+            {
+                "name": "t3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/t3.v",
+                    "tree": "tree/mcnc/t3.json",
+                    "entropy": "entropy/mcnc/t3.json"
+                }
+            },
+            {
+                "name": "t481",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/t481.v",
+                    "tree": "tree/mcnc/t481.json",
+                    "entropy": "entropy/mcnc/t481.json"
+                }
+            },
+            {
+                "name": "t4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/t4.v",
+                    "tree": "tree/mcnc/t4.json",
+                    "entropy": "entropy/mcnc/t4.json"
+                }
+            },
+            {
+                "name": "table3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/table3.v",
+                    "tree": "tree/mcnc/table3.json",
+                    "entropy": "entropy/mcnc/table3.json"
+                }
+            },
+            {
+                "name": "table5",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/table5.v",
+                    "tree": "tree/mcnc/table5.json",
+                    "entropy": "entropy/mcnc/table5.json"
+                }
+            },
+            {
+                "name": "tcon",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/tcon.v",
+                    "tree": "tree/mcnc/tcon.json",
+                    "entropy": "entropy/mcnc/tcon.json"
+                }
+            },
+            {
+                "name": "term1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/term1.v",
+                    "tree": "tree/mcnc/term1.json",
+                    "entropy": "entropy/mcnc/term1.json"
+                }
+            },
+            {
+                "name": "ti",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ti.v",
+                    "tree": "tree/mcnc/ti.json",
+                    "entropy": "entropy/mcnc/ti.json"
+                }
+            },
+            {
+                "name": "tms",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/tms.v",
+                    "tree": "tree/mcnc/tms.json",
+                    "entropy": "entropy/mcnc/tms.json"
+                }
+            },
+            {
+                "name": "too_large",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/too_large.v",
+                    "tree": "tree/mcnc/too_large.json",
+                    "entropy": "entropy/mcnc/too_large.json"
+                }
+            },
+            {
+                "name": "ts10",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ts10.v",
+                    "tree": "tree/mcnc/ts10.json",
+                    "entropy": "entropy/mcnc/ts10.json"
+                }
+            },
+            {
+                "name": "ttt2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/ttt2.v",
+                    "tree": "tree/mcnc/ttt2.json",
+                    "entropy": "entropy/mcnc/ttt2.json"
+                }
+            },
+            {
+                "name": "t",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/t.v",
+                    "tree": "tree/mcnc/t.json",
+                    "entropy": "entropy/mcnc/t.json"
+                }
+            },
+            {
+                "name": "unreg",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/unreg.v",
+                    "tree": "tree/mcnc/unreg.json",
+                    "entropy": "entropy/mcnc/unreg.json"
+                }
+            },
+            {
+                "name": "vda",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/vda.v",
+                    "tree": "tree/mcnc/vda.json",
+                    "entropy": "entropy/mcnc/vda.json"
+                }
+            },
+            {
+                "name": "vg2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/vg2.v",
+                    "tree": "tree/mcnc/vg2.json",
+                    "entropy": "entropy/mcnc/vg2.json"
+                }
+            },
+            {
+                "name": "vtx1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/vtx1.v",
+                    "tree": "tree/mcnc/vtx1.json",
+                    "entropy": "entropy/mcnc/vtx1.json"
+                }
+            },
+            {
+                "name": "wim",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/wim.v",
+                    "tree": "tree/mcnc/wim.json",
+                    "entropy": "entropy/mcnc/wim.json"
+                }
+            },
+            {
+                "name": "x1dn",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x1dn.v",
+                    "tree": "tree/mcnc/x1dn.json",
+                    "entropy": "entropy/mcnc/x1dn.json"
+                }
+            },
+            {
+                "name": "x1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x1.v",
+                    "tree": "tree/mcnc/x1.json",
+                    "entropy": "entropy/mcnc/x1.json"
+                }
+            },
+            {
+                "name": "x2dn",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x2dn.v",
+                    "tree": "tree/mcnc/x2dn.json",
+                    "entropy": "entropy/mcnc/x2dn.json"
+                }
+            },
+            {
+                "name": "x2",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x2.v",
+                    "tree": "tree/mcnc/x2.json",
+                    "entropy": "entropy/mcnc/x2.json"
+                }
+            },
+            {
+                "name": "x3",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x3.v",
+                    "tree": "tree/mcnc/x3.json",
+                    "entropy": "entropy/mcnc/x3.json"
+                }
+            },
+            {
+                "name": "x4",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x4.v",
+                    "tree": "tree/mcnc/x4.json",
+                    "entropy": "entropy/mcnc/x4.json"
+                }
+            },
+            {
+                "name": "x6dn",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x6dn.v",
+                    "tree": "tree/mcnc/x6dn.json",
+                    "entropy": "entropy/mcnc/x6dn.json"
+                }
+            },
+            {
+                "name": "x7dn",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x7dn.v",
+                    "tree": "tree/mcnc/x7dn.json",
+                    "entropy": "entropy/mcnc/x7dn.json"
+                }
+            },
+            {
+                "name": "x9dn",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/x9dn.v",
+                    "tree": "tree/mcnc/x9dn.json",
+                    "entropy": "entropy/mcnc/x9dn.json"
+                }
+            },
+            {
+                "name": "xor5",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/xor5.v",
+                    "tree": "tree/mcnc/xor5.json",
+                    "entropy": "entropy/mcnc/xor5.json"
+                }
+            },
+            {
+                "name": "xparc",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/xparc.v",
+                    "tree": "tree/mcnc/xparc.json",
+                    "entropy": "entropy/mcnc/xparc.json"
+                }
+            },
+            {
+                "name": "z4ml",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/z4ml.v",
+                    "tree": "tree/mcnc/z4ml.json",
+                    "entropy": "entropy/mcnc/z4ml.json"
+                }
+            },
+            {
+                "name": "Z5xp1",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/Z5xp1.v",
+                    "tree": "tree/mcnc/Z5xp1.json",
+                    "entropy": "entropy/mcnc/Z5xp1.json"
+                }
+            },
+            {
+                "name": "Z9sym",
+                "majority_support": false,
+                "files": {
+                    "design": "source/mcnc/Z9sym.v",
+                    "tree": "tree/mcnc/Z9sym.json",
+                    "entropy": "entropy/mcnc/Z9sym.json"
+                }
+            }
+        ]
+    }
+]
