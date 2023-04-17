@@ -140,7 +140,7 @@ def main():
     import landauer.parse as parse
     content = args.file.read() if args.file else sys.stdin.read()
     aig = parse.deserialize(content)
-    print(serialize(entropy(aig, timeout = args.timeout, progressbar = args.progressbar)))
+    print(serialize(entropy(aig, timeout = args.timeout)))
 
 if __name__ == "__main__":
     main()
