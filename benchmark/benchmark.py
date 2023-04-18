@@ -76,7 +76,7 @@ def main():
     pool = multiprocessing.Pool(args.processes)
     result = pool.starmap(prepare_item, items)
 
-    df = pd.DataFrame(filter(None, result), columns=['tree_overwritten', 'tree_time', 'entropy_overwritten', 'entropy_time'])
+    df = pd.DataFrame(filter(None, result), columns=['benchmark', 'name', 'tree_overwritten', 'tree_time', 'entropy_overwritten', 'entropy_time'])
     df.to_csv(args.output if args.output else sys.stdout)
 
 def get_tree_data(tree, design_data, majority_support, overwrite):
@@ -120,7 +120,7 @@ def prepare_item(working_directory, benchmark, data, overwrite, timeout):
         entropy_overwritten, entropy_time = generate_entropy_data(entropy_file, tree_data, overwrite, timeout)
 
         logging.info(f"'{data['name']}' from '{benchmark}': completed")
-        return (tree_overwritten, tree_time, entropy_overwritten, entropy_time)
+        return (benchmark, data['name'], tree_overwritten, tree_time, entropy_overwritten, entropy_time)
 
     except Exception as e:
         logging.error(f"'{data['name']}' from '{benchmark}': failed: {e}")
