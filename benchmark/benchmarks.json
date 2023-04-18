@@ -5,7 +5,7 @@
         "items": [
             {
                 "name": "ripple-carry adder (3-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_3.v",
                     "tree": "tree/bencgen/c11_3.json",
@@ -14,7 +14,7 @@
             },
             {
                 "name": "ripple-carry adder (4-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_4.v",
                     "tree": "tree/bencgen/c11_4.json",
@@ -23,7 +23,7 @@
             },
             {
                 "name": "ripple-carry adder (5-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_5.v",
                     "tree": "tree/bencgen/c11_5.json",
@@ -32,7 +32,7 @@
             },
             {
                 "name": "ripple-carry adder (6-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_6.v",
                     "tree": "tree/bencgen/c11_6.json",
@@ -41,7 +41,7 @@
             },
             {
                 "name": "ripple-carry adder (7-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_7.v",
                     "tree": "tree/bencgen/c11_7.json",
@@ -50,7 +50,7 @@
             },
             {
                 "name": "ripple-carry adder (8-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_8.v",
                     "tree": "tree/bencgen/c11_8.json",
@@ -59,7 +59,7 @@
             },
             {
                 "name": "ripple-carry adder (9-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_9.v",
                     "tree": "tree/bencgen/c11_9.json",
@@ -68,7 +68,7 @@
             },
             {
                 "name": "ripple-carry adder (10-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_10.v",
                     "tree": "tree/bencgen/c11_10.json",
@@ -77,7 +77,7 @@
             },
             {
                 "name": "ripple-carry adder (11-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_11.v",
                     "tree": "tree/bencgen/c11_11.json",
@@ -86,7 +86,7 @@
             },
             {
                 "name": "ripple-carry adder (12-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_12.v",
                     "tree": "tree/bencgen/c11_12.json",
@@ -95,7 +95,7 @@
             },
             {
                 "name": "ripple-carry adder (13-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_13.v",
                     "tree": "tree/bencgen/c11_13.json",
@@ -104,7 +104,7 @@
             },
             {
                 "name": "ripple-carry adder (14-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_14.v",
                     "tree": "tree/bencgen/c11_14.json",
@@ -113,7 +113,7 @@
             },
             {
                 "name": "ripple-carry adder (15-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_15.v",
                     "tree": "tree/bencgen/c11_15.json",
@@ -122,7 +122,7 @@
             },
             {
                 "name": "ripple-carry adder (16-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c11_16.v",
                     "tree": "tree/bencgen/c11_16.json",
@@ -131,7 +131,7 @@
             },
             {
                 "name": "carry-lookahead adder (3-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_3.v",
                     "tree": "tree/bencgen/c13_3.json",
@@ -140,7 +140,7 @@
             },
             {
                 "name": "carry-lookahead adder (4-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_4.v",
                     "tree": "tree/bencgen/c13_4.json",
@@ -149,7 +149,7 @@
             },
             {
                 "name": "carry-lookahead adder (5-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_5.v",
                     "tree": "tree/bencgen/c13_5.json",
@@ -158,7 +158,7 @@
             },
             {
                 "name": "carry-lookahead adder (6-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_6.v",
                     "tree": "tree/bencgen/c13_6.json",
@@ -167,7 +167,7 @@
             },
             {
                 "name": "carry-lookahead adder (7-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_7.v",
                     "tree": "tree/bencgen/c13_7.json",
@@ -176,7 +176,7 @@
             },
             {
                 "name": "carry-lookahead adder (8-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_8.v",
                     "tree": "tree/bencgen/c13_8.json",
@@ -185,7 +185,7 @@
             },
             {
                 "name": "carry-lookahead adder (9-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_9.v",
                     "tree": "tree/bencgen/c13_9.json",
@@ -194,7 +194,7 @@
             },
             {
                 "name": "carry-lookahead adder (10-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_10.v",
                     "tree": "tree/bencgen/c13_10.json",
@@ -203,7 +203,7 @@
             },
             {
                 "name": "carry-lookahead adder (11-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_11.v",
                     "tree": "tree/bencgen/c13_11.json",
@@ -212,7 +212,7 @@
             },
             {
                 "name": "carry-lookahead adder (12-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_12.v",
                     "tree": "tree/bencgen/c13_12.json",
@@ -221,7 +221,7 @@
             },
             {
                 "name": "carry-lookahead adder (13-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_13.v",
                     "tree": "tree/bencgen/c13_13.json",
@@ -230,7 +230,7 @@
             },
             {
                 "name": "carry-lookahead adder (14-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_14.v",
                     "tree": "tree/bencgen/c13_14.json",
@@ -239,7 +239,7 @@
             },
             {
                 "name": "carry-lookahead adder (15-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_15.v",
                     "tree": "tree/bencgen/c13_15.json",
@@ -248,7 +248,7 @@
             },
             {
                 "name": "carry-lookahead adder (16-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c13_16.v",
                     "tree": "tree/bencgen/c13_16.json",
@@ -257,7 +257,7 @@
             },
             {
                 "name": "carry-lookahead block adder (3-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_3.v",
                     "tree": "tree/bencgen/c17_3.json",
@@ -266,7 +266,7 @@
             },
             {
                 "name": "carry-lookahead block adder (4-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_4.v",
                     "tree": "tree/bencgen/c17_4.json",
@@ -275,7 +275,7 @@
             },
             {
                 "name": "carry-lookahead block adder (5-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_5.v",
                     "tree": "tree/bencgen/c17_5.json",
@@ -284,7 +284,7 @@
             },
             {
                 "name": "carry-lookahead block adder (6-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_6.v",
                     "tree": "tree/bencgen/c17_6.json",
@@ -293,7 +293,7 @@
             },
             {
                 "name": "carry-lookahead block adder (7-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_7.v",
                     "tree": "tree/bencgen/c17_7.json",
@@ -302,7 +302,7 @@
             },
             {
                 "name": "carry-lookahead block adder (8-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_8.v",
                     "tree": "tree/bencgen/c17_8.json",
@@ -311,7 +311,7 @@
             },
             {
                 "name": "carry-lookahead block adder (9-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_9.v",
                     "tree": "tree/bencgen/c17_9.json",
@@ -320,7 +320,7 @@
             },
             {
                 "name": "carry-lookahead block adder (10-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_10.v",
                     "tree": "tree/bencgen/c17_10.json",
@@ -329,7 +329,7 @@
             },
             {
                 "name": "carry-lookahead block adder (11-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_11.v",
                     "tree": "tree/bencgen/c17_11.json",
@@ -338,7 +338,7 @@
             },
             {
                 "name": "carry-lookahead block adder (12-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_12.v",
                     "tree": "tree/bencgen/c17_12.json",
@@ -347,7 +347,7 @@
             },
             {
                 "name": "carry-lookahead block adder (13-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_13.v",
                     "tree": "tree/bencgen/c17_13.json",
@@ -356,7 +356,7 @@
             },
             {
                 "name": "carry-lookahead block adder (14-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_14.v",
                     "tree": "tree/bencgen/c17_14.json",
@@ -365,7 +365,7 @@
             },
             {
                 "name": "carry-lookahead block adder (15-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_15.v",
                     "tree": "tree/bencgen/c17_15.json",
@@ -374,7 +374,7 @@
             },
             {
                 "name": "carry-lookahead block adder (16-bit input)",
-                "majority_support": true,
+                "majority_support": false,
                 "files": {
                     "design": "source/bencgen/c17_16.v",
                     "tree": "tree/bencgen/c17_16.json",
@@ -1186,7 +1186,7 @@
                 "name": "multiplier",
                 "majority_support": true,
                 "files": {
-                    "design": "source/epfl/testa/multiplier.v",
+                    "design": "source/epfl/testa/mult.v",
                     "tree": "tree/epfl/testa/multiplier.json",
                     "entropy": "entropy/epfl/testa/multiplier.json"
                 }
@@ -1256,7 +1256,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/adder.v",
-                    "tree": "tree/epfl/testa/adder.json",
+                    "tree": "tree/epfl/testa/disabled/adder.json",
                     "entropy": "entropy/epfl/testa/disabled/adder.json"
                 }
             },
@@ -1265,7 +1265,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/arbiter.v",
-                    "tree": "tree/epfl/testa/arbiter.json",
+                    "tree": "tree/epfl/testa/disabled/arbiter.json",
                     "entropy": "entropy/epfl/testa/disabled/arbiter.json"
                 }
             },
@@ -1274,7 +1274,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/bar.v",
-                    "tree": "tree/epfl/testa/bar.json",
+                    "tree": "tree/epfl/testa/disabled/bar.json",
                     "entropy": "entropy/epfl/testa/disabled/bar.json"
                 }
             },
@@ -1283,7 +1283,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/cavlc.v",
-                    "tree": "tree/epfl/testa/cavlc.json",
+                    "tree": "tree/epfl/testa/disabled/cavlc.json",
                     "entropy": "entropy/epfl/testa/disabled/cavlc.json"
                 }
             },
@@ -1292,7 +1292,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/ctrl.v",
-                    "tree": "tree/epfl/testa/ctrl.json",
+                    "tree": "tree/epfl/testa/disabled/ctrl.json",
                     "entropy": "entropy/epfl/testa/disabled/ctrl.json"
                 }
             },
@@ -1301,7 +1301,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/dec.v",
-                    "tree": "tree/epfl/testa/dec.json",
+                    "tree": "tree/epfl/testa/disabled/dec.json",
                     "entropy": "entropy/epfl/testa/disabled/dec.json"
                 }
             },
@@ -1310,7 +1310,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/div.v",
-                    "tree": "tree/epfl/testa/div.json",
+                    "tree": "tree/epfl/testa/disabled/div.json",
                     "entropy": "entropy/epfl/testa/disabled/div.json"
                 }
             },
@@ -1319,7 +1319,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/hyp.v",
-                    "tree": "tree/epfl/testa/hyp.json",
+                    "tree": "tree/epfl/testa/disabled/hyp.json",
                     "entropy": "entropy/epfl/testa/disabled/hyp.json"
                 }
             },
@@ -1328,7 +1328,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/i2c.v",
-                    "tree": "tree/epfl/testa/i2c.json",
+                    "tree": "tree/epfl/testa/disabled/i2c.json",
                     "entropy": "entropy/epfl/testa/disabled/i2c.json"
                 }
             },
@@ -1337,7 +1337,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/int2float.v",
-                    "tree": "tree/epfl/testa/int2float.json",
+                    "tree": "tree/epfl/testa/disabled/int2float.json",
                     "entropy": "entropy/epfl/testa/disabled/int2float.json"
                 }
             },
@@ -1346,7 +1346,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/log2.v",
-                    "tree": "tree/epfl/testa/log2.json",
+                    "tree": "tree/epfl/testa/disabled/log2.json",
                     "entropy": "entropy/epfl/testa/disabled/log2.json"
                 }
             },
@@ -1355,7 +1355,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/max.v",
-                    "tree": "tree/epfl/testa/max.json",
+                    "tree": "tree/epfl/testa/disabled/max.json",
                     "entropy": "entropy/epfl/testa/disabled/max.json"
                 }
             },
@@ -1364,7 +1364,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/mem_ctrl.v",
-                    "tree": "tree/epfl/testa/mem_ctrl.json",
+                    "tree": "tree/epfl/testa/disabled/mem_ctrl.json",
                     "entropy": "entropy/epfl/testa/disabled/mem_ctrl.json"
                 }
             },
@@ -1372,8 +1372,8 @@
                 "name": "multiplier",
                 "majority_support": false,
                 "files": {
-                    "design": "source/epfl/testa/multiplier.v",
-                    "tree": "tree/epfl/testa/multiplier.json",
+                    "design": "source/epfl/testa/mult.v",
+                    "tree": "tree/epfl/testa/disabled/multiplier.json",
                     "entropy": "entropy/epfl/testa/disabled/multiplier.json"
                 }
             },
@@ -1382,7 +1382,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/priority.v",
-                    "tree": "tree/epfl/testa/priority.json",
+                    "tree": "tree/epfl/testa/disabled/priority.json",
                     "entropy": "entropy/epfl/testa/disabled/priority.json"
                 }
             },
@@ -1391,7 +1391,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/router.v",
-                    "tree": "tree/epfl/testa/router.json",
+                    "tree": "tree/epfl/testa/disabled/router.json",
                     "entropy": "entropy/epfl/testa/disabled/router.json"
                 }
             },
@@ -1400,7 +1400,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/sin.v",
-                    "tree": "tree/epfl/testa/sin.json",
+                    "tree": "tree/epfl/testa/disabled/sin.json",
                     "entropy": "entropy/epfl/testa/disabled/sin.json"
                 }
             },
@@ -1409,7 +1409,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/sqrt.v",
-                    "tree": "tree/epfl/testa/sqrt.json",
+                    "tree": "tree/epfl/testa/disabled/sqrt.json",
                     "entropy": "entropy/epfl/testa/disabled/sqrt.json"
                 }
             },
@@ -1418,7 +1418,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/square.v",
-                    "tree": "tree/epfl/testa/square.json",
+                    "tree": "tree/epfl/testa/disabled/square.json",
                     "entropy": "entropy/epfl/testa/disabled/square.json"
                 }
             },
@@ -1427,7 +1427,7 @@
                 "majority_support": false,
                 "files": {
                     "design": "source/epfl/testa/voter.v",
-                    "tree": "tree/epfl/testa/voter.json",
+                    "tree": "tree/epfl/testa/disabled/voter.json",
                     "entropy": "entropy/epfl/testa/disabled/voter.json"
                 }
             }
