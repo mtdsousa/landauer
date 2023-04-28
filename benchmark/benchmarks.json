@@ -2,7 +2,7 @@
     {
         "name": "bencgen",
         "description": "Fabrício Vivas Andrade, Leandro Maia Silva, and Antônio Otávio Fernandes. 2008. BenCGen: a digital circuit generation tool for benchmarks. In Proceedings of the 21st annual symposium on Integrated circuits and system design (SBCCI '08). Association for Computing Machinery, New York, NY, USA, 164–169. https://doi.org/10.1145/1404371.1404418",
-        "items": [
+        "list": [
             {
                 "name": "ripple-carry adder (3-bit input)",
                 "majority_support": false,
@@ -512,7 +512,7 @@
     {
         "name": "bencgen (balanced)",
         "description": "",
-        "items": [
+        "list": [
             {
                 "name": "ripple-carry adder (3-bit input)",
                 "majority_support": false,
@@ -896,7 +896,7 @@
     {
         "name": "epfl",
         "description": "Amarù, Luca Gaetano, Pierre-Emmanuel Gaillardon and Giovanni De Micheli. \"The EPFL Combinational Benchmark Suite.\" (2015).",
-        "items": [
+        "list": [
             {
                 "name": "adder",
                 "majority_support": false,
@@ -1082,7 +1082,7 @@
     {
         "name": "epfl (testa)",
         "description": "",
-        "items": [
+        "list": [
             {
                 "name": "adder",
                 "majority_support": true,
@@ -1250,7 +1250,7 @@
     {
         "name": "epfl (testa, majority-disabled)",
         "description": "",
-        "items": [
+        "list": [
             {
                 "name": "adder",
                 "majority_support": false,
@@ -1436,7 +1436,7 @@
     {
         "name": "mcnc",
         "description": "S. Yang, \"Logic Synthesis and Optimization Benchmarks,\" Technical Report, MCNC, Dec. 1988, published at 1989 MCNC International Workshop on Logic Synthesis.",
-        "items": [
+        "list": [
             {
                 "name": "5xp1",
                 "majority_support": false,
