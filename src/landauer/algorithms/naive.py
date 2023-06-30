@@ -25,10 +25,8 @@ SOFTWARE.
 import argparse
 import json
 import networkx as nx
-import seaborn as sns
 import sys
 
-from collections import deque
 from enum import Enum, auto
 from operator import itemgetter
 
@@ -51,9 +49,6 @@ def _set_hierarchical_level(dag):
 
 def _get_simple_edge(aig, u, v):
     edges = [key for key in aig.succ[u][v].keys() if not aig.edges[u, v, key].get('forward', False)]
-    if len(edges) != 1:
-        import landauer.graph as graph
-        graph.show(graph.default(aig))
     assert len(edges) == 1, f'Expected a single edge between nodes \'{u}\' and \'{v}\''
     return edges[0]
 
@@ -62,15 +57,14 @@ class Strategy(Enum):
     DELAY_ORIENTED = auto()
     ENERGY_ORIENTED = auto()
 
-def naive(aig, strategy = Strategy.DELAY_ORIENTED, palette = 'colorblind'):
+def naive(aig, strategy = Strategy.DELAY_ORIENTED):
     '''
     References
     ----------
     CHAVES, J. et all. Designing Partially Reversible Field-Coupled 
     Nanocomputing Circuits. IEEE Transactions on Nanotechnology, Volume 18, 2019
     '''
-    palette = deque(sns.color_palette(palette).as_hex())
-    return _build_chain(aig, strategy, palette)
+    return _build_chain(aig, strategy)
 
 def _ranked_children(aig, node):
     _set_hierarchical_level(aig)
@@ -101,7 +95,7 @@ def _choose(aig, strategy, children):
 
     return set(choices[:])
 
-def _make_chain(aig, palette, node, choices, outputs):
+def _make_chain(aig, node, choices, outputs):
     '''
     "It selects a non-recyclable node, e.g., an output, to be at the bottom of 
     the chain. After selection of the children, the algorithm links their inputs 
@@ -113,15 +107,11 @@ def _make_chain(aig, palette, node, choices, outputs):
     key = _get_simple_edge(aig, node, last)
     last_is_inverted = aig.edges[node, last, key]['inverter']
 
-    color = palette[0]
-    palette.rotate(1)
-    aig.edges[node, last, key].setdefault('attributes', {}).update({'color':color})
-
     for choice in choices:
         key = _get_simple_edge(aig, node, choice)
         choice_is_inverted = aig.edges[node, choice, key]['inverter']
         aig.remove_edge(node, choice, key)
-        aig.add_edge(last, choice, node, forward = True, inverter = (choice_is_inverted != last_is_inverted), attributes = {'color': color})
+        aig.add_edge(last, choice, node, forward = True, inverter = (choice_is_inverted != last_is_inverted))
         last = choice
         last_is_inverted = choice_is_inverted
 
@@ -129,9 +119,9 @@ def _make_chain(aig, palette, node, choices, outputs):
         key = _get_simple_edge(aig, node, output)
         output_is_inverted = aig.edges[node, output, key]['inverter']
         aig.remove_edge(node, output, key)
-        aig.add_edge(last, output, node, forward = True, inverter = output_is_inverted != last_is_inverted, attributes = {'color': color})
+        aig.add_edge(last, output, node, forward = True, inverter = output_is_inverted != last_is_inverted)
 
-def _build_chain(aig, strategy, palette):
+def _build_chain(aig, strategy):
     '''
     Algorithm 1: Building Chains of n-bits Recycling Gates
     data : netlist <- circuit's netlist
@@ -163,7 +153,7 @@ def _build_chain(aig, strategy, palette):
 
             # "Finally, when the chain is complete, i.e., 
             # there are no sets left:"
-            _make_chain(aig, palette, node, choices, outputs)
+            _make_chain(aig, node, choices, outputs)
 
     return aig
 

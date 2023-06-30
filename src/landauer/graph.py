@@ -29,8 +29,10 @@ import logging
 import matplotlib.pyplot as plt
 import networkx as nx
 import pydot
+import seaborn as sns
 import sys
 
+from collections import deque
 from io import BytesIO
 from PIL import Image
 
@@ -51,8 +53,42 @@ def _set_hierarchical_level(dag):
                     dag.nodes[v]['level'] = dag.nodes[u]['level'] + 1
                     pending.append(v)
 
+def _level(dag):
+    graph = graphviz.Graph()
+    subgraphs = {}
+
+    for node, attr in dag.nodes(data=True):
+        level = attr.get('level', 0)
+        subgraphs.setdefault(level, graphviz.Graph())
+        subgraphs[level].node(str(node), **(attr.get('attributes', {})))
+
+    # First level has rank set to 'source'
+    top = subgraphs.pop(0)
+    top.attr(rank = 'source')
+    graph.subgraph(top)
+
+    # Last level has rank set to 'sink'
+    if len(subgraphs) > 0:
+        bottom = subgraphs.pop(max(subgraphs))
+        bottom.attr(rank = 'sink')
+        graph.subgraph(bottom)
+
+    for level, subgraph in subgraphs.items():
+        subgraph.attr(rank = 'same')
+        graph.subgraph(subgraph)
+
+    graph.attr(rankdir = 'TB')
+    for u, v, attributes in dag.edges(data='attributes', default={}):
+        graph.edge(str(u), str(v), **attributes)
+    
+    return graph
+
+def _next_color(palette):
+    color = palette[0]
+    palette.rotate(1)
+    return color
+
 def paper(dag):
-    dag = nx.MultiDiGraph(dag)
     _set_hierarchical_level(dag)
 
     # Set input nodes:
@@ -94,64 +130,32 @@ def paper(dag):
         }
 
     # Set edges:
-    for u,v,k in dag.edges(keys=True):
-        '''
-        dag.edges[u,v,k]['attributes'] = {
+    palette = deque(sns.color_palette('colorblind').as_hex())
+    colors = dict()
+    for u, v, key, forward in dag.edges(keys=True, data='forward'):
+        forwarded = any(k == u and f for _, _, k, f in dag.out_edges(v, keys=True, data='forward', default=False))
+        color = colors.setdefault(u, _next_color(palette)) if forwarded else colors.setdefault(key, _next_color(palette)) if forward else '#00000032'
+        dag.edges[u,v,key]['attributes'] = {
             'arrowsize' : '0.4',
-            'color' : '#00000032',
-            'fillcolor' : '#000000',
+            'color' : color,
             'penwidth' : '1.0',
-            'style' : ('dashed' if dag.edges[u,v,k]['inverter'] else 'solid')
-        }
-        '''
-        dag.edges[u,v,k]['attributes'] = {
-            'arrowsize' : '0.4',
-            'color' : dag.edges[u, v, k]['attributes']['color'] if 'attributes' in dag.edges[u, v, k] and 'color' in dag.edges[u, v, k]['attributes'] else '#00000032',
-            'penwidth' : '1.0',
-            'style' : ('dashed' if dag.edges[u,v,k]['inverter'] else 'solid')
+            'style' : ('dashed' if dag.edges[u,v,key]['inverter'] else 'solid')
         }
     
     return _level(dag)
-        
-def _level(dag):
-    graph = graphviz.Graph()
-    subgraphs = {}
-
-    for node, attr in dag.nodes(data=True):
-        level = attr.get('level', 0)
-        subgraphs.setdefault(level, graphviz.Graph())
-        subgraphs[level].node(str(node), **(attr.get('attributes', {})))
-
-    # First level has rank set to 'source'
-    top = subgraphs.pop(0)
-    top.attr(rank = 'source')
-    graph.subgraph(top)
-
-    # Last level has rank set to 'sink'
-    if len(subgraphs) > 0:
-        bottom = subgraphs.pop(max(subgraphs))
-        bottom.attr(rank = 'sink')
-        graph.subgraph(bottom)
-
-    for level, subgraph in subgraphs.items():
-        subgraph.attr(rank = 'same')
-        graph.subgraph(subgraph)
-
-    graph.attr(rankdir = 'TB')
-    for u, v, attributes in dag.edges(data='attributes', default={}):
-        graph.edge(str(u), str(v), **attributes)
-    
-    return graph
 
 def default(dag):
+    palette = deque(sns.color_palette('colorblind').as_hex())
+    colors = dict()
     graph = graphviz.Digraph(strict = False)
-    for node, attributes in dag.nodes(data='attributes', default={}):
-        graph.node(str(node), **attributes)
-    for u, v, attr in dag.edges(data=True):
-        inverter = attr.get('inverter', False)
-        attributes = attr.get('attributes', {})
-        attributes.setdefault('style', 'dashed' if inverter else 'solid')
-        graph.edge(str(u), str(v), **attributes)
+    for node in dag.nodes():
+        graph.node(str(node))
+    for u, v, key, data in dag.edges(keys=True, data=True):
+        inverter = data.get('inverter', False)
+        forward = data.get('forward', False)
+        forwarded = any(k == u and f for _, _, k, f in dag.out_edges(v, keys=True, data='forward', default=False))
+        color = colors.setdefault(u, _next_color(palette)) if forwarded else colors.setdefault(key, _next_color(palette)) if forward else '#000000'
+        graph.edge(str(u), str(v), style='dashed' if inverter else 'solid', color=color)
     return graph
 
 def show(dot):
@@ -176,7 +180,7 @@ def main():
  
     content = args.file.read() if args.file else sys.stdin.read()
     import landauer.parse as parse
-    dag = parse.deserialize(content)
+    dag = nx.MultiDiGraph(parse.deserialize(content))
     dot = mode[args.type](dag)
     print(dot.source)
 
