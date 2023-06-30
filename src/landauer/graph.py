@@ -89,6 +89,7 @@ def _next_color(palette):
     return color
 
 def paper(dag):
+    dag = nx.MultiDiGraph(dag)
     _set_hierarchical_level(dag)
 
     # Set input nodes:
@@ -145,6 +146,7 @@ def paper(dag):
     return _level(dag)
 
 def default(dag):
+    dag = nx.MultiDiGraph(dag)
     palette = deque(sns.color_palette('colorblind').as_hex())
     colors = dict()
     graph = graphviz.Digraph(strict = False)
@@ -180,7 +182,7 @@ def main():
  
     content = args.file.read() if args.file else sys.stdin.read()
     import landauer.parse as parse
-    dag = nx.MultiDiGraph(parse.deserialize(content))
+    dag = parse.deserialize(content)
     dot = mode[args.type](dag)
     print(dot.source)
 
