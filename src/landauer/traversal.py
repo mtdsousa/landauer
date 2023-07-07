@@ -27,12 +27,9 @@ import functools
 import itertools
 import json
 import networkx as nx
+import sys
 
-def serialize(aig):
-    return json.dumps(nx.readwrite.json_graph.adjacency_data(aig))
-
-def deserialize(content):
-    return nx.readwrite.json_graph.adjacency_graph(json.loads(content))
+from collections import deque
 
 def _outputs(aig):
     return set(node for node in aig.nodes() if len(list(aig.successors(node))) == 0)
@@ -69,40 +66,33 @@ class Traversal():
     def __init__(self, aig):
         self._aig = aig
         self._counter = itertools.count(1)
-        self._initialized = set()
         self._level = 0
+        self._populated = set()
         self._outputs = _outputs(aig)
         self._opportunities = _opportunities(aig, self._outputs)
 
         self.forwarding = nx.MultiDiGraph(aig)
         self.graph = nx.DiGraph()
-        self.node = 0
         
         self.graph.add_node(0)
-        
-    def leaf(self):
-        return self._level == len(self._opportunities)
+        self.node = 0
+        self._populate()
 
-    def root(self):
-        return self.node == 0
+    def _populate(self):
+        if self.node in self._populated:
+            return
 
-    def edges(self):
-        if self.leaf():
-            return list()
-        
-        if self.node not in self._initialized:
+        if self._level < len(self._opportunities):
             opportunity = self._opportunities[self._level]
             candidates = _candidates(self._aig, self.forwarding, self._outputs, opportunity)
             for candidate in candidates:
                 self.graph.add_edge(self.node, next(self._counter), opportunity=opportunity, candidate=candidate)
-            self._initialized.add(self.node)
+    
+        self._populated.add(self.node)
 
-        return list(self.graph.out_edges(self.node, data=True))
-
-    def advance(self, edge):
-        _, v, data = edge
-        node, parent = data['opportunity']
-        candidate = data['candidate']
+    def next(self, successor):
+        node, parent = self.graph[self.node][successor]['opportunity']
+        candidate = self.graph[self.node][successor]['candidate']
 
         if candidate != parent:
             # Add forwarding edge between candidate and node
@@ -113,10 +103,11 @@ class Traversal():
             key = [key for key in self.forwarding.succ[parent][node].keys() if not self.forwarding.edges[parent, node, key].get('forward', False)][0]
             self.forwarding.remove_edge(parent, node, key)
 
-        self.node = v
+        self.node = successor
         self._level += 1
+        self._populate()
 
-    def retreat(self):
+    def previous(self):
         u, _, data = list(self.graph.in_edges(self.node, data=True))[0]
         node, parent = data['opportunity']
         candidate = data['candidate']
@@ -125,12 +116,23 @@ class Traversal():
             self.forwarding.remove_edge(candidate, node, parent)
             self.forwarding.add_edge(parent, node, inverter=self._aig.edges[parent, node].get('inverter', False))
 
-        self._level -= 1
         self.node = u
+        self._level -= 1
 
-    def restart(self):
-        while not self.root():
-            self.retreat()
+def restart(traversal):
+    while not root(traversal.graph, traversal.node):
+        traversal.previous()
+
+def follow(traversal, path):
+    restart(traversal)
+    for u, v in path:
+        traversal.next(v)
+
+def leaf(tree, node):
+    return tree.out_degree(node) == 0
+
+def root(tree, node):
+    return tree.in_degree(node) == 0
 
 def main():
     argparser = argparse.ArgumentParser()
@@ -145,12 +147,12 @@ def main():
     
     import random
     traversal = Traversal(aig)
-    while not traversal.leaf():
-        edges = traversal.edges()
-        edge = random.choice(edges)
-        traversal.advance(edge)
+    while not leaf(traversal.graph, traversal.node):
+        successors = list(traversal.graph.successors(traversal.node))
+        successor = random.choice(successors)
+        traversal.next(successor)
 
-    print(serialize(traversal.forwarding))
+    print(parse.serialize(traversal.forwarding))
 
 if __name__ == '__main__':
     main()
