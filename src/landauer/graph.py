@@ -150,15 +150,41 @@ def default(dag):
     palette = deque(sns.color_palette('colorblind').as_hex())
     colors = dict()
     graph = graphviz.Digraph(strict = False)
-    for node in dag.nodes():
-        graph.node(str(node))
+    for node, attributes in dag.nodes(data='attributes', default={}):
+        graph.node(str(node), **attributes)
     for u, v, key, data in dag.edges(keys=True, data=True):
         inverter = data.get('inverter', False)
         forward = data.get('forward', False)
         forwarded = any(k == u and f for _, _, k, f in dag.out_edges(v, keys=True, data='forward', default=False))
         color = colors.setdefault(u, _next_color(palette)) if forwarded else colors.setdefault(key, _next_color(palette)) if forward else '#000000'
-        graph.edge(str(u), str(v), style='dashed' if inverter else 'solid', color=color)
+        attributes = {
+            'style' : 'dashed' if inverter else 'solid',
+            'color' : color
+        }
+        attributes.update(data.get('attributes', {}))
+        graph.edge(str(u), str(v), **attributes)
     return graph
+
+def weighted(dag):
+    dag = nx.MultiDiGraph(dag)
+    for node in dag.nodes():
+        dag.nodes[node]['attributes'] = {
+            'label' : '',
+            'shape' : 'circle',
+            'width' : '0.1'
+        }
+    
+    cmap = sns.color_palette("flare", as_cmap=True)
+    for u, v, k, data in dag.edges(keys=True, data=True):
+        attributes = {}
+        if 'opportunity' in data and 'candidate' in data:
+            node, parent = data['opportunity']
+            candidate = data['candidate']
+            weight = f" ({data['weight']})" if 'weight' in data else ''
+            attributes['label'] = f'{candidate} -{parent}-> {node}{weight}'
+        dag.edges[u,v,k].setdefault('attributes', {}).update(attributes)
+
+    return default(dag)
 
 def show(dot):
     graphs = pydot.graph_from_dot_data(dot.source)
@@ -172,7 +198,7 @@ def main():
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--show', help="show graph using matplotlib", action="store_true")
 
-    mode = {'paper' : paper, 'default' : default}
+    mode = {'paper' : paper, 'default' : default, 'weighted' : weighted}
     argparser.add_argument('--type', choices=mode.keys(), help='graph type', required=True)
     
     group = argparser.add_mutually_exclusive_group(required=True)
