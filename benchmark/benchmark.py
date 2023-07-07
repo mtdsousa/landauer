@@ -42,7 +42,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 import landauer.evaluate as evaluate
 import landauer.parse as parse
 import landauer.graph as graph
-import landauer.algorithms as algorithms
 import landauer.entropy as entropy
 
 def filter_(collection, rules):

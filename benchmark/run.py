@@ -45,10 +45,49 @@ import landauer.parse as parse
 import landauer.graph as graph
 import landauer.entropy as entropy
 
+from landauer.algorithms import *
 
 def filter_(collection, rules):
     f = lambda b, l, x: x[0] == b and (len(l) == 0 or x[1] in l)
     return set(chain.from_iterable(filter(partial(f, rule["benchmark"], rule["list"]), collection) for rule in rules))
+
+def resolve_path(working_directory, filename):
+    return Path(filename) if Path(filename).is_absolute() else working_directory / filename
+
+def run(working_directory, benchmark, design, recipe):
+    logging.info(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': started")
+
+    # Read tree data
+    tree = resolve_path(working_directory, design["files"]["tree"])
+    if not tree.is_file():
+        logging.warn(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': tree file not found")
+        return None
+
+    with open(tree) as f:
+        aig = parse.deserialize(f.read())
+    
+    # Read entropy data
+    entropy_file = resolve_path(working_directory, design["files"]["entropy"])
+    if not entropy_file.is_file():
+        logging.warn(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': entropy file not found")
+        return None
+
+    with open(entropy_file) as f:
+        entropy_data = entropy.deserialize(f.read())
+
+    try:
+        algorithm = getattr(algorithms, recipe["algorithm"])
+        result = algorithm.benchmark(aig, entropy_data, recipe["settings"])
+        data = ((benchmark, design['name']),{(recipe['name'], k) : v for k, v in result.items()})
+        logging.info(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': completed")
+        return data
+    except AttributeError as e:
+        logging.error(f"Recipe '{recipe['name']}': algorithm '{recipe['algorithm']}' not found")
+        logging.error(str(e))
+        return None
+    except Exception as e:
+        logging.error(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': {e}")
+        return None
 
 def main():
     logging.basicConfig(level=logging.DEBUG)
@@ -78,56 +117,18 @@ def main():
 
     working_directory = Path(args.benchmarks.name).parent.resolve()
 
-    list_ = [(working_directory, benchmark["name"], design, recipe) \
+    tasks = [(working_directory, benchmark["name"], design, recipe) \
         for recipe in recipes \
         for benchmark in benchmarks for design in benchmark["list"] if (benchmark["name"], design["name"]) in collection]
     
     pool = multiprocessing.Pool(args.processes)
-    results = pool.starmap(run, list_)
-    data = {}
+    results = pool.starmap(run, tasks)
+    data = dict()
     for design, result in filter(None, results):
         data.setdefault(design, {}).update(result)
 
     df = pd.DataFrame.from_dict(data, orient='index')
-    print(df)
-    #df.to_csv(args.output if args.output else sys.stdout)
-
-def resolve_path(working_directory, filename):
-    return Path(filename) if Path(filename).is_absolute() else working_directory / filename
-
-def run(working_directory, benchmark, design, recipe):
-    logging.info(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': started")
-
-    # Read tree data
-    tree = resolve_path(working_directory, design["files"]["tree"])
-    if not tree.is_file():
-        logging.warn(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': tree file not found")
-        return None
-
-    with open(tree) as f:
-        tree_data = parse.deserialize(f.read())
-    
-    # Read entropy data
-    entropy_file = resolve_path(working_directory, design["files"]["entropy"])
-    if not entropy_file.is_file():
-        logging.warn(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': entropy file not found")
-        return None
-
-    with open(entropy_file) as f:
-        entropy_data = entropy.deserialize(f.read())
-
-    try:
-        algorithm = getattr(algorithms, recipe["algorithm"])
-        result = algorithm.benchmark(tree_data, entropy_data, recipe["settings"])
-        data = ((benchmark, design['name']),{(recipe['name'], k) : v for k, v in result.items()})
-        logging.info(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': completed")
-        return data
-    except AttributeError as e:
-        logging.error(f"Recipe '{recipe['name']}': algorithm '{recipe['algorithm']}' not found")
-        return None
-    except Exception as e:
-        logging.error(f"Recipe '{recipe['name']}' for '{design['name']}' from '{benchmark}': {e}")
-        return None
+    df.to_csv(args.output if args.output else sys.stdout)
 
 if __name__ == '__main__':
     main()
