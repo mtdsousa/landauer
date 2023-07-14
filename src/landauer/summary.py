@@ -23,6 +23,7 @@ SOFTWARE.
 '''
 
 import argparse
+import json
 import networkx as nx
 import sys
 
