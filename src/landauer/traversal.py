@@ -123,11 +123,6 @@ def restart(traversal):
     while not root(traversal.graph, traversal.node):
         traversal.previous()
 
-def follow(traversal, path):
-    restart(traversal)
-    for u, v in path:
-        traversal.next(v)
-
 def leaf(tree, node):
     return tree.out_degree(node) == 0
 
