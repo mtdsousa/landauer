@@ -157,22 +157,6 @@ def _build_chain(aig, strategy):
 
     return aig
 
-def benchmark(aig, entropy, settings):
-    assert 'strategy' in settings, "strategy is required"
-    strategy = Strategy.ENERGY_ORIENTED if settings['strategy'] == 'energy_oriented' else Strategy.DELAY_ORIENTED
-    
-    from timeit import default_timer as timer
-    start = timer()
-    forwards = naive(aig, strategy)
-    time = timer() - start
-
-    delay = len(nx.dag_longest_path(aig))
-
-    import landauer.evaluate as evaluate
-    loss = evaluate.evaluate(forwards, entropy)['total']
-
-    return {"time" : time, "delay" : delay, "loss" : loss}
-
 def main():
     argparser = argparse.ArgumentParser()
 
