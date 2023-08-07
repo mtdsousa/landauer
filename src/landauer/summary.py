@@ -29,12 +29,9 @@ import sys
 
 import landauer.evaluate as evaluate
 
-def benchmark(aig, entropy, settings):
-    return summary(aig, entropy)
-
 def summary(aig, entropy):
     delay = len(nx.dag_longest_path(aig))
-    loss = evaluate.evaluate(aig, entropy)['total']
+    loss = evaluate.evaluate(aig, entropy)['total'] if entropy else None
     outputs = set(node for node in aig.nodes() if len(list(aig.successors(node))) == 0)
     inputs = set(node for node in aig.nodes() if len(list(aig.predecessors(node))) == 0)
     gates = set (node for node in aig.nodes() if node not in outputs and node not in inputs)
