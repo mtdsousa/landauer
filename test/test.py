@@ -32,20 +32,20 @@ class Test(unittest.TestCase):
         entropy_ = entropy.entropy(aig)
         graph.default(aig)
         graph.paper(aig)
-        loss = evaluate.evaluate(aig, entropy_)
-        self.assertEqual(4.066165626622601, loss['total'])
+        entropy_losses = evaluate.evaluate(aig, entropy_)
+        self.assertEqual(4.066165626622601, entropy_losses['total'])
 
-        delay_oriented = naive.naive(aig, naive.Strategy.DELAY_ORIENTED)
-        graph.default(delay_oriented)
-        graph.paper(delay_oriented)
-        loss_delay_oriented = evaluate.evaluate(delay_oriented, entropy_)
-        self.assertEqual(4.066165626622601, loss_delay_oriented['total'])
+        depth_oriented = naive.naive(aig, naive.Strategy.DEPTH_ORIENTED)
+        graph.default(depth_oriented)
+        graph.paper(depth_oriented)
+        entropy_losses_depth_oriented = evaluate.evaluate(depth_oriented, entropy_)
+        self.assertEqual(4.066165626622601, entropy_losses_depth_oriented['total'])
 
         energy_oriented = naive.naive(aig, naive.Strategy.ENERGY_ORIENTED)
         graph.default(energy_oriented)
         graph.paper(energy_oriented)
-        loss_energy_oriented = evaluate.evaluate(energy_oriented, entropy_)
-        self.assertEqual(1.688721875540867, loss_energy_oriented['total'])
+        entropy_losses_energy_oriented = evaluate.evaluate(energy_oriented, entropy_)
+        self.assertEqual(1.688721875540867, entropy_losses_energy_oriented['total'])
 
     def test_majority_support(self):
         module = '''

@@ -54,10 +54,10 @@ def _get_simple_edge(aig, u, v):
 
 
 class Strategy(Enum):
-    DELAY_ORIENTED = auto()
+    DEPTH_ORIENTED = auto()
     ENERGY_ORIENTED = auto()
 
-def naive(aig, strategy = Strategy.DELAY_ORIENTED):
+def naive(aig, strategy = Strategy.DEPTH_ORIENTED):
     '''
     References
     ----------
@@ -90,7 +90,7 @@ def _choose(aig, strategy, children):
     full = set(child for child in children if len(set(key for _, _, key, forward in aig.out_edges(child, keys=True, data='forward', default=False) if forward)) == 2)
 
     choices = list(children - (outputs | full))
-    if strategy == Strategy.DELAY_ORIENTED:
+    if strategy == Strategy.DEPTH_ORIENTED:
         return set(choices[:1])
 
     return set(choices[:])
@@ -164,7 +164,7 @@ def main():
     group.add_argument('--file', help='and-inverter graph file', type=argparse.FileType('r'))
     group.add_argument('--stdin', help='read input data (and-inverter graph file) from stdin', action='store_true')
     
-    strategy = {'energy_oriented' : Strategy.ENERGY_ORIENTED, 'delay_oriented': Strategy.DELAY_ORIENTED}
+    strategy = {'energy_oriented' : Strategy.ENERGY_ORIENTED, 'depth_oriented': Strategy.DEPTH_ORIENTED}
     argparser.add_argument('strategy', choices=strategy.keys(), help='Naive (CHAVES, 2019)')
 
     args = argparser.parse_args()
