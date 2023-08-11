@@ -30,12 +30,12 @@ import sys
 import landauer.evaluate as evaluate
 
 def summary(aig, entropy):
-    delay = len(nx.dag_longest_path(aig))
+    depth = len(nx.dag_longest_path(aig))
     loss = evaluate.evaluate(aig, entropy)['total'] if entropy else None
     outputs = set(node for node in aig.nodes() if len(list(aig.successors(node))) == 0)
     inputs = set(node for node in aig.nodes() if len(list(aig.predecessors(node))) == 0)
     gates = set (node for node in aig.nodes() if node not in outputs and node not in inputs)
-    return {'delay': delay, 'loss': loss, 'inputs': len(inputs), 'outputs': len(outputs), 'gates': len(gates)}
+    return {'depth': depth, 'loss': loss, 'inputs': len(inputs), 'outputs': len(outputs), 'gates': len(gates)}
 
 def main():
     argparser = argparse.ArgumentParser()
