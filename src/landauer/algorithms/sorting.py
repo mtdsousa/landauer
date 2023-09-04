@@ -41,6 +41,9 @@ def sorting(aig):
             if not inputs:
                 break
 
+            if not any(aig.successors(previous_node)):
+                continue
+
             available = set(u for u, _ in aig.in_edges(previous_node))
             forwarded = set(key for _, _, key, forward in forwarding.out_edges(previous_node, keys=True, data='forward', default=False) if forward)
             candidates = inputs & available
