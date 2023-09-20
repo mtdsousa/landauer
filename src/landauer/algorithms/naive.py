@@ -49,7 +49,7 @@ def _set_hierarchical_level(dag):
 
 def _get_simple_edge(aig, u, v):
     edges = [key for key in aig.succ[u][v].keys() if not aig.edges[u, v, key].get('forward', False)]
-    assert len(edges) == 1, f'Expected a single edge between nodes \'{u}\' and \'{v}\''
+    assert len(edges) == 1, f'Expected a single non-forwarding edge between nodes \'{u}\' and \'{v}\''
     return edges[0]
 
 
