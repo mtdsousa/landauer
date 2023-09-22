@@ -65,8 +65,8 @@ half_adder = '''
         assign cout = a & b;
     endmodule
 '''
-entropy = entropy.entropy(parse.parse(half_adder))
-print(entropy)
+entropy_database = entropy.entropy(parse.parse(half_adder))
+print(entropy_database)
 # {frozenset({'b', 'a'}): 2.0, frozenset({1}): 0.8112781244591328, frozenset({1, 'b'}): 1.5, frozenset({1, 'a'}): 1.5, frozenset({1, 'b', 'a'}): 2.0, frozenset({2}): 0.8112781244591328, frozenset({2, 'b'}): 1.5, frozenset({2, 'a'}): 1.5, frozenset({2, 'b', 'a'}): 2.0, frozenset({4}): 0.8112781244591328, frozenset({'b', 4}): 1.5, frozenset({4, 'a'}): 1.5, frozenset({'b', 4, 'a'}): 2.0, frozenset({1, 2}): 1.5, frozenset({3}): 1.0, frozenset({1, 3}): 1.5, frozenset({2, 3}): 1.5, frozenset({1, 2, 3}): 1.5}
 ```
 > The output is a Python dictionary where the key is the signal set (as a Python `frozenset`), and the value is the entropy (in bits).
@@ -90,7 +90,7 @@ Calculates the total entropy loss and losses for each gate given circuit and its
 
 ```python
 import landauer.parse as parse
-import landauer.simulate as simulate
+import landauer.entropy as entropy
 import landauer.evaluate as evaluate
 
 half_adder = '''
@@ -103,9 +103,9 @@ half_adder = '''
     endmodule
 '''
 aig = parse.parse(half_adder)
-simulation = simulate.simulate(aig)
-entropy = evaluate.evaluate(aig, simulation)
-print(entropy)
+entropy_database = entropy.entropy(aig)
+evaluation = evaluate.evaluate(aig, entropy_database)
+print(evaluation)
 # {'gates': {1: 1.188721875540867, 2: 1.188721875540867, 3: 0.5, 4: 1.188721875540867}, 'total': 4.066165626622601}
 ```
 
@@ -123,8 +123,8 @@ module half_adder (a, b, sum, cout);
     endmodule
 EOF
 python -m landauer.parse --file half_adder.v > half_adder.json
-python -m landauer.simulate --file half_adder.v > simulation.json
-python -m landauer.evaluate simulation.json --file half_adder.json
+python -m landauer.entropy --file half_adder.v > entropy_database.json
+python -m landauer.evaluate entropy_database.json --file half_adder.json
 # {"total": 4.066165626622601, "gates": [{"gate": 1, "loss": 1.188721875540867}, {"gate": 2, "loss": 1.188721875540867}, {"gate": 3, "loss": 0.5}, {"gate": 4, "loss": 1.188721875540867}]}
 ```
 
@@ -133,7 +133,7 @@ Optimizes the circuit using the heuristics from "CHAVES, J. et all. Designing Pa
 
 ```python
 import landauer.parse as parse
-import landauer.simulate as simulate
+import landauer.entropy as entropy
 import landauer.evaluate as evaluate
 import landauer.naive as naive
 
@@ -148,8 +148,8 @@ half_adder = '''
 '''
 
 aig = parse.parse(half_adder)
-simulation = simulate.simulate(aig)
-print(evaluate.evaluate(aig, simulation))
+entropy_database = entropy.entropy(aig)
+print(evaluate.evaluate(aig, entropy_database))
 # 4.066165626622601
 
 delay_oriented = naive.naive(aig, naive.Strategy.DELAY_ORIENTED)
@@ -175,8 +175,8 @@ module half_adder (a, b, sum, cout);
     endmodule
 EOF
 python -m landauer.parse --file half_adder.v > half_adder.json
-python -m landauer.simulate --file half_adder.v > simulation.json
-python -m landauer.evaluate simulation.json --file half_adder.json
+python -m landauer.entropy --file half_adder.v > entropy_database.json
+python -m landauer.evaluate entropy_database.json --file half_adder.json
 python -m landauer.naive energy_oriented --file half_adder.json
 # {"directed": true, "multigraph": true, "graph": [], "nodes": [{"level": 0, "id": "a"}, {"level": 1, "id": 1}, {"level": 0, "id": "b"}, {"level": 2, "id": 2}, {"level": 3, "id": 3}, {"level": 4, "id": "sum"}, {"level": 3, "id": 4}, {"level": 4, "id": "cout"}], "adjacency": [[{"inverter": false, "id": 1, "attributes": {"color": "#0173b2"}, "key": 0}], [{"inverter": true, "id": 3, "key": 0}, {"forward": true, "inverter": true, "attributes": {"color": "#0173b2"}, "id": 2, "key": "a"}, {"forward": true, "inverter": true, "attributes": {"color": "#56b4e9"}, "id": 2, "key": "b"}], [{"inverter": true, "id": 1, "attributes": {"color": "#56b4e9"}, "key": 0}], [{"inverter": true, "id": 3, "key": 0}, {"forward": true, "inverter": true, "attributes": {"color": "#0173b2"}, "id": 4, "key": "a"}, {"forward": true, "inverter": false, "attributes": {"color": "#56b4e9"}, "id": 4, "key": "b"}], [{"inverter": true, "id": "sum", "key": 0}], [], [{"inverter": false, "id": "cout", "key": 0}], []]}
 
