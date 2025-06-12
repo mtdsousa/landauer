@@ -35,24 +35,35 @@ from io import BytesIO
 from PIL import Image
 
 
-def _set_hierarchical_level(dag):
+def _remove_loops(dag, sources):
+    try:
+        u, v, k = nx.find_cycle(dag, source = sources)[-1]
+        f = dag[u][v][k].get("forward", False)
+        i = dag[u][v][k].get("inverter", False)
+        dag.remove_edge(u, v, k)
+        yield (u, v, k, f, i)
+    except nx.NetworkXNoCycle:
+        return
+        
+def _set_hierarchical_level(dag, remove_loops = False):
+    sources = [node for node in dag.nodes() if len(set(dag.predecessors(node))) == 0]
+    removed = list(_remove_loops(dag, sources)) if remove_loops else []
     assert nx.algorithms.dag.is_directed_acyclic_graph(dag)
 
     for node in dag.nodes():
-        dag.nodes[node].pop("level", None)
+        dag.nodes[node]["level"] = 0
 
-    sources = set(
-        node for node in dag.nodes() if len(list(dag.predecessors(node))) == 0
-    )
     for node in sources:
         pending = [node]
-        dag.nodes[node]["level"] = 0
         while pending:
             u = pending.pop(0)
             for v in dag.neighbors(u):
-                if dag.nodes[u]["level"] + 1 > dag.nodes[v].get("level", 0):
+                if dag.nodes[u]["level"] + 1 > dag.nodes[v]["level"]:
                     dag.nodes[v]["level"] = dag.nodes[u]["level"] + 1
                     pending.append(v)
+    
+    for u, v, k, f, i in removed:
+        dag.add_edge(u, v, k, forward = f, inverter = i)    
 
 
 def _level(dag, directed=False):
@@ -171,8 +182,10 @@ def _set_color(dag, colormap=None):
         dag.edges[u, v, key].setdefault("attributes", {}).update({"color": color})
 
 
-def default(dag, colormap=None):
+def default(dag, colormap=None, remove_loops = False):
     dag = nx.MultiDiGraph(dag)
+    _set_hierarchical_level(dag, remove_loops)
+
     for node in dag.nodes():
         dag.nodes[node].setdefault("attributes", {}).update(
             {
@@ -191,7 +204,6 @@ def default(dag, colormap=None):
             {"style": "dashed" if inverter else "solid"}
         )
 
-    _set_hierarchical_level(dag)
     _set_color(dag, colormap)
     return _level(dag, directed=True)
 
