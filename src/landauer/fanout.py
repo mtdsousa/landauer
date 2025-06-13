@@ -78,18 +78,9 @@ def steps(aig):
             yield [a for a in step3(aig, gates, outputs, c)]
 
 
-def recycle(aig, forwarding, a, b, c):
-    """_summary_
-    a -> b, a -> c
-    a -> b -> c
-
-    Args:
-        aig1 (_type_): _description_
-        aig2 (_type_): _description_
-        a (_type_): _description_
-        b (_type_): _description_
-        c (_type_): _description_
-    """
+def forward(aig, forwarding, a, b, c):
+    # a -> b, a -> c
+    # a -> b -> c
     assert b != c
     assert aig.has_edge(a, b) and aig.has_edge(a, c)
     assert not forwarding.has_edge(b, c, a)
@@ -108,15 +99,7 @@ def recycle(aig, forwarding, a, b, c):
     forwarding.add_edge(b, c, key=a, forward=True, inverter=inverter)
 
 
-def restore(aig, steps):
-    forwarding = nx.MultiDiGraph(aig)
-    for (a, c), b in steps:
-        if b != a:
-            recycle(aig, forwarding, a, b, c)
-    return forwarding
-
-
 def generate(aig):
     # Step 4:
     for p in product(*[s for s in steps(aig)]):
-        yield restore(aig, chain.from_iterable(p))
+        yield chain.from_iterable(p)

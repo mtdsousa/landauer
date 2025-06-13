@@ -22,7 +22,11 @@ SOFTWARE.
 
 """
 
+import csv
 import subprocess
+import sys
+
+import networkx as nx
 
 from landauer import fanout, parse
 from landauer import graph
@@ -34,13 +38,21 @@ design = """
         output sum, cout;
         assign w1 = a & b;
         assign cout = w1;
-        assign sum = ~(w1 & (~a & ~b));
+        assign sum = ~w1 & ~(~a & ~b);
     endmodule
 """
 
 aig = parse.parse(design)
 colormap = {"a": "#0173b2", "b": "#de8f05", 1: "#029e73"}
-for id, forwarding in enumerate(fanout.generate(aig), start=1):
+csvwriter = csv.writer(sys.stdout)
+csvwriter.writerow(["#", "signal", "from", "to"])
+for id, assignments in enumerate(fanout.generate(aig), start=1):
+    forwarding = nx.MultiDiGraph(aig)
+    for (a, c), b in assignments:
+        csvwriter.writerow([id, a, b, c])
+        if b != a:
+            fanout.forward(aig, forwarding, a, b, c)
+
     dot = graph.default(forwarding, colormap, loops=True)
     with open(f"halfadder{id}.dot", "w") as f:
         f.write(dot.source)
