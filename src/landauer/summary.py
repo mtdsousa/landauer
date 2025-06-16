@@ -1,6 +1,6 @@
-'''
+"""
 
-Copyright (c) 2023 Marco Diniz Sousa
+Copyright (c) 2025 Marco Diniz Sousa
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,41 +20,64 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-'''
+"""
 
 import argparse
 import json
-import networkx as nx
 import sys
 
-import landauer.evaluate as evaluate
+from functools import partial
 
-def summary(aig, entropy):
-    depth = len(nx.dag_longest_path(aig))
-    losses = evaluate.evaluate(aig, entropy)['total'] if entropy else None
-    outputs = set(node for node in aig.nodes() if len(list(aig.successors(node))) == 0)
-    inputs = set(node for node in aig.nodes() if len(list(aig.predecessors(node))) == 0)
-    gates = set (node for node in aig.nodes() if node not in outputs and node not in inputs)
-    return {'depth': depth, 'entropy_losses': losses, 'inputs': len(inputs), 'outputs': len(outputs), 'gates': len(gates)}
+import networkx as nx
+
+from landauer import parse
+
+
+def input(aig, node):
+    return not any(aig.predecessors(node))
+
+
+def gate(aig, node):
+    return any(aig.successors(node))
+
+
+def output(aig, node):
+    return not any(aig.successors(node))
+
+
+def depth(aig):
+    return len(nx.dag_longest_path(aig))
+
+
+def summary(aig):
+    nodes = list(aig.nodes())
+    gates = len(list(filter(partial(gate, aig), nodes)))
+    outputs = len(list(filter(partial(output, aig), nodes)))
+    inputs = len(list(filter(partial(input, aig), nodes)))
+
+    return {
+        "depth": depth(aig),
+        "inputs": inputs,
+        "outputs": outputs,
+        "gates": gates,
+    }
+
 
 def main():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('entropy', help='entropy database', type=argparse.FileType('r'))
-
     group = argparser.add_mutually_exclusive_group(required=True)
-    group.add_argument('--file', help='and-inverter graph file', type=argparse.FileType('r'))
-    group.add_argument('--stdin', help='read input data (and-inverter graph file) from stdin', action='store_true')
-
+    group.add_argument("--file", help="aig file", type=argparse.FileType("r"))
+    group.add_argument(
+        "--stdin",
+        help="read aig file from stdin",
+        action="store_true",
+    )
     args = argparser.parse_args()
-    
-    import landauer.parse as parse
+
     content = args.file.read() if args.file else sys.stdin.read()
     aig = parse.deserialize(content)
-    
-    import landauer.entropy as entropy
-    entropy_ = entropy.deserialize(args.entropy.read())
+    print(json.dumps(summary(aig)))
 
-    print(json.dumps(summary(aig, entropy_)))
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
