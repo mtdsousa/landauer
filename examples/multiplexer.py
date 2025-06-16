@@ -32,7 +32,9 @@ def save(colormap, forwarding, name):
     dot = graph.default(forwarding, colormap, loops=True)
     with open(f"{name}.dot", "w") as f:
         f.write(dot.source)
-    subprocess.run(["dot", "-Tpdf", "-Gmargin=0", f"{name}.dot", "-o", f"{name}.pdf"])
+    subprocess.run(
+        ["dot", "-Tpdf", "-Gmargin=0", f"{name}.dot", "-o", f"{name}.pdf"]
+    )
 
 
 design = """
