@@ -24,6 +24,7 @@ SOFTWARE.
 
 from functools import partial
 from itertools import product, chain
+
 import networkx as nx
 
 
@@ -97,6 +98,13 @@ def forward(aig, forwarding, a, b, c):
     else:
         assert False
     forwarding.add_edge(b, c, key=a, forward=True, inverter=inverter)
+
+
+def restore(aig, assignments):
+    forwarding = nx.MultiDiGraph(aig)
+    for (a, c), b in assignments:
+        forward(aig, forwarding, a, b, c)
+    return forwarding
 
 
 def generate(aig):
