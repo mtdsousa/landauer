@@ -25,6 +25,7 @@ SOFTWARE.
 from functools import partial
 from itertools import product, chain
 
+import math
 import networkx as nx
 
 
@@ -111,3 +112,17 @@ def generate(aig):
     # Step 4:
     for p in product(*[s for s in steps(aig)]):
         yield chain.from_iterable(p)
+
+
+def _count(aig):
+    for candidate in candidates(aig):
+        children = list(aig.successors(candidate))
+        gates = len(list(filter(partial(gate, aig), children)))
+        yield (gates + 1) ** (gates - 1)
+
+        outputs = len(list(filter(partial(output, aig), children)))
+        yield (gates + 1) ** outputs
+
+
+def count(aig):
+    return math.prod(_count(aig))
