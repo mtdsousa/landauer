@@ -31,6 +31,16 @@ import networkx as nx
 from landauer import fanout, parse
 from landauer import graph
 
+
+def save(colormap, forwarding, name):
+    dot = graph.default(forwarding, colormap, loops=True)
+    with open(f"{name}.dot", "w") as f:
+        f.write(dot.source)
+    subprocess.run(
+        ["dot", "-Tpdf", "-Gmargin=0", f"{name}.dot", "-o", f"{name}.pdf"]
+    )
+
+
 design = """
     module half_adder(a, b, sum, cout);
         input a, b;
@@ -53,9 +63,4 @@ for id, assignments in enumerate(fanout.generate(aig), start=1):
         if b != a:
             fanout.forward(aig, forwarding, a, b, c)
 
-    dot = graph.default(forwarding, colormap, loops=True)
-    with open(f"halfadder{id}.dot", "w") as f:
-        f.write(dot.source)
-    subprocess.run(
-        ["dot", "-Tpdf", "-Gmargin=0", f"halfadder{id}.dot", "-o", f"halfadder{id}.pdf"]
-    )
+    save(colormap, forwarding, f"halfadder{id}")
