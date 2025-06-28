@@ -29,26 +29,32 @@ import sys
 
 from pathlib import Path
 
-from landauer import parse, fanout
+from landauer import parse, fanout, summary
 
 csvwriter = csv.writer(sys.stdout)
-csvwriter.writerow(["benchmark", "design", "count"])
+csvwriter.writerow(
+    ["benchmark", "design", "inputs", "outputs", "gates", "outcomes"]
+)
 
 examples_path = Path(os.path.dirname(os.path.realpath(__file__)))
 benchmark_path = examples_path / ".." / "benchmark" / "benchmark"
 
-for root, dirs, file in os.walk(benchmark_path):
-    for filename in file:
+for root, dirs, files in os.walk(benchmark_path):
+    for filename in sorted(files):
         if not filename.endswith(".aig.json"):
             continue
         with open(Path(root) / filename) as f:
             aig = parse.deserialize(f.read())
 
+        data = summary.summary(aig)
         n = decimal.Decimal(fanout.count(aig))
         csvwriter.writerow(
             [
                 root.split(os.path.sep)[-1],
                 filename.removesuffix(".aig.json"),
+                data["inputs"],
+                data["outputs"],
+                data["gates"],
                 format(n, ".2e"),
             ]
         )
