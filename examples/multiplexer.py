@@ -24,12 +24,12 @@ SOFTWARE.
 
 import subprocess
 
-from landauer import fanout, parse
+from landauer import embed, parse
 from landauer import graph
 
 
-def save(colormap, forwarding, name):
-    dot = graph.default(forwarding, colormap, loops=True)
+def save(colormap, aig, name):
+    dot = graph.default(aig, colormap, loops=True)
     with open(f"{name}.dot", "w") as f:
         f.write(dot.source)
     subprocess.run(
@@ -50,6 +50,6 @@ design = """
 
 aig = parse.parse(design)
 colormap = {"s": "#0173b2"}
-save(colormap, fanout.restore(aig, []), "multiplexer")
-save(colormap, fanout.restore(aig, [(("s", 3), 2)]), "multiplexer2")
-save(colormap, fanout.restore(aig, [(("s", 2), 3)]), "multiplexer3")
+save(colormap, embed.restore(aig, []), "multiplexer")
+save(colormap, embed.restore(aig, [(("s", 3), 2)]), "multiplexer2")
+save(colormap, embed.restore(aig, [(("s", 2), 3)]), "multiplexer3")

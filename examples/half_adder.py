@@ -28,12 +28,12 @@ import sys
 
 import networkx as nx
 
-from landauer import fanout, parse
+from landauer import embed, parse
 from landauer import graph
 
 
-def save(colormap, forwarding, name):
-    dot = graph.default(forwarding, colormap, loops=True)
+def save(colormap, aig, name):
+    dot = graph.default(aig, colormap, loops=True)
     with open(f"{name}.dot", "w") as f:
         f.write(dot.source)
     subprocess.run(
@@ -52,15 +52,14 @@ design = """
     endmodule
 """
 
-aig = parse.parse(design)
+base = parse.parse(design)
 colormap = {"a": "#0173b2", "b": "#de8f05", 1: "#029e73"}
 csvwriter = csv.writer(sys.stdout)
 csvwriter.writerow(["#", "signal", "from", "to"])
-for id, assignments in enumerate(fanout.generate(aig), start=1):
-    forwarding = nx.MultiDiGraph(aig)
+for id, assignments in enumerate(embed.generate(base), start=1):
+    dst = nx.MultiDiGraph(base)
     for (a, c), b in assignments:
         csvwriter.writerow([id, a, b, c])
-        if b != a:
-            fanout.forward(aig, forwarding, a, b, c)
+        embed.embed(base, dst, a, b, c)
 
-    save(colormap, forwarding, f"halfadder{id}")
+    save(colormap, dst, f"halfadder{id}")

@@ -29,7 +29,7 @@ import sys
 
 from pathlib import Path
 
-from landauer import parse, fanout, summary
+from landauer import parse, embed, summary
 
 csvwriter = csv.writer(sys.stdout)
 csvwriter.writerow(
@@ -47,7 +47,7 @@ for root, dirs, files in os.walk(benchmark_path):
             aig = parse.deserialize(f.read())
 
         data = summary.summary(aig)
-        n = decimal.Decimal(fanout.count(aig))
+        n = decimal.Decimal(embed.count(aig))
         csvwriter.writerow(
             [
                 root.split(os.path.sep)[-1],
