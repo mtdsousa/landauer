@@ -1,6 +1,6 @@
-'''
+"""
 
-Copyright (c) 2022 Marco Diniz Sousa
+Copyright (c) 2025 Marco Sousa
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-'''
+"""
 
-import argparse
 import itertools
 import json
 import math
-import networkx as nx
-import sys
+import timeit
 
-from timeit import default_timer as timer
-from tqdm import tqdm
+import networkx as nx
+
+
+class TimeoutException(Exception):
+    """Exception that is raised if entropy calculation times out."""
+
 
 def _input_generator():
     yield itertools.cycle((0x5555555555555555,))
@@ -40,8 +42,14 @@ def _input_generator():
     yield itertools.cycle((0xFFFF0000FFFF0000,))
     yield itertools.cycle((0xFFFFFFFF00000000,))
     for i in itertools.count():
-        repetition = 2 ** i
-        yield itertools.cycle(itertools.chain((0x0000000000000000 for _ in range(repetition)), (0xFFFFFFFFFFFFFFFF for _ in range(repetition))))
+        repetition = 2**i
+        yield itertools.cycle(
+            itertools.chain(
+                (0x0000000000000000 for _ in range(repetition)),
+                (0xFFFFFFFFFFFFFFFF for _ in range(repetition)),
+            )
+        )
+
 
 def _assignment(values):
     size = len(values)
@@ -55,57 +63,110 @@ def _assignment(values):
         a, b, c = values
         return (a & b) | (a & c) | (b & c)
 
+
 def _count(variables, buffer, mask):
     counter = {}
-    for product in itertools.product((0x0000000000000000, 0xFFFFFFFFFFFFFFFF), repeat = len(variables)):
+    for product in itertools.product(
+        (0x0000000000000000, 0xFFFFFFFFFFFFFFFF), repeat=len(variables)
+    ):
         result = mask
         for variable, pattern in zip(variables, product):
             result = result & ~(buffer[variable] ^ pattern)
         counter[product] = result.bit_count()
     return counter
 
+
 def _simulate(aig, constants, mask):
     buffer = constants
-    inputs = set(node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0) - {0}
+    inputs = set(
+        node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0
+    ) - {0}
     outputs = set(node for node in aig.nodes() if len(set(aig.successors(node))) == 0)
-    gates = [node for node in nx.topological_sort(aig) if node not in inputs | outputs | {0}]
+    gates = [
+        node for node in nx.topological_sort(aig) if node not in inputs | outputs | {0}
+    ]
     counter = {}
     for gate in gates:
         # update buffer with gate's output value
-        input_values = tuple(buffer[u] if not inverted else ~buffer[u] for u, v, inverted in aig.in_edges(gate, data='inverter'))
+        input_values = tuple(
+            buffer[u] if not inverted else ~buffer[u]
+            for u, v, inverted in aig.in_edges(gate, data="inverter")
+        )
         buffer[gate] = _assignment(input_values)
 
-        variables = frozenset(aig.predecessors(gate)) # assumption: predecessors function is deterministic
+        variables = frozenset(
+            aig.predecessors(gate)
+        )  # assumption: predecessors function is deterministic
         if variables not in counter:
             counter[variables] = _count(variables, buffer, mask)
-        
+
         for i in range(len(variables) + 1):
             for combination in itertools.combinations(variables, i):
                 output = frozenset(itertools.chain((gate,), combination))
                 counter[output] = _count(output, buffer, mask)
     return counter
 
+
 def _entropy(counter, states):
     result = {}
     for variables, products in counter.items():
         sanity_check = 0
-        entropy = 0
+        entropy_ = 0
         for count in products.values():
             if count > 0:
                 sanity_check += count
-                probability = count/states
-                entropy += -probability * math.log(probability, 2)
-        result[variables] = entropy
+                probability = count / states
+                entropy_ += -probability * math.log(probability, 2)
+        result[variables] = entropy_
         assert sanity_check == states
     return result
 
-def entropy(aig, timeout = 0.0):
-    inputs = set(node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0) - {0}
+
+def entropy(aig, timeout=0.0):
+    """Calculates entropy values given a combinational circuit.
+
+    Simulates a combinational circuit for all possible input combinations,
+    and, for each gate, it calculates the entropy value for different signals
+    sets: input signals, output signal, and each possible combination of these
+    previously ones.
+
+    Parameters
+    ----------
+    aig (networkx.DiGraph) : Logic circuit as AIG (and-inverter graph).
+    timeout (float) : Timeout value in seconds. Defaults to 0 (disabled).
+
+    Returns
+    -------
+    dict : signals sets (frozenset) mapped to entropy values (float).
+    
+    Raises
+    ------
+    TimeoutException : Entropy calculation lasted more than expected.
+
+    Examples
+    --------
+    Calculating entropy for a simple AND gate:
+    >>> import landauer.entropy as entropy
+    >>> import networkx as nx
+    >>> aig = [("input1", 1), ("input2", 1), (1, "output1")]
+    >>> entropy.entropy(nx.from_edgelist(aig, nx.DiGraph))
+    {
+        frozenset({'input1', 'input2'}): 2.0,
+        frozenset({1}): 0.8112781244591328,
+        frozenset({1, 'input1'}): 1.5,
+        frozenset({1, 'input2'}): 1.5,
+        frozenset({1, 'input1', 'input2'}): 2.0
+    }
+
+    """
+    inputs = set(
+        node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0
+    ) - {0}
     states = 2 ** len(inputs)
     mask = 0xFFFFFFFFFFFFFFFF >> max(64 - states, 0)
     input_generator = list(zip(sorted(inputs), _input_generator()))
     counter = {}
-    start = timer()
+    start = timeit.default_timer()
 
     for _ in range(max(1, states // 64)):
         constants = {0: 0}
@@ -115,32 +176,63 @@ def entropy(aig, timeout = 0.0):
             counter.setdefault(variables, {})
             for product, count in products.items():
                 counter[variables][product] = counter[variables].get(product, 0) + count
-        if timeout != 0 and timer() - start > timeout:
-            raise Exception(f'timed out')
+        if timeout != 0 and timeit.default_timer() - start > timeout:
+            raise TimeoutException
 
-    entropy_ = _entropy(counter, states)
-    return entropy_
+    return _entropy(counter, states)
 
-def serialize(simulation):
-    return json.dumps([{'variables':list(variables),'entropy':entropy} for variables, entropy in simulation.items()])
+
+def serialize(entropy_):
+    """Serialize entropy values as JSON string
+
+    Example
+    -------
+    >>> entropy.serialize(
+    ... {
+    ...    frozenset({'input1', 'input2'}): 2.0,
+    ...    frozenset({1}): 0.8112781244591328,
+    ...    frozenset({1, 'input1'}): 1.5,
+    ...    frozenset({1, 'input2'}): 1.5,
+    ...    frozenset({1, 'input1', 'input2'}): 2.0
+    ... })
+    '[{"variables": ["input1", "input2"], "entropy": 2.0},
+      {"variables": [1], "entropy": 0.8112781244591328},
+      {"variables": [1, "input1"], "entropy": 1.5},
+      {"variables": [1, "input2"], "entropy": 1.5},
+      {"variables": [1, "input1", "input2"], "entropy": 2.0}]'
+
+    """
+    return json.dumps(
+        [
+            {"variables": list(variables), "entropy": entropy}
+            for variables, entropy in entropy_.items()
+        ]
+    )
+
 
 def deserialize(content):
-    return {frozenset(data['variables']):data['entropy'] for data in json.loads(content)}
+    """Deserialize entropy values encoded as JSON string
 
-def main():
-    argparser = argparse.ArgumentParser()
-    argparser.add_argument('--timeout', help='timeout (s)', type=float, default = 0.0)
-    
-    group = argparser.add_mutually_exclusive_group(required=True)
-    group.add_argument('--file', help='and-inverter graph file', type=argparse.FileType('r'))
-    group.add_argument('--stdin', help='read input data (and-inverter graph file) from stdin', action='store_true')
+    Example
+    -------
+    >>> entropy.deserialize('''[
+    ... [
+    ...     {"variables": ["input1", "input2"], "entropy": 2.0},
+    ...     {"variables": [1], "entropy": 0.8112781244591328},
+    ...     {"variables": [1, "input1"], "entropy": 1.5},
+    ...     {"variables": [1, "input2"], "entropy": 1.5},
+    ...     {"variables": [1, "input1", "input2"], "entropy": 2.0}
+    ... ]
+    ... ''')
+    {
+        frozenset({'input1', 'input2'}): 2.0,
+        frozenset({1}): 0.8112781244591328,
+        frozenset({1, 'input1'}): 1.5,
+        frozenset({1, 'input2'}): 1.5,
+        frozenset({1, 'input1', 'input2'}): 2.0
+    }
 
-    args = argparser.parse_args()
-    
-    import landauer.parse as parse
-    content = args.file.read() if args.file else sys.stdin.read()
-    aig = parse.deserialize(content)
-    print(serialize(entropy(aig, timeout = args.timeout)))
-
-if __name__ == "__main__":
-    main()
+    """
+    return {
+        frozenset(data["variables"]): data["entropy"] for data in json.loads(content)
+    }

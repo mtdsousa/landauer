@@ -22,13 +22,11 @@ SOFTWARE.
 
 """
 
-import argparse
 import graphviz
 import matplotlib.pyplot as plt
 import networkx as nx
 import pydot
 import seaborn as sns
-import sys
 
 from collections import deque
 from io import BytesIO
@@ -38,7 +36,7 @@ from PIL import Image
 def _remove_loops(dag, sources):
     try:
         u, v, k = nx.find_cycle(dag, source=sources)[-1]
-        f = dag[u][v][k].get("forward", False)
+        f = dag[u][v][k].get("embedded", False)
         i = dag[u][v][k].get("inverter", False)
         dag.remove_edge(u, v, k)
         yield (u, v, k, f, i)
@@ -47,7 +45,9 @@ def _remove_loops(dag, sources):
 
 
 def _set_hierarchical_level(dag, loops=False):
-    sources = [node for node in dag.nodes() if len(set(dag.predecessors(node))) == 0]
+    sources = [
+        node for node in dag.nodes() if len(set(dag.predecessors(node))) == 0
+    ]
     removed = list(_remove_loops(dag, sources)) if loops else []
     assert nx.algorithms.dag.is_directed_acyclic_graph(dag)
 
@@ -63,8 +63,8 @@ def _set_hierarchical_level(dag, loops=False):
                     dag.nodes[v]["level"] = dag.nodes[u]["level"] + 1
                     pending.append(v)
 
-    for u, v, k, f, i in removed:
-        dag.add_edge(u, v, k, forward=f, inverter=i)
+    for u, v, k, e, i in removed:
+        dag.add_edge(u, v, k, embedded=e, inverter=i)
 
 
 def _level(dag, directed=False):
@@ -110,7 +110,11 @@ def paper(dag):
 
     # Set input nodes:
     sources = set(
-        [node for node in dag.nodes() if len(list(dag.predecessors(node))) == 0]
+        [
+            node
+            for node in dag.nodes()
+            if len(list(dag.predecessors(node))) == 0
+        ]
     )
     for node in sources:
         dag.nodes[node]["attributes"] = {
@@ -123,9 +127,15 @@ def paper(dag):
             "width": "0.15",
         }
 
-    leaves = set([node for node in dag.nodes() if len(list(dag.successors(node))) == 0])
+    leaves = set(
+        [node for node in dag.nodes() if len(list(dag.successors(node))) == 0]
+    )
     ordinary = set(
-        [node for node in dag.nodes() if node not in sources and node not in leaves]
+        [
+            node
+            for node in dag.nodes()
+            if node not in sources and node not in leaves
+        ]
     )
     for node in ordinary:
         dag.nodes[node]["attributes"] = {
@@ -151,11 +161,13 @@ def paper(dag):
         }
 
     # Set edges:
-    for u, v, key, forward in dag.edges(keys=True, data="forward"):
+    for u, v, key, embedded in dag.edges(keys=True, data="embedded"):
         dag.edges[u, v, key]["attributes"] = {
             "arrowsize": "0.4",
             "penwidth": "1.0",
-            "style": ("dashed" if dag.edges[u, v, key]["inverter"] else "solid"),
+            "style": (
+                "dashed" if dag.edges[u, v, key]["inverter"] else "solid"
+            ),
         }
     _set_color(dag)
     return _level(dag)
@@ -164,23 +176,29 @@ def paper(dag):
 def _set_color(dag, colormap=None):
     palette = deque(sns.color_palette("colorblind").as_hex())
     colors = colormap if colormap else dict()
-    for u, v, key, forward in dag.edges(keys=True, data="forward", default=False):
-        forwarded = any(
+    for u, v, key, embed in dag.edges(
+        keys=True, data="embedded", default=False
+    ):
+        embedded = any(
             k == u and f
-            for _, _, k, f in dag.out_edges(v, keys=True, data="forward", default=False)
+            for _, _, k, f in dag.out_edges(
+                v, keys=True, data="embedded", default=False
+            )
         )
         color = "#000000"
-        if forwarded:
+        if embedded:
             if u not in colors:
                 colors[u] = palette[0]
                 palette.rotate(-1)
             color = colors[u]
-        elif forward:
+        elif embed:
             if key not in colors:
                 colors[key] = palette[0]
                 palette.rotate(-1)
             color = colors[key]
-        dag.edges[u, v, key].setdefault("attributes", {}).update({"color": color})
+        dag.edges[u, v, key].setdefault("attributes", {}).update(
+            {"color": color}
+        )
 
 
 def default(dag, colormap=None, loops=False):
@@ -200,7 +218,9 @@ def default(dag, colormap=None, loops=False):
             }
         )
 
-    for u, v, key, inverter in dag.edges(keys=True, data="inverter", default=False):
+    for u, v, key, inverter in dag.edges(
+        keys=True, data="inverter", default=False
+    ):
         dag.edges[u, v, key].setdefault("attributes", {}).update(
             {"style": "dashed" if inverter else "solid"}
         )
@@ -216,40 +236,3 @@ def show(dot):
     plt.imshow(image)
     plt.axis("off")
     plt.show()
-
-
-def main():
-    argparser = argparse.ArgumentParser()
-    argparser.add_argument(
-        "--show", help="show graph using matplotlib", action="store_true"
-    )
-
-    mode = {"paper": paper, "default": default}
-    argparser.add_argument(
-        "--type", choices=mode.keys(), help="graph type", required=True
-    )
-
-    group = argparser.add_mutually_exclusive_group(required=True)
-    group.add_argument(
-        "--file", help="and-inverter graph file", type=argparse.FileType("r")
-    )
-    group.add_argument(
-        "--stdin",
-        help="read input data (and-inverter graph file) from stdin",
-        action="store_true",
-    )
-    args = argparser.parse_args()
-
-    content = args.file.read() if args.file else sys.stdin.read()
-    import landauer.parse as parse
-
-    dag = parse.deserialize(content)
-    dot = mode[args.type](dag)
-    print(dot.source)
-
-    if args.show:
-        show(dot)
-
-
-if __name__ == "__main__":
-    main()

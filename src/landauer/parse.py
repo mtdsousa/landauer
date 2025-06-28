@@ -22,15 +22,17 @@ SOFTWARE.
 
 """
 
-import argparse
 import itertools
 import json
 import networkx as nx
 import re
-import sys
 
 from antlr4_verilog import InputStream, CommonTokenStream, ParseTreeWalker
-from antlr4_verilog.verilog import VerilogParserListener, VerilogParser, VerilogLexer
+from antlr4_verilog.verilog import (
+    VerilogParserListener,
+    VerilogParser,
+    VerilogLexer,
+)
 
 
 class DefaultVerilogListener(VerilogParserListener):
@@ -57,7 +59,9 @@ class DefaultVerilogListener(VerilogParserListener):
                     assignment_in, assignment_out
                 ), "Unexpected gate with duplicated input"
                 self._aig.add_edge(
-                    assignment_in, assignment_out, inverter=inverted_in ^ inverted_out
+                    assignment_in,
+                    assignment_out,
+                    inverter=inverted_in ^ inverted_out,
                 )
                 self._aig.remove_edge(identifier, assignment_out)
 
@@ -92,7 +96,9 @@ class DefaultVerilogListener(VerilogParserListener):
     def _binary_expression(self, operator, left, right):
         assert operator in ("&", "|", "^")
         if operator == "&":
-            assert left[0] != right[0], f"Unexpected gate with duplicated input"
+            assert (
+                left[0] != right[0]
+            ), f"Unexpected gate with duplicated input"
             node = next(self._labels)
             self._aig.add_edge(left[0], node, inverter=left[1])
             self._aig.add_edge(right[0], node, inverter=right[1])
@@ -157,14 +163,18 @@ class DefaultVerilogListener(VerilogParserListener):
         expression = self._expression_traversal(expression)
         self._aig.add_edge(expression[0], identifier, inverter=expression[1])
 
-    def exitNet_decl_assignment(self, ctx: VerilogParser.Net_decl_assignmentContext):
+    def exitNet_decl_assignment(
+        self, ctx: VerilogParser.Net_decl_assignmentContext
+    ):
         self._assignment(
-            self._handle_escaped_name(ctx.net_identifier().getText()), ctx.expression()
+            self._handle_escaped_name(ctx.net_identifier().getText()),
+            ctx.expression(),
         )
 
     def exitNet_assignment(self, ctx: VerilogParser.Net_assignmentContext):
         self._assignment(
-            self._handle_escaped_name(ctx.net_lvalue().getText()), ctx.expression()
+            self._handle_escaped_name(ctx.net_lvalue().getText()),
+            ctx.expression(),
         )
 
 
@@ -176,7 +186,9 @@ class MajoritySupportVerilogListener(DefaultVerilogListener):
             return identifier, not is_inverted
 
         if ctx.getChildCount() == 1:
-            if not isinstance(ctx.getChild(0), VerilogParser.IdentifierContext):
+            if not isinstance(
+                ctx.getChild(0), VerilogParser.IdentifierContext
+            ):
                 return self._parse_identifier(ctx.getChild(0))
             identifier = self._handle_escaped_name(ctx.getText())
             self._identifiers.add(identifier)
@@ -189,7 +201,9 @@ class MajoritySupportVerilogListener(DefaultVerilogListener):
             return self._parse_AND(ctx.getChild(0))
 
         if ctx.getChildCount() == 3:
-            if isinstance(ctx.getChild(1), VerilogParser.Mintypmax_expressionContext):
+            if isinstance(
+                ctx.getChild(1), VerilogParser.Mintypmax_expressionContext
+            ):
                 return self._parse_AND(ctx.getChild(1))
 
             if ctx.getChild(1).getText() == "&":
@@ -214,7 +228,17 @@ class MajoritySupportVerilogListener(DefaultVerilogListener):
         a2, c1 = self._parse_AND(left.getChild(2))  # (a & c)
         b2, c2 = self._parse_AND(ctx.getChild(2))  # (b & c)
 
-        if a1 and a2 and b1 and b2 and c1 and c2 and a1 == a2 and b1 == b2 and c1 == c2:
+        if (
+            a1
+            and a2
+            and b1
+            and b2
+            and c1
+            and c2
+            and a1 == a2
+            and b1 == b2
+            and c1 == c2
+        ):
             assert (
                 a1[0] != b1[0] and a1[0] != c1[0] and b1[0] != c1[0]
             ), f"Unexpected gate with duplicated input"
@@ -252,32 +276,3 @@ def serialize(aig):
 
 def deserialize(content):
     return nx.readwrite.json_graph.adjacency_graph(json.loads(content))
-
-
-def main():
-    argparser = argparse.ArgumentParser()
-    group = argparser.add_mutually_exclusive_group(required=True)
-    group.add_argument(
-        "--file", help="hardware description file", type=argparse.FileType("r")
-    )
-    group.add_argument(
-        "--stdin",
-        help="read input data (hardware description file) from stdin",
-        action="store_true",
-    )
-
-    # Aditional support
-    argparser.add_argument(
-        "--majority_support",
-        help="enable support to majority gates",
-        action="store_true",
-    )
-
-    args = argparser.parse_args()
-
-    content = args.file.read() if args.file else sys.stdin.read()
-    print(serialize(parse(content, majority_support=args.majority_support)))
-
-
-if __name__ == "__main__":
-    main()

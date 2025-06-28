@@ -37,6 +37,17 @@ def output(aig, node):
     return not any(aig.successors(node))
 
 
+def free(dst, node, s):
+    embedded = set(
+        key
+        for _, _, key, embedded in dst.out_edges(
+            node, keys=True, data="embedded", default=False
+        )
+        if embedded
+    )
+    return s in embedded or len(embedded) < 2
+
+
 def candidates(aig):
     for node in aig.nodes():
         children = list(aig.successors(node))
@@ -80,38 +91,38 @@ def steps(aig):
             yield [a for a in step3(aig, gates, outputs, c)]
 
 
-def forward(aig, forwarding, a, b, c):
+def embed(base, dst, a, b, c):
     # a -> b, a -> c
     # a -> b -> c
     assert b != c
-    assert aig.has_edge(a, b) and aig.has_edge(a, c)
-    assert not forwarding.has_edge(b, c, a)
+    assert base.has_edge(a, b) and base.has_edge(a, c)
+    assert not dst.has_edge(b, c, a)
 
-    inverter = aig.edges[a, b].get("inverter", False) != aig.edges[a, c].get(
+    inverter = base.edges[a, b].get("inverter", False) != base.edges[a, c].get(
         "inverter", False
     )
 
     # Remove previous edge
-    for u, _, k in forwarding.in_edges(nbunch=c, keys=True):
+    for u, _, k in dst.in_edges(nbunch=c, keys=True):
         if a in (u, k):
-            forwarding.remove_edge(u, c, k)
+            dst.remove_edge(u, c, k)
             break
     else:
         assert False
-    forwarding.add_edge(b, c, key=a, forward=True, inverter=inverter)
+    dst.add_edge(b, c, key=a, embedded=True, inverter=inverter)
 
 
 def restore(aig, assignments):
-    forwarding = nx.MultiDiGraph(aig)
+    dst = nx.MultiDiGraph(aig)
     for (a, c), b in assignments:
-        forward(aig, forwarding, a, b, c)
-    return forwarding
+        embed(aig, dst, a, b, c)
+    return dst
 
 
 def generate(aig):
     # Step 4:
     for p in product(*[s for s in steps(aig)]):
-        yield chain.from_iterable(p)
+        yield [((a, c), b) for (a, c), b in chain.from_iterable(p) if b != a]
 
 
 def _count(aig):

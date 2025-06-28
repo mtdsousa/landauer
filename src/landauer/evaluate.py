@@ -1,6 +1,6 @@
-'''
+"""
 
-Copyright (c) 2022 Marco Diniz Sousa
+Copyright (c) 2025 Marco Diniz Sousa
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,67 +20,69 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-'''
+"""
 
-import argparse
 import json
-import logging
 import networkx as nx
-import sys
+
 
 def evaluate(aig, simulation):
     aig = nx.MultiDiGraph(aig)
-    inputs = set(node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0)
-    outputs = set(node for node in aig.nodes() if len(set(aig.successors(node))) == 0)
+    inputs = set(
+        node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0
+    )
+    outputs = set(
+        node for node in aig.nodes() if len(set(aig.successors(node))) == 0
+    )
     gates = [node for node in aig.nodes() if node not in inputs | outputs]
 
-    result = {'gates': {}}
+    result = {"gates": {}}
     total = 0
     for gate in gates:
-        inputs = frozenset(u if not forward else key for u, _, key, forward in aig.in_edges(gate, keys=True, data='forward', default=False))
-        outputs = frozenset(u if not forward else key for u, _, key, forward in aig.out_edges(gate, keys=True, data='forward', default=False))
-        assert inputs in simulation, f'Variable set \'{str(tuple(inputs))}\' expected in the simulation'
-        assert outputs in simulation, f'Variable set \'{str(tuple(outputs))}\' expected in the simulation'
-        
+        inputs = frozenset(
+            u if not embedded else key
+            for u, _, key, embedded in aig.in_edges(
+                gate, keys=True, data="embedded", default=False
+            )
+        )
+        outputs = frozenset(
+            u if not embedded else key
+            for u, _, key, embedded in aig.out_edges(
+                gate, keys=True, data="embedded", default=False
+            )
+        )
+        assert (
+            inputs in simulation
+        ), f"Variable set '{str(tuple(inputs))}' expected in the simulation"
+        assert (
+            outputs in simulation
+        ), f"Variable set '{str(tuple(outputs))}' expected in the simulation"
+
         loss = simulation[inputs] - simulation[outputs]
-        result['gates'][gate] = loss
+        result["gates"][gate] = loss
         total += loss
 
-    result['total'] = total
+    result["total"] = total
     return result
 
+
 def serialize(evaluation):
-    return json.dumps({
-        'total':evaluation['total'],
-        'gates': [{'gate':gate, 'loss':loss} for gate, loss in evaluation['gates'].items()]
-    })
+    return json.dumps(
+        {
+            "total": evaluation["total"],
+            "gates": [
+                {"gate": gate, "loss": loss}
+                for gate, loss in evaluation["gates"].items()
+            ],
+        }
+    )
+
 
 def deserialize(content):
     evaluation = {}
     data = json.loads(content)
-    evaluation['total'] = data['total']
-    evaluation['gates'] = {gate['gate']: gate['loss'] for gate in data['gates']}
+    evaluation["total"] = data["total"]
+    evaluation["gates"] = {
+        gate["gate"]: gate["loss"] for gate in data["gates"]
+    }
     return evaluation
-
-def main():
-    argparser = argparse.ArgumentParser()
-    argparser.add_argument('entropy', help='entropy database', type=argparse.FileType('r'))
-
-    group = argparser.add_mutually_exclusive_group(required=True)
-    group.add_argument('--file', help='and-inverter graph file', type=argparse.FileType('r'))
-    group.add_argument('--stdin', help='read input data (and-inverter graph file) from stdin', action='store_true')
-
-    args = argparser.parse_args()
-    
-    import landauer.parse as parse
-    content = args.file.read() if args.file else sys.stdin.read()
-    aig = parse.deserialize(content)
-    
-    import landauer.entropy as entropy
-    entropy_ = entropy.deserialize(args.entropy.read())
-
-    evaluation = evaluate(aig, entropy_)
-    print(serialize(evaluation))
-
-if __name__ == "__main__":
-    main()
