@@ -90,6 +90,10 @@ def steps(aig):
         if len(gates) >= 1 and len(outputs) >= 1:
             yield [a for a in step3(aig, gates, outputs, c)]
 
+def encoding(aig):
+    for candidate in sorted(candidates(aig)):
+        continue
+
 
 def embed(base, dst, a, b, c):
     # a -> b, a -> c
@@ -98,23 +102,21 @@ def embed(base, dst, a, b, c):
     assert base.has_edge(a, b) and base.has_edge(a, c)
     assert not dst.has_edge(b, c, a)
 
-    inverter = base.edges[a, b].get("inverter", False) != base.edges[a, c].get(
-        "inverter", False
-    )
+    ab_is_inverted = base.edges[a, b].get("inverter", False)
+    ac_is_inverted = base.edges[a, c].get("inverter", False)
+    inverter = ab_is_inverted != ac_is_inverted
 
     # Remove previous edge
-    for u, _, k in dst.in_edges(nbunch=c, keys=True):
-        if a in (u, k):
-            dst.remove_edge(u, c, k)
-            break
-    else:
-        assert False
+    assert c in dst.adj[a]
+    previous_edge = list(dst.adj[a][c].keys())
+    assert len(previous_edge) == 1
+    dst.remove_edge(a, c, key=previous_edge[0])
     dst.add_edge(b, c, key=a, embedded=True, inverter=inverter)
 
 
-def restore(aig, assignments):
+def from_list(aig, embeddings):
     dst = nx.MultiDiGraph(aig)
-    for (a, c), b in assignments:
+    for (a, c), b in embeddings:
         embed(aig, dst, a, b, c)
     return dst
 

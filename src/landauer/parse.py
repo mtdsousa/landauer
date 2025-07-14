@@ -99,7 +99,7 @@ class DefaultVerilogListener(VerilogParserListener):
             assert (
                 left[0] != right[0]
             ), f"Unexpected gate with duplicated input"
-            node = next(self._labels)
+            node = str(next(self._labels))
             self._aig.add_edge(left[0], node, inverter=left[1])
             self._aig.add_edge(right[0], node, inverter=right[1])
             return (node, False)
@@ -127,7 +127,7 @@ class DefaultVerilogListener(VerilogParserListener):
                 assert (
                     match
                 ), f"Expected literal '{ctx.getText()}' being 0, 1, 1'b0 or 1'b1"
-                return (0, match.group(1) == "1")
+                return ("0", match.group(1) == "1")
 
             # Identifier
             if isinstance(ctx.getChild(0), VerilogParser.IdentifierContext):

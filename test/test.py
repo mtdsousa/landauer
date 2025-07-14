@@ -5,11 +5,15 @@ import sys
 import tempfile
 import unittest
 
-import landauer.evaluate as evaluate
-import landauer.parse as parse
-import landauer.graph as graph
+
 import landauer.entropy as entropy
 import landauer.embed as embed
+import landauer.evaluate as evaluate
+import landauer.graph as graph
+import landauer.parse as parse
+import landauer.summary as summary
+
+
 import landauer.algorithms.tnano2019 as tnano2019
 
 
@@ -98,7 +102,9 @@ class Test(unittest.TestCase):
         """
         aig = parse.parse(module)
         # the netlist is the same as c = a & b
-        self.assertEqual(set([("a", 1), ("b", 1), (1, "c")]), set(aig.edges()))
+        self.assertEqual(
+            set([("a", "1"), ("b", "1"), ("1", "c")]), set(aig.edges())
+        )
 
     def test_reference_to_output(self):
         # Issue #4: Support reference to output signals
@@ -319,6 +325,31 @@ class Test(unittest.TestCase):
             )
             self.assertEqual(0, p.returncode)
             self.assertEqual("", p.stderr)
+
+    def test_generate(self):
+        design = """
+            module mux(a, b, c, s, out);
+                input a, b, c, s;
+                wire w1;
+                output out;
+
+                assign w1 = a & b;
+                assign out = (w1 & ~s) | (c & s);
+            endmodule
+        """
+        aig = parse.parse(design)
+        entropy_data = entropy.entropy(aig, timeout=1)
+        expected = {
+            frozenset(): 3.9895183701117043,
+            frozenset({(("s", "3"), "2")}): 3.127443751081734,
+            frozenset({(("s", "2"), "3")}): 3.300796494570837,
+        }
+        for embedding in embed.generate(aig):
+            result = embed.from_list(aig, embedding)
+            evaluation = evaluate.evaluate(result, entropy_data)
+            e = frozenset(embedding)
+            self.assertTrue(e in expected)
+            self.assertEqual(expected[e], evaluation["total"])
 
 
 if __name__ == "__main__":

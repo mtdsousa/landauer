@@ -26,40 +26,36 @@ import json
 import networkx as nx
 
 
-def evaluate(aig, simulation):
+def evaluate(aig, entropy_data):
     aig = nx.MultiDiGraph(aig)
-    inputs = set(
-        node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0
-    )
-    outputs = set(
-        node for node in aig.nodes() if len(set(aig.successors(node))) == 0
-    )
-    gates = [node for node in aig.nodes() if node not in inputs | outputs]
-
     result = {"gates": {}}
     total = 0
-    for gate in gates:
+    for node in aig.nodes():
+        # Ignore inputs and outputs
+        if not any(aig.predecessors(node)) or not any(aig.successors(node)):
+            continue
+
         inputs = frozenset(
             u if not embedded else key
             for u, _, key, embedded in aig.in_edges(
-                gate, keys=True, data="embedded", default=False
+                node, keys=True, data="embedded", default=False
             )
         )
         outputs = frozenset(
             u if not embedded else key
             for u, _, key, embedded in aig.out_edges(
-                gate, keys=True, data="embedded", default=False
+                node, keys=True, data="embedded", default=False
             )
         )
         assert (
-            inputs in simulation
-        ), f"Variable set '{str(tuple(inputs))}' expected in the simulation"
+            inputs in entropy_data
+        ), f"Variable set '{str(tuple(inputs))}' expected in the entropy data"
         assert (
-            outputs in simulation
-        ), f"Variable set '{str(tuple(outputs))}' expected in the simulation"
+            outputs in entropy_data
+        ), f"Variable set '{str(tuple(outputs))}' expected in the entropy data"
 
-        loss = simulation[inputs] - simulation[outputs]
-        result["gates"][gate] = loss
+        loss = entropy_data[inputs] - entropy_data[outputs]
+        result["gates"][node] = loss
         total += loss
 
     result["total"] = total
