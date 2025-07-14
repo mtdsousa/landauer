@@ -56,9 +56,9 @@ base = parse.parse(design)
 colormap = {"a": "#0173b2", "b": "#de8f05", 1: "#029e73"}
 csvwriter = csv.writer(sys.stdout)
 csvwriter.writerow(["#", "signal", "from", "to"])
-for id, assignments in enumerate(embed.generate(base), start=1):
+for id, embeddings in enumerate(embed.generate(base), start=1):
     dst = nx.MultiDiGraph(base)
-    for (a, c), b in assignments:
+    for (a, c), b in embeddings:
         csvwriter.writerow([id, a, b, c])
         embed.embed(base, dst, a, b, c)
 

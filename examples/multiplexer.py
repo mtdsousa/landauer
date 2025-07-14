@@ -50,6 +50,6 @@ design = """
 
 aig = parse.parse(design)
 colormap = {"s": "#0173b2"}
-save(colormap, embed.restore(aig, []), "multiplexer")
-save(colormap, embed.restore(aig, [(("s", 3), 2)]), "multiplexer2")
-save(colormap, embed.restore(aig, [(("s", 2), 3)]), "multiplexer3")
+save(colormap, embed.from_list(aig, []), "multiplexer")
+save(colormap, embed.from_list(aig, [(("s", 3), 2)]), "multiplexer2")
+save(colormap, embed.from_list(aig, [(("s", 2), 3)]), "multiplexer3")
