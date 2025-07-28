@@ -22,18 +22,17 @@ SOFTWARE.
 
 """
 
-from functools import partial
-from itertools import product, chain
-
+import itertools
 import math
+
 import networkx as nx
 
 
-def gate(aig, node):
-    return any(aig.successors(node))
+def _is_gate(aig, node):
+    return any(aig.successors(node)) and any(aig.predecessors(node))
 
 
-def output(aig, node):
+def _is_output(aig, node):
     return not any(aig.successors(node))
 
 
@@ -48,51 +47,98 @@ def free(dst, node, s):
     return s in embedded or len(embedded) < 2
 
 
-def candidates(aig):
+def _candidates(aig):
     for node in aig.nodes():
         children = list(aig.successors(node))
-        if len(children) >= 2 and any(gate(aig, child) for child in children):
+        if len(children) >= 2 and any(
+            _is_gate(aig, child) for child in children
+        ):
             yield node
 
 
-def trees(nodes):
-    assert len(nodes) > 2
-    for sequence in product(range(len(nodes)), repeat=len(nodes) - 2):
-        G = nx.from_prufer_sequence(sequence)
-        edges = nx.bfs_tree(G, 0).edges()
-        yield [(nodes[u], nodes[v]) for u, v in edges]
-
-
-def step2(aig, gates, node):
-    assert len(gates) >= 2
-    for edges in trees([node] + gates):
-        yield [((node, v), u) for u, v in edges]
-
-
-def step3(aig, gates, outputs, node):
-    assert len(gates) >= 1 and len(outputs) >= 1
-    assignments = product([node] + gates, outputs)
-    yield from ([((node, v), u)] for u, v in assignments)
-
-
-def steps(aig):
-    # Step 1:
-    for c in candidates(aig):
-        children = set(aig.successors(c))
-        gates = list(sorted(filter(partial(gate, aig), children)))
-        outputs = list(sorted(filter(partial(output, aig), children)))
-
-        # Step 2:
-        if len(gates) >= 2:
-            yield [f for f in step2(aig, gates, c)]
-
-        # Step 3:
-        if len(gates) >= 1 and len(outputs) >= 1:
-            yield [a for a in step3(aig, gates, outputs, c)]
-
 def encoding(aig):
-    for candidate in sorted(candidates(aig)):
-        continue
+    for candidate in sorted(_candidates(aig)):
+        children = set(aig.successors(candidate))
+        outputs = set(child for child in children if _is_output(aig, child))
+        non_output = len(children - outputs)
+        assert len(children) >= 2 and non_output > 0
+        # Fanout propagation
+        if non_output > 1:
+            yield (non_output + 1) ** (non_output - 1)
+        # Output handling
+        yield from itertools.repeat(non_output + 1, len(outputs))
+
+
+def generate(aig):
+    yield from itertools.product(*[range(n) for n in encoding(aig)])
+
+
+def _from_decimal(n, value):
+    """
+    Convert value from base 10 to base n. It expected a positive number less
+    than n ^ (n - 2). It returns a list with n - 2 digits (leading zeros).
+    This function is used to convert a decimal number to a Prufer sequence.
+    """
+    sequence = []
+    while value != 0:
+        sequence.append(value % n)
+        value //= n
+    expected = n - 2
+    assert len(sequence) <= expected
+    sequence.extend(itertools.repeat(0, expected - len(sequence)))
+    return list(reversed(sequence))
+
+
+def decode(aig, e):
+    encoded = iter(e)
+    for candidate in sorted(_candidates(aig)):
+        children = list(sorted(aig.successors(candidate)))
+        gates = list(child for child in children if _is_gate(aig, child))
+        assert len(children) >= 2 and len(gates) > 0
+        # Fanout propagation
+        if len(gates) > 1:
+            prufer = _from_decimal(len(gates) + 1, next(encoded))
+            G = nx.from_prufer_sequence(prufer)
+            for u, v in nx.bfs_tree(G, 0).edges():
+                if u != 0:
+                    yield ((candidate, gates[v - 1]), gates[u - 1])
+        # Output handling
+        outputs = list(child for child in children if _is_output(aig, child))
+        for output in outputs:
+            u = next(encoded)
+            if u != 0:
+                yield ((candidate, output), gates[u - 1])
+
+
+def _to_decimal(sequence):
+    """
+    Convert sequence of n elements to a number base (n + 2). This function
+    is used to convert a Prufer sequence to a decimal number.
+    """
+    n = len(sequence) + 2
+    value = 0
+    for i, s in enumerate(reversed(sequence)):
+        value += s * n**i
+    return value
+
+
+def encode(aig, l):
+    e = dict(l)
+    for c in sorted(_candidates(aig)):
+        children = list(sorted(aig.successors(c)))
+        gates = list(child for child in children if _is_gate(aig, child))
+        mapping = dict(zip(gates, itertools.count(1)))
+        mapping[c] = 0
+        assert len(children) >= 2 and len(gates) > 0
+        # Fanout propagation
+        if len(gates) > 1:
+            G = nx.Graph([(e.get((c, g), c), g) for g in gates])
+            nx.relabel_nodes(G, mapping, copy=False)
+            yield _to_decimal(nx.to_prufer_sequence(G))
+        # Output handling
+        outputs = list(child for child in children if _is_output(aig, child))
+        for output in outputs:
+            yield mapping[e.get((c, output))] if (c, output) in e else 0
 
 
 def embed(base, dst, a, b, c):
@@ -114,28 +160,18 @@ def embed(base, dst, a, b, c):
     dst.add_edge(b, c, key=a, embedded=True, inverter=inverter)
 
 
-def from_list(aig, embeddings):
+def from_list(aig, l):
     dst = nx.MultiDiGraph(aig)
-    for (a, c), b in embeddings:
+    for (a, c), b in l:
         embed(aig, dst, a, b, c)
     return dst
 
 
-def generate(aig):
-    # Step 4:
-    for p in product(*[s for s in steps(aig)]):
-        yield [((a, c), b) for (a, c), b in chain.from_iterable(p) if b != a]
-
-
-def _count(aig):
-    for candidate in candidates(aig):
-        children = list(aig.successors(candidate))
-        gates = len(list(filter(partial(gate, aig), children)))
-        yield (gates + 1) ** (gates - 1)
-
-        outputs = len(list(filter(partial(output, aig), children)))
-        yield (gates + 1) ** outputs
+def to_list(aig):
+    assert isinstance(aig, nx.MultiDiGraph)
+    edges = aig.edges(data="embedded", default=False, keys=True)
+    yield from [((k, v), u) for u, v, k, embedded in edges if embedded]
 
 
 def count(aig):
-    return math.prod(_count(aig))
+    return math.prod(encoding(aig))
