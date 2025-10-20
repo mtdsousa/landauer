@@ -242,7 +242,7 @@ class MajoritySupportVerilogListener(DefaultVerilogListener):
             assert (
                 a1[0] != b1[0] and a1[0] != c1[0] and b1[0] != c1[0]
             ), f"Unexpected gate with duplicated input"
-            node = next(self._labels)
+            node = str(next(self._labels))
             self._aig.add_edge(a1[0], node, inverter=a1[1])
             self._aig.add_edge(b1[0], node, inverter=b1[1])
             self._aig.add_edge(c1[0], node, inverter=c1[1])
