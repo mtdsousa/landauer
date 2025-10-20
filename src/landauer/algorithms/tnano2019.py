@@ -22,15 +22,10 @@ SOFTWARE.
 
 """
 
-import argparse
-import sys
-
 from enum import Enum, auto
 from operator import itemgetter
 
 import networkx as nx
-
-from landauer import parse
 
 
 def _set_hierarchical_level(dag):
@@ -73,8 +68,10 @@ class Strategy(Enum):
 def energy_oriented(aig):
     return _build_chain(aig, Strategy.ENERGY_ORIENTED)
 
+
 def depth_oriented(aig):
     return _build_chain(aig, Strategy.DEPTH_ORIENTED)
+
 
 def tnano2019(aig):
     """
@@ -86,6 +83,7 @@ def tnano2019(aig):
 
     yield _build_chain(aig, Strategy.DEPTH_ORIENTED)
     yield _build_chain(aig, Strategy.ENERGY_ORIENTED)
+
 
 def _ranked_children(aig, node):
     _set_hierarchical_level(aig)
@@ -132,7 +130,7 @@ def _choose(aig, strategy, children):
         == 2
     )
 
-    choices = list(children - (outputs | full))
+    choices = list(sorted(children - (outputs | full)))
     if strategy == Strategy.DEPTH_ORIENTED:
         return set(choices[:1])
 
@@ -145,7 +143,7 @@ def _make_chain(aig, node, choices, outputs):
     the chain. After selection of the children, the algorithm links their inputs
     and outputs together."
     """
-    choices = sorted(list(choices), key=lambda x: aig.nodes[x]["level"])
+    choices = sorted(sorted(choices), key=lambda x: aig.nodes[x]["level"])
 
     last = choices.pop(0)
     key = _get_simple_edge(aig, node, last)
@@ -165,7 +163,7 @@ def _make_chain(aig, node, choices, outputs):
         last = choice
         last_is_inverted = choice_is_inverted
 
-    for output in outputs:
+    for output in sorted(outputs):
         key = _get_simple_edge(aig, node, output)
         output_is_inverted = aig.edges[node, output, key]["inverter"]
         aig.remove_edge(node, output, key)
