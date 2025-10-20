@@ -56,21 +56,39 @@ def _candidates(aig):
             yield node
 
 
-def encoding(aig):
+def _iterate(aig):
     for candidate in sorted(_candidates(aig)):
-        children = set(aig.successors(candidate))
-        outputs = set(child for child in children if _is_output(aig, child))
-        non_output = len(children - outputs)
-        assert len(children) >= 2 and non_output > 0
+        children = list(sorted(aig.successors(candidate)))
+        gates = list(child for child in children if _is_gate(aig, child))
+        outputs = list(child for child in children if _is_output(aig, child))
+        assert len(children) >= 2 and len(gates) > 0
+        assert len(children) == len(gates) + len(outputs)
+        yield candidate, gates, outputs
+
+
+def encoding(aig):
+    for _, gates, outputs in _iterate(aig):
         # Fanout propagation
-        if non_output > 1:
-            yield (non_output + 1) ** (non_output - 1)
+        n = len(gates)
+        if n > 1:
+            yield (n + 1) ** (n - 1)
         # Output handling
-        yield from itertools.repeat(non_output + 1, len(outputs))
+        yield from itertools.repeat(n + 1, len(outputs))
+
+
+def labels(aig):
+    for candidate, gates, outputs in _iterate(aig):
+        # Fanout propagation
+        n = len(gates)
+        if n > 1:
+            yield (candidate, gates)
+        for output in outputs:
+            yield (candidate, [output])
 
 
 def generate(aig):
-    yield from itertools.product(*[range(n) for n in encoding(aig)])
+    iterators = [range(min(n, 65536)) for n in encoding(aig)]
+    yield from itertools.product(*iterators)
 
 
 def _from_decimal(n, value):
@@ -91,10 +109,7 @@ def _from_decimal(n, value):
 
 def decode(aig, e):
     encoded = iter(e)
-    for candidate in sorted(_candidates(aig)):
-        children = list(sorted(aig.successors(candidate)))
-        gates = list(child for child in children if _is_gate(aig, child))
-        assert len(children) >= 2 and len(gates) > 0
+    for candidate, gates, outputs in _iterate(aig):
         # Fanout propagation
         if len(gates) > 1:
             prufer = _from_decimal(len(gates) + 1, next(encoded))
@@ -103,7 +118,6 @@ def decode(aig, e):
                 if u != 0:
                     yield ((candidate, gates[v - 1]), gates[u - 1])
         # Output handling
-        outputs = list(child for child in children if _is_output(aig, child))
         for output in outputs:
             u = next(encoded)
             if u != 0:
@@ -124,19 +138,15 @@ def _to_decimal(sequence):
 
 def encode(aig, l):
     e = dict(l)
-    for c in sorted(_candidates(aig)):
-        children = list(sorted(aig.successors(c)))
-        gates = list(child for child in children if _is_gate(aig, child))
+    for c, gates, outputs in _iterate(aig):
         mapping = dict(zip(gates, itertools.count(1)))
         mapping[c] = 0
-        assert len(children) >= 2 and len(gates) > 0
         # Fanout propagation
         if len(gates) > 1:
             G = nx.Graph([(e.get((c, g), c), g) for g in gates])
             nx.relabel_nodes(G, mapping, copy=False)
             yield _to_decimal(nx.to_prufer_sequence(G))
         # Output handling
-        outputs = list(child for child in children if _is_output(aig, child))
         for output in outputs:
             yield mapping[e.get((c, output))] if (c, output) in e else 0
 
