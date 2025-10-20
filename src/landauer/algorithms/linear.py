@@ -27,6 +27,10 @@ import networkx as nx
 from landauer import embed
 
 
+def _is_output(aig, node):
+    return not any(aig.successors(node))
+
+
 def linear(base):
     dst = nx.MultiDiGraph(base)
     nodes = list(nx.topological_sort(base))
@@ -36,5 +40,5 @@ def linear(base):
             if parent in replacements:
                 embed.embed(base, dst, parent, replacements[parent], node)
                 yield dst
-            if embed.free(dst, node, parent) and not embed.output(base, node):
+            if embed.free(dst, node, parent) and not _is_output(base, node):
                 replacements[parent] = node
