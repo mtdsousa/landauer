@@ -64,28 +64,26 @@ def _assignment(values):
         return (a & b) | (a & c) | (b & c)
 
 
-def _count(variables, buffer, mask):
+def _count(signals, buffer, mask):
     counter = {}
     for product in itertools.product(
-        (0x0000000000000000, 0xFFFFFFFFFFFFFFFF), repeat=len(variables)
+        (0x0000000000000000, 0xFFFFFFFFFFFFFFFF), repeat=len(signals)
     ):
         result = mask
-        for variable, pattern in zip(variables, product):
+        for variable, pattern in zip(signals, product):
             result = result & ~(buffer[variable] ^ pattern)
         counter[product] = result.bit_count()
     return counter
 
 
+def _is_gate(aig, node):
+    return any(aig.successors(node)) and any(aig.predecessors(node))
+
+
 def _simulate(aig, constants, mask):
     buffer = constants
-    inputs = set(
-        node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0
-    ) - {0}
-    outputs = set(node for node in aig.nodes() if len(set(aig.successors(node))) == 0)
-    gates = [
-        node for node in nx.topological_sort(aig) if node not in inputs | outputs | {0}
-    ]
     counter = {}
+    gates = [node for node in nx.topological_sort(aig) if _is_gate(aig, node)]
     for gate in gates:
         # update buffer with gate's output value
         input_values = tuple(
@@ -93,15 +91,12 @@ def _simulate(aig, constants, mask):
             for u, v, inverted in aig.in_edges(gate, data="inverter")
         )
         buffer[gate] = _assignment(input_values)
+        signals = frozenset(sorted(aig.predecessors(gate)))
+        if signals not in counter:
+            counter[signals] = _count(signals, buffer, mask)
 
-        variables = frozenset(
-            aig.predecessors(gate)
-        )  # assumption: predecessors function is deterministic
-        if variables not in counter:
-            counter[variables] = _count(variables, buffer, mask)
-
-        for i in range(len(variables) + 1):
-            for combination in itertools.combinations(variables, i):
+        for i in range(len(signals) + 1):
+            for combination in itertools.combinations(signals, i):
                 output = frozenset(itertools.chain((gate,), combination))
                 counter[output] = _count(output, buffer, mask)
     return counter
@@ -109,7 +104,7 @@ def _simulate(aig, constants, mask):
 
 def _entropy(counter, states):
     result = {}
-    for variables, products in counter.items():
+    for signals, products in counter.items():
         sanity_check = 0
         entropy_ = 0
         for count in products.values():
@@ -117,9 +112,13 @@ def _entropy(counter, states):
                 sanity_check += count
                 probability = count / states
                 entropy_ += -probability * math.log(probability, 2)
-        result[variables] = entropy_
+        result[signals] = entropy_
         assert sanity_check == states
     return result
+
+
+def _is_input(aig, node):
+    return node != "0" and not any(aig.predecessors(node))
 
 
 def entropy(aig, timeout=0.0):
@@ -138,7 +137,7 @@ def entropy(aig, timeout=0.0):
     Returns
     -------
     dict : signals sets (frozenset) mapped to entropy values (float).
-    
+
     Raises
     ------
     TimeoutException : Entropy calculation lasted more than expected.
@@ -152,16 +151,14 @@ def entropy(aig, timeout=0.0):
     >>> entropy.entropy(nx.from_edgelist(aig, nx.DiGraph))
     {
         frozenset({'input1', 'input2'}): 2.0,
-        frozenset({1}): 0.8112781244591328,
-        frozenset({1, 'input1'}): 1.5,
-        frozenset({1, 'input2'}): 1.5,
-        frozenset({1, 'input1', 'input2'}): 2.0
+        frozenset({'1'}): 0.8112781244591328,
+        frozenset({'1', 'input1'}): 1.5,
+        frozenset({'1', 'input2'}): 1.5,
+        frozenset({'1', 'input1', 'input2'}): 2.0
     }
 
     """
-    inputs = set(
-        node for node in aig.nodes() if len(set(aig.predecessors(node))) == 0
-    ) - {0}
+    inputs = set(node for node in aig.nodes() if _is_input(aig, node))
     states = 2 ** len(inputs)
     mask = 0xFFFFFFFFFFFFFFFF >> max(64 - states, 0)
     input_generator = list(zip(sorted(inputs), _input_generator()))
@@ -169,13 +166,17 @@ def entropy(aig, timeout=0.0):
     start = timeit.default_timer()
 
     for _ in range(max(1, states // 64)):
-        constants = {0: 0}
-        constants.update({name: next(values) for name, values in input_generator})
+        constants = {"0": 0}
+        constants.update(
+            {name: next(values) for name, values in input_generator}
+        )
         result = _simulate(aig, constants, mask)
-        for variables, products in result.items():
-            counter.setdefault(variables, {})
+        for signals, products in result.items():
+            counter.setdefault(signals, {})
             for product, count in products.items():
-                counter[variables][product] = counter[variables].get(product, 0) + count
+                counter[signals][product] = (
+                    counter[signals].get(product, 0) + count
+                )
         if timeout != 0 and timeit.default_timer() - start > timeout:
             raise TimeoutException
 
@@ -190,22 +191,22 @@ def serialize(entropy_):
     >>> entropy.serialize(
     ... {
     ...    frozenset({'input1', 'input2'}): 2.0,
-    ...    frozenset({1}): 0.8112781244591328,
-    ...    frozenset({1, 'input1'}): 1.5,
-    ...    frozenset({1, 'input2'}): 1.5,
-    ...    frozenset({1, 'input1', 'input2'}): 2.0
+    ...    frozenset({'1'}): 0.8112781244591328,
+    ...    frozenset({'1', 'input1'}): 1.5,
+    ...    frozenset({'1', 'input2'}): 1.5,
+    ...    frozenset({'1', 'input1', 'input2'}): 2.0
     ... })
-    '[{"variables": ["input1", "input2"], "entropy": 2.0},
-      {"variables": [1], "entropy": 0.8112781244591328},
-      {"variables": [1, "input1"], "entropy": 1.5},
-      {"variables": [1, "input2"], "entropy": 1.5},
-      {"variables": [1, "input1", "input2"], "entropy": 2.0}]'
+    '[{"signals": ["input1", "input2"], "entropy": 2.0},
+      {"signals": ["1"], "entropy": 0.8112781244591328},
+      {"signals": ["1", "input1"], "entropy": 1.5},
+      {"signals": ["1", "input2"], "entropy": 1.5},
+      {"signals": ["1", "input1", "input2"], "entropy": 2.0}]'
 
     """
     return json.dumps(
         [
-            {"variables": list(variables), "entropy": entropy}
-            for variables, entropy in entropy_.items()
+            {"signals": list(signals), "entropy": entropy}
+            for signals, entropy in entropy_.items()
         ]
     )
 
@@ -217,22 +218,23 @@ def deserialize(content):
     -------
     >>> entropy.deserialize('''[
     ... [
-    ...     {"variables": ["input1", "input2"], "entropy": 2.0},
-    ...     {"variables": [1], "entropy": 0.8112781244591328},
-    ...     {"variables": [1, "input1"], "entropy": 1.5},
-    ...     {"variables": [1, "input2"], "entropy": 1.5},
-    ...     {"variables": [1, "input1", "input2"], "entropy": 2.0}
+    ...     {"signals": ["input1", "input2"], "entropy": 2.0},
+    ...     {"signals": ["1"], "entropy": 0.8112781244591328},
+    ...     {"signals": ["1", "input1"], "entropy": 1.5},
+    ...     {"signals": ["1", "input2"], "entropy": 1.5},
+    ...     {"signals": ["1", "input1", "input2"], "entropy": 2.0}
     ... ]
     ... ''')
     {
         frozenset({'input1', 'input2'}): 2.0,
-        frozenset({1}): 0.8112781244591328,
-        frozenset({1, 'input1'}): 1.5,
-        frozenset({1, 'input2'}): 1.5,
-        frozenset({1, 'input1', 'input2'}): 2.0
+        frozenset({'1'}): 0.8112781244591328,
+        frozenset({'1', 'input1'}): 1.5,
+        frozenset({'1', 'input2'}): 1.5,
+        frozenset({'1', 'input1', 'input2'}): 2.0
     }
 
     """
     return {
-        frozenset(data["variables"]): data["entropy"] for data in json.loads(content)
+        frozenset(data["signals"]): data["entropy"]
+        for data in json.loads(content)
     }
