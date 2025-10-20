@@ -22,36 +22,23 @@ SOFTWARE.
 
 """
 
-from functools import partial
+import argparse
+import json
+import sys
 
-import networkx as nx
+from landauer import parse, summary
 
+if __name__ == "__main__":
+    argparser = argparse.ArgumentParser()
+    group = argparser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--file", help="aig file", type=argparse.FileType("r"))
+    group.add_argument(
+        "--stdin",
+        help="read aig file from stdin",
+        action="store_true",
+    )
+    args = argparser.parse_args()
 
-def _input(aig, node):
-    return not any(aig.predecessors(node))
-
-
-def _gate(aig, node):
-    return any(aig.successors(node)) and any(aig.predecessors(node))
-
-
-def _output(aig, node):
-    return not any(aig.successors(node))
-
-
-def _depth(aig):
-    return len(nx.dag_longest_path(aig))
-
-
-def summary(aig):
-    nodes = list(aig.nodes())
-    gates = len(list(filter(partial(_gate, aig), nodes)))
-    outputs = len(list(filter(partial(_output, aig), nodes)))
-    inputs = len(list(filter(partial(_input, aig), nodes)))
-
-    return {
-        "depth": _depth(aig),
-        "inputs": inputs,
-        "outputs": outputs,
-        "gates": gates,
-    }
+    content = args.file.read() if args.file else sys.stdin.read()
+    aig = parse.deserialize(content)
+    print(json.dumps(summary.summary(aig)))
