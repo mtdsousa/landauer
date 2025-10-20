@@ -49,10 +49,10 @@ def evaluate(aig, entropy_data):
         )
         assert (
             inputs in entropy_data
-        ), f"Variable set '{str(tuple(inputs))}' expected in the entropy data"
+        ), f"Signal set '{str(tuple(inputs))}' expected in the entropy data"
         assert (
             outputs in entropy_data
-        ), f"Variable set '{str(tuple(outputs))}' expected in the entropy data"
+        ), f"Signal set '{str(tuple(outputs))}' expected in the entropy data"
 
         loss = entropy_data[inputs] - entropy_data[outputs]
         result["gates"][node] = loss
