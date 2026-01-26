@@ -26,7 +26,7 @@ import argparse
 import json
 import sys
 
-from landauer import parse, summary
+from landauer import parse
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
@@ -41,4 +41,4 @@ if __name__ == "__main__":
 
     content = args.file.read() if args.file else sys.stdin.read()
     aig = parse.deserialize(content)
-    print(json.dumps(summary.summary(aig)))
+    print(json.dumps(parse.summary(aig)))
