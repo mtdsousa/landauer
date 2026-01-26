@@ -33,6 +33,7 @@ def _is_output(aig, node):
 
 def linear(base):
     dst = nx.MultiDiGraph(base)
+    yield dst
     nodes = list(nx.topological_sort(base))
     replacements = {}
     for node in nodes:
