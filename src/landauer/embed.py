@@ -69,50 +69,58 @@ def _iterate(aig):
 def encoding(aig):
     for _, gates, outputs in _iterate(aig):
         # Fanout propagation
-        n = len(gates)
-        if n > 1:
-            yield (n + 1) ** (n - 1)
+        n = len(gates) + 1
+        if n > 2:
+            # A Prufer sequence is a list of n - 2 numbers between 0 and
+            # n - 1, inclusive). However, this function returns a
+            # non-inclusive max number, then n repeated n - 2 times.
+            yield from itertools.repeat(n, n - 2)
         # Output handling
-        yield from itertools.repeat(n + 1, len(outputs))
+        yield from itertools.repeat(n, len(outputs))
+
+
+def short_encoding(aig):
+    for _, gates, outputs in _iterate(aig):
+        # Fanout propagation
+        n = len(gates) + 1
+        if n > 2:
+            yield (n, n - 2)
+        # Output handling
+        yield from itertools.repeat((n, 1), len(outputs))
 
 
 def labels(aig):
     for candidate, gates, outputs in _iterate(aig):
         # Fanout propagation
-        n = len(gates)
-        if n > 1:
-            yield (candidate, gates)
+        n = len(gates) + 1
+        if n > 2:
+            yield from (((candidate, gates), i) for i in range(n-2))
+        for output in outputs:
+            yield ((candidate, [output]), 0)
+
+
+def short_labels(aig):
+    for candidate, gates, outputs in _iterate(aig):
+        # Fanout propagation
+        n = len(gates) + 1
+        if n > 2:
+            yield ((candidate, gates), n-2)
         for output in outputs:
             yield (candidate, [output])
-
 
 def generate(aig):
     iterators = [range(min(n, 65536)) for n in encoding(aig)]
     yield from itertools.product(*iterators)
 
 
-def _from_decimal(n, value):
-    """
-    Convert value from base 10 to base n. It expected a positive number less
-    than n ^ (n - 2). It returns a list with n - 2 digits (leading zeros).
-    This function is used to convert a decimal number to a Prufer sequence.
-    """
-    sequence = []
-    while value != 0:
-        sequence.append(value % n)
-        value //= n
-    expected = n - 2
-    assert len(sequence) <= expected
-    sequence.extend(itertools.repeat(0, expected - len(sequence)))
-    return list(reversed(sequence))
-
-
 def decode(aig, e):
     encoded = iter(e)
     for candidate, gates, outputs in _iterate(aig):
         # Fanout propagation
-        if len(gates) > 1:
-            prufer = _from_decimal(len(gates) + 1, next(encoded))
+        n = len(gates) + 1
+        if n > 2:
+            prufer = list(itertools.islice(encoded, n-2))
+            assert len(prufer) == n-2
             G = nx.from_prufer_sequence(prufer)
             for u, v in nx.bfs_tree(G, 0).edges():
                 if u != 0:
@@ -124,18 +132,6 @@ def decode(aig, e):
                 yield ((candidate, output), gates[u - 1])
 
 
-def _to_decimal(sequence):
-    """
-    Convert sequence of n elements to a number base (n + 2). This function
-    is used to convert a Prufer sequence to a decimal number.
-    """
-    n = len(sequence) + 2
-    value = 0
-    for i, s in enumerate(reversed(sequence)):
-        value += s * n**i
-    return value
-
-
 def encode(aig, l):
     e = dict(l)
     for c, gates, outputs in _iterate(aig):
@@ -145,7 +141,7 @@ def encode(aig, l):
         if len(gates) > 1:
             G = nx.Graph([(e.get((c, g), c), g) for g in gates])
             nx.relabel_nodes(G, mapping, copy=False)
-            yield _to_decimal(nx.to_prufer_sequence(G))
+            yield from nx.to_prufer_sequence(G)
         # Output handling
         for output in outputs:
             yield mapping[e.get((c, output))] if (c, output) in e else 0
@@ -164,7 +160,12 @@ def embed(base, dst, a, b, c):
 
     # Remove previous edge
     assert c in dst.adj[a]
-    previous_edge = list(dst.adj[a][c].keys())
+    previous_edge = list(
+        filter(
+            lambda k: not dst.edges[a, c, k].get("embedded", False),
+            dst.adj[a][c].keys(),
+        )
+    )
     assert len(previous_edge) == 1
     dst.remove_edge(a, c, key=previous_edge[0])
     dst.add_edge(b, c, key=a, embedded=True, inverter=inverter)
@@ -178,7 +179,7 @@ def from_list(aig, l):
 
 
 def to_list(aig):
-    assert isinstance(aig, nx.MultiDiGraph)
+    aig = nx.MultiDiGraph(aig)
     edges = aig.edges(data="embedded", default=False, keys=True)
     yield from [((k, v), u) for u, v, k, embedded in edges if embedded]
 
