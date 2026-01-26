@@ -27,6 +27,8 @@ import json
 import networkx as nx
 import re
 
+from functools import partial
+
 from antlr4_verilog import InputStream, CommonTokenStream, ParseTreeWalker
 from antlr4_verilog.verilog import (
     VerilogParserListener,
@@ -276,3 +278,33 @@ def serialize(aig):
 
 def deserialize(content):
     return nx.readwrite.json_graph.adjacency_graph(json.loads(content))
+
+
+def is_input(aig, node):
+    return not any(aig.predecessors(node))
+
+
+def is_gate(aig, node):
+    return any(aig.successors(node)) and any(aig.predecessors(node))
+
+
+def is_output(aig, node):
+    return not any(aig.successors(node))
+
+
+def get_depth(aig):
+    return len(nx.dag_longest_path(aig))
+
+
+def summary(aig):
+    nodes = list(aig.nodes())
+    gates = len(list(filter(partial(is_gate, aig), nodes)))
+    outputs = len(list(filter(partial(is_output, aig), nodes)))
+    inputs = len(list(filter(partial(is_input, aig), nodes)))
+
+    return {
+        "depth": get_depth(aig),
+        "inputs": inputs,
+        "outputs": outputs,
+        "gates": gates,
+    }
