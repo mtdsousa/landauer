@@ -26,6 +26,7 @@ from enum import Enum, auto
 from operator import itemgetter
 
 import networkx as nx
+import time
 
 
 def _set_hierarchical_level(dag):
@@ -64,16 +65,18 @@ class Strategy(Enum):
     DEPTH_ORIENTED = auto()
     ENERGY_ORIENTED = auto()
 
+class TimeoutException(Exception):
+    """Exception that is raised if entropy calculation times out."""
 
-def energy_oriented(aig):
-    return _build_chain(aig, Strategy.ENERGY_ORIENTED)
-
-
-def depth_oriented(aig):
-    return _build_chain(aig, Strategy.DEPTH_ORIENTED)
+def energy_oriented(aig, timeout = 0):
+    return _build_chain(aig, Strategy.ENERGY_ORIENTED, timeout)
 
 
-def tnano2019(aig):
+def depth_oriented(aig, timeout = 0):
+    return _build_chain(aig, Strategy.DEPTH_ORIENTED, timeout)
+
+
+def tnano2019(aig, timeout = 0):
     """
     References
     ----------
@@ -81,8 +84,8 @@ def tnano2019(aig):
     Nanocomputing Circuits. IEEE Transactions on Nanotechnology, Volume 18, 2019
     """
 
-    yield _build_chain(aig, Strategy.DEPTH_ORIENTED)
-    yield _build_chain(aig, Strategy.ENERGY_ORIENTED)
+    yield _build_chain(aig, Strategy.DEPTH_ORIENTED, timeout)
+    yield _build_chain(aig, Strategy.ENERGY_ORIENTED, timeout)
 
 
 def _ranked_children(aig, node):
@@ -176,7 +179,7 @@ def _make_chain(aig, node, choices, outputs):
         )
 
 
-def _build_chain(aig, strategy):
+def _build_chain(aig, strategy, timeout):
     """
     Algorithm 1: Building Chains of n-bits Recycling Gates
     data : netlist <- circuit's netlist
@@ -191,6 +194,7 @@ def _build_chain(aig, strategy):
         until |choices| <= 1
     """
     aig = nx.MultiDiGraph(aig)
+    start_time = time.time()
     for node in list(nx.topological_sort(aig)):
         outputs = set(
             v
@@ -198,6 +202,8 @@ def _build_chain(aig, strategy):
             if not embedded and aig.successors(v) == 0
         )
         while True:
+            if timeout and time.time() - start_time > timeout:
+                raise TimeoutException
             choices = set()
             ranks = _ranked_children(aig, node)
             for _, children in ranks:
